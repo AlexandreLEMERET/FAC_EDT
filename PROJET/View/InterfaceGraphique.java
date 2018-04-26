@@ -200,7 +200,6 @@ public class InterfaceGraphique extends JFrame /*implements Observer*/ {
 		cardCreation.setLayout(new BorderLayout());
 		cardCreation.setBackground(Color.blue);
 		
-		
 		cardCreation.add(panelBoutonCardCreation(), BorderLayout.NORTH);
 		cardCreation.add(cardObjetsCrees(), BorderLayout.CENTER);
 		
@@ -214,8 +213,7 @@ public class InterfaceGraphique extends JFrame /*implements Observer*/ {
 		cardEDT.setBackground(Color.red);
 		String[] typeStrings = {"Salle", "Professeur", "Classe", "Groupe", "Eleve", "Matiere"};
 		cmbTypeList = new JComboBox<String>(typeStrings);
-		String[] choixStrings = {"1", "2", "3"};
-		cmbChoixList = new JComboBox<String>(choixStrings);
+		cmbChoixList = new JComboBox<String>();
 		cardEDT.add(cmbTypeList);
 		cardEDT.add(cmbChoixList);
 		

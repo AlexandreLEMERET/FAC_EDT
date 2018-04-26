@@ -213,6 +213,7 @@ public class InterfaceGraphique extends JFrame /*implements Observer*/ {
 		cardEDT.setBackground(Color.red);
 		String[] typeStrings = {"Salle", "Professeur", "Classe", "Groupe", "Eleve", "Matiere"};
 		cmbTypeList = new JComboBox<String>(typeStrings);
+		#
 		cmbChoixList = new JComboBox<String>();
 		cardEDT.add(cmbTypeList);
 		cardEDT.add(cmbChoixList);

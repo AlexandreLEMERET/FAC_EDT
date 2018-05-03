@@ -3,7 +3,7 @@ package PROJET.Model;
 import java.util.*;
 import java.awt.Color;
 
-public class Classe extends Observable {
+public class Classe {
 	
 	private String nomClasse;
 	private String niveauClasse;

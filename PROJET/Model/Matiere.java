@@ -3,7 +3,7 @@ package PROJET.Model;
 import java.util.*;
 import java.awt.Color;
 
-public class Matiere extends Observable {
+public class Matiere {
 	
 	private String nomMatiere;
 	private int nombreHeureCM;

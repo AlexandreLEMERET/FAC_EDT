@@ -27,9 +27,9 @@ import java.util.*;
 /* Interface graphique */
 @SuppressWarnings("serial")
 
-public class InterfaceGraphique extends JFrame /*implements Observer*/ {
+public class InterfaceGraphique extends JFrame {
 
-	private CardLayout cardLayout, cardLayoutObjetsCrees;
+	private CardLayout cardLayout;
 	
 	private JFrame frameAjoutSalle, frameAjoutProfesseur, frameAjoutClasse, frameAjoutGroupe, frameAjoutEleve, frameAjoutMatiere;
 	
@@ -74,10 +74,9 @@ public class InterfaceGraphique extends JFrame /*implements Observer*/ {
 		panelBoutonPrecedent = new JPanel();
 		panelBoutonPrecedent.setLayout(new BorderLayout());
 		panelBoutonPrecedent.setBackground(Color.yellow);
-
 		boutonPrecedent = new JButton("◄");
 		panelBoutonPrecedent.add(boutonPrecedent, BorderLayout.CENTER);
-
+		
 		return panelBoutonPrecedent;
 	}
 
@@ -85,7 +84,7 @@ public class InterfaceGraphique extends JFrame /*implements Observer*/ {
 	private JPanel panelBoutonObjetsCrees() {
 		panelBoutonObjetsCrees = new JPanel();
 		panelBoutonObjetsCrees.setBackground(Color.green);
-
+		
 		return panelBoutonObjetsCrees;
 	}
 
@@ -148,10 +147,9 @@ public class InterfaceGraphique extends JFrame /*implements Observer*/ {
 		panelBoutonSuivant = new JPanel();
 		panelBoutonSuivant.setLayout(new BorderLayout());
 		panelBoutonSuivant.setBackground(Color.black);
-
 		boutonSuivant = new JButton("►");
 		panelBoutonSuivant.add(boutonSuivant, BorderLayout.CENTER);
-
+		
 		return panelBoutonSuivant;
 	}
 
@@ -159,14 +157,14 @@ public class InterfaceGraphique extends JFrame /*implements Observer*/ {
 	private JPanel cardObjetsCrees() {
 		cardObjetsCrees = new JPanel();
 		cardObjetsCrees.setLayout(new BorderLayout());
-
 		cardObjetsCrees.add(panelBoutonPrecedent(), BorderLayout.WEST);
 		cardObjetsCrees.add(panelBoutonObjetsCrees(), BorderLayout.CENTER);
 		cardObjetsCrees.add(panelBoutonSuivant(), BorderLayout.EAST);
-
+		
 		return cardObjetsCrees;
 	}
 
+	/* JPanel qui contient le JComboBox et les boutons */
 	private JPanel panelBoutonCardCreation() {
 		panelBoutonCardCreation = new JPanel();
 		panelBoutonCardCreation.setBackground(Color.blue);
@@ -183,11 +181,8 @@ public class InterfaceGraphique extends JFrame /*implements Observer*/ {
 		cmbMessageList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				panelBoutonObjetsCrees.removeAll();
-				//System.out.println("Tous les JButton ont été enlevé");
 				panelBoutonObjetsCrees.validate();
-				//System.out.println("Le JPanel est recharger");
 				update_panelBoutonObjetsCrees();
-				//System.out.println("Les bouttons correspondant au type ont été chargé");
 			}
 		});
 	
@@ -199,7 +194,6 @@ public class InterfaceGraphique extends JFrame /*implements Observer*/ {
 		cardCreation = new JPanel();
 		cardCreation.setLayout(new BorderLayout());
 		cardCreation.setBackground(Color.blue);
-		
 		cardCreation.add(panelBoutonCardCreation(), BorderLayout.NORTH);
 		cardCreation.add(cardObjetsCrees(), BorderLayout.CENTER);
 		
@@ -213,7 +207,6 @@ public class InterfaceGraphique extends JFrame /*implements Observer*/ {
 		cardEDT.setBackground(Color.red);
 		String[] typeStrings = {"Salle", "Professeur", "Classe", "Groupe", "Eleve", "Matiere"};
 		cmbTypeList = new JComboBox<String>(typeStrings);
-		#
 		cmbChoixList = new JComboBox<String>();
 		cardEDT.add(cmbTypeList);
 		cardEDT.add(cmbChoixList);
@@ -224,21 +217,18 @@ public class InterfaceGraphique extends JFrame /*implements Observer*/ {
 	/* JPanel qui contient les boutons en haut */
 	private JPanel boutonPane() {
 		boutonPane = new JPanel();
-		
 		boutonCreation = new JButton("Création");
 		boutonCreation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				cardLayout.show(panelGlobal, listContent[0]);
 			}
 		});
-		
 		boutonEDT = new JButton("Emploi du temps");
 		boutonEDT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				cardLayout.show(panelGlobal, listContent[1]);
 			}
 		});
-		
 		boutonPane.add(boutonCreation);
 		boutonPane.add(boutonEDT);
 		
@@ -516,9 +506,7 @@ public class InterfaceGraphique extends JFrame /*implements Observer*/ {
 	public void create_buttonSalle(boolean visible, String nomSalle) {
 		JButton salle = new JButton(nomSalle);
 		this.lesBoutonsSalle.add(salle);
-		//System.out.println("Bouton ajouté a la liste des salles");
 		if(visible) { panelBoutonObjetsCrees.add(salle); }
-		//System.out.println("Bouton ajouté sur le JPanel");
 		System.out.println("Nombre de bouton salle : " + lesBoutonsSalle.size());
 		panelBoutonObjetsCrees.updateUI();
 	}

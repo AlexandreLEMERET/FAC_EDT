@@ -2,7 +2,7 @@ package PROJET.Model;
 
 import java.util.*;
 
-public class Groupe extends Observable {
+public class Groupe {
 	
 	private String nomGroupe;
 	private Classe classeGroupe;

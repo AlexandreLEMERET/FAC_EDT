@@ -2,7 +2,7 @@ package PROJET.Model;
 
 import java.util.*;
 
-public class Eleve extends Observable {
+public class Eleve {
 	
 	private String nomEleve;
 	private String prenomEleve;

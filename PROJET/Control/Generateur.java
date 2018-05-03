@@ -227,6 +227,13 @@ public class Generateur {
 				}
 		});
 
+		interfaceGraphique.getBoutonEDT().addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent event) {
+					System.out.println("Chargement des JComboBox");
+				}
+		});
+
+
 	}
 	
 	

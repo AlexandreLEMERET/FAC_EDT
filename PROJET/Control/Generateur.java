@@ -33,6 +33,7 @@ public class Generateur {
 		this.lesGroupes = new MGroupe();
 		this.lesEleves = new MEleve();
 		this.lesMatieres = new MMatiere();
+		this.lesEDT ° new MEDT();
 		
 		
 		setupActionButton();

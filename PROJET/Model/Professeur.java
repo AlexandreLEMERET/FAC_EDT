@@ -8,6 +8,7 @@ public class Professeur {
 	private String prenomProfesseur;
 	private Matiere matiereProfesseur;
 	private int nombreHeuresProfesseur;
+	private Edt edtProfesseur;
 	
 	public Professeur() {}
 	
@@ -16,6 +17,14 @@ public class Professeur {
 		this.prenomProfesseur = p_prenomProfesseur;
 		this.matiereProfesseur = p_matiereProfesseur;
 		this.nombreHeuresProfesseur = p_nombreHeuresProfesseur;
+	}
+
+	public Professeur(String p_nomProfesseur, String p_prenomProfesseur, Matiere p_matiereProfesseur, int p_nombreHeuresProfesseur, Edt p_edtProfesseur) {
+		this.nomProfesseur = p_nomProfesseur;
+		this.prenomProfesseur = p_prenomProfesseur;
+		this.matiereProfesseur = p_matiereProfesseur;
+		this.nombreHeuresProfesseur = p_nombreHeuresProfesseur;
+		this.edtProfesseur = p_edtProfesseur;
 	}
 	
 	public String getNomProfesseur() {

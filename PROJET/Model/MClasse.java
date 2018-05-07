@@ -25,13 +25,15 @@ public class MClasse implements Serializable {
 		return this.lesClasses;
 	}
 
-	public void ajoutClasse(String nomClasse, String niveauClasse, Color couleurClasse) {
+	public void ajoutClasse(String nomClasse, String niveauClasse, Color couleurClasse, MEdt lesEDT) {
 		if(nomClasse.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Le nom de la classe doit contenir au moins 1 caractère !");
 		} else if(couleurClasse.getRed() == 238 && couleurClasse.getGreen() == 238 && couleurClasse.getBlue() == 238) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir une couleur pour la classe !");
 		} else {
-			Classe nouvelleClasse = new Classe(nomClasse, niveauClasse, couleurClasse);
+			Edt nouvelEDT = new Edt();
+			lesEDT.ajoutEDT(nouvelEDT);
+			Classe nouvelleClasse = new Classe(nomClasse, niveauClasse, couleurClasse, nouvelEDT);
 			lesClasses.add(nouvelleClasse);
 			JOptionPane.showMessageDialog(null, "La classe de " + niveauClasse + " " + nomClasse + " a été ajouté.");
 			System.out.println("Nom classe " + nomClasse + " - Niveau classe : " + niveauClasse + " - Couleur : " + couleurClasse);

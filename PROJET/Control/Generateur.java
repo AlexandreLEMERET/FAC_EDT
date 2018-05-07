@@ -22,6 +22,7 @@ public class Generateur {
 	private MGroupe lesGroupes;
 	private MEleve lesEleves;
 	private MMatiere lesMatieres;
+	private MEdt lesEDT;
 	
 	/* Constructeur du generateur */
 	public Generateur() {
@@ -33,7 +34,7 @@ public class Generateur {
 		this.lesGroupes = new MGroupe();
 		this.lesEleves = new MEleve();
 		this.lesMatieres = new MMatiere();
-		this.lesEDT ° new MEDT();
+		this.lesEDT = new MEdt();
 		
 		
 		setupActionButton();
@@ -51,7 +52,7 @@ public class Generateur {
 							interfaceGraphique.create_frameAjoutSalle();
 							interfaceGraphique.getBoutonAccepterSalle().addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent event) {
-									lesSalles.ajoutSalle(interfaceGraphique.getTfNumeroSalle().getText(), interfaceGraphique.getTfNombrePlaceSalle().getText(), interfaceGraphique.getCmbTypeSalle().getSelectedItem().toString());
+									lesSalles.ajoutSalle(interfaceGraphique.getTfNumeroSalle().getText(), interfaceGraphique.getTfNombrePlaceSalle().getText(), interfaceGraphique.getCmbTypeSalle().getSelectedItem().toString(), lesEDT);
 									interfaceGraphique.create_buttonSalle(true, interfaceGraphique.getTfNumeroSalle().getText());
 								}
 							});
@@ -62,7 +63,7 @@ public class Generateur {
 							lesProfesseurs.chargerComboBoxProfesseur(lesMatieres, interfaceGraphique.getCmbMatiereProfesseur());
 							interfaceGraphique.getBoutonAccepterProfesseur().addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent event) {
-									lesProfesseurs.ajoutProfesseur(interfaceGraphique.getTfNomProfesseur().getText(), interfaceGraphique.getTfPrenomProfesseur().getText(), interfaceGraphique.getCmbMatiereProfesseur().getSelectedIndex(), interfaceGraphique.getTfNombreHeureProfesseur().getText(), lesMatieres);
+									lesProfesseurs.ajoutProfesseur(interfaceGraphique.getTfNomProfesseur().getText(), interfaceGraphique.getTfPrenomProfesseur().getText(), interfaceGraphique.getCmbMatiereProfesseur().getSelectedIndex(), interfaceGraphique.getTfNombreHeureProfesseur().getText(), lesMatieres, lesEDT);
 									interfaceGraphique.create_buttonProfesseur(true, interfaceGraphique.getTfNomProfesseur().getText(), interfaceGraphique.getTfPrenomProfesseur().getText());
 								}
 							});
@@ -83,7 +84,7 @@ public class Generateur {
 							});
 							interfaceGraphique.getBoutonAccepterClasse().addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent event) {
-									lesClasses.ajoutClasse(interfaceGraphique.getTfNomClasse().getText(), interfaceGraphique.getCmbNiveauClasse().getSelectedItem().toString(), interfaceGraphique.getBoutonCouleurClasse().getBackground()); 
+									lesClasses.ajoutClasse(interfaceGraphique.getTfNomClasse().getText(), interfaceGraphique.getCmbNiveauClasse().getSelectedItem().toString(), interfaceGraphique.getBoutonCouleurClasse().getBackground(), lesEDT); 
 									interfaceGraphique.create_buttonClasse(true, interfaceGraphique.getCmbNiveauClasse().getSelectedItem().toString(), interfaceGraphique.getTfNomClasse().getText(), interfaceGraphique.getBoutonCouleurClasse().getBackground());
 								}
 							});
@@ -94,7 +95,7 @@ public class Generateur {
 							lesGroupes.chargerComboBoxGroupe(lesClasses, interfaceGraphique.getCmbClasseGroupe());
 							interfaceGraphique.getBoutonAccepterGroupe().addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent event) {
-									lesGroupes.ajoutGroupe(interfaceGraphique.getTfNomGroupe().getText(), interfaceGraphique.getCmbClasseGroupe().getSelectedIndex(), lesClasses);
+									lesGroupes.ajoutGroupe(interfaceGraphique.getTfNomGroupe().getText(), interfaceGraphique.getCmbClasseGroupe().getSelectedIndex(), lesClasses, lesEDT);
 									interfaceGraphique.create_buttonGroupe(true, interfaceGraphique.getTfNomGroupe().getText(), interfaceGraphique.getCmbClasseGroupe().getSelectedItem().toString());
 								}
 							});
@@ -111,11 +112,11 @@ public class Generateur {
 							interfaceGraphique.getBoutonAccepterEleve().addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent event) {
 									if(interfaceGraphique.getCmbGroupeEleve().getSelectedIndex() < 0) {
-										lesEleves.ajoutEleve(interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText(), interfaceGraphique.getCmbClasseEleve().getSelectedIndex(), lesClasses);
+										lesEleves.ajoutEleve(interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText(), interfaceGraphique.getCmbClasseEleve().getSelectedIndex(), lesClasses, lesEDT);
 										interfaceGraphique.create_buttonEleve(true, interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText());
 									} 
 									else {
-										lesEleves.ajoutEleve(interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText(), interfaceGraphique.getCmbClasseEleve().getSelectedIndex(), interfaceGraphique.getCmbGroupeEleve().getSelectedIndex(), lesClasses);
+										lesEleves.ajoutEleve(interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText(), interfaceGraphique.getCmbClasseEleve().getSelectedIndex(), interfaceGraphique.getCmbGroupeEleve().getSelectedIndex(), lesClasses, lesEDT);
 										interfaceGraphique.create_buttonEleve(true, interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText());
 									}
 								}

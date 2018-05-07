@@ -9,6 +9,7 @@ public class Classe {
 	private String niveauClasse;
 	private ArrayList<Groupe> lesGroupes;
 	private Color couleurClasse;
+	private Edt edtClasse;
 	
 	public Classe() {}
 	
@@ -19,6 +20,14 @@ public class Classe {
 		this.couleurClasse = p_couleurClasse;
 	}
 	
+	public Classe(String p_nomClasse, String p_niveauClasse, Color p_couleurClasse, Edt p_edtClasse) {
+		this.nomClasse = p_nomClasse;
+		this.niveauClasse = p_niveauClasse;
+		this.lesGroupes = new ArrayList<Groupe>();
+		this.couleurClasse = p_couleurClasse;
+		this.edtClasse = p_edtClasse;
+	}
+
 	public String getNomClasse() {
 		return this.nomClasse;
 	}

@@ -28,13 +28,15 @@ public class MEleve implements Serializable {
 	}
 	
 	/* Ajout d'un eleve dans une classe sans groupe */
-	public void ajoutEleve(String nomEleve, String prenomEleve, int indexClasse, MClasse lesClasses) {
+	public void ajoutEleve(String nomEleve, String prenomEleve, int indexClasse, MClasse lesClasses, MEdt lesEDT) {
 		if(nomEleve.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour l'élève !");
 		} else if(prenomEleve.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour l'élève !");
 		} else {
-			Eleve nouvelEleve = new Eleve(nomEleve, prenomEleve, lesClasses.getLesClasses().get(indexClasse));
+			Edt nouvelEDT = new Edt();
+			lesEDT.ajoutEDT(nouvelEDT); 
+			Eleve nouvelEleve = new Eleve(nomEleve, prenomEleve, lesClasses.getLesClasses().get(indexClasse), nouvelEDT);
 			JOptionPane.showMessageDialog(null, "L'élève " + nomEleve + " " + prenomEleve + " a été ajouté.");
 			System.out.println("Eleve : " + nomEleve + " " + prenomEleve + " - " + lesClasses.getLesClasses().get(indexClasse).getNiveauClasse() + " " + lesClasses.getLesClasses().get(indexClasse).getNomClasse() + " - Pas de groupe");
 		
@@ -52,13 +54,15 @@ public class MEleve implements Serializable {
 	}
 
 	/* Ajout d'un eleve dans une classe avec un groupe */
-	public void ajoutEleve(String nomEleve, String prenomEleve, int indexClasse, int indexGroupe, MClasse lesClasses) {
+	public void ajoutEleve(String nomEleve, String prenomEleve, int indexClasse, int indexGroupe, MClasse lesClasses, MEdt lesEDT) {
 		if(nomEleve.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour l'élève !");
 		} else if(prenomEleve.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour l'élève !");
 		} else {
-			Eleve nouvelEleve = new Eleve(nomEleve, prenomEleve, lesClasses.getLesClasses().get(indexClasse), lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().get(indexGroupe));
+			Edt nouvelEDT = new Edt();
+			lesEDT.ajoutEDT(nouvelEDT);
+			Eleve nouvelEleve = new Eleve(nomEleve, prenomEleve, lesClasses.getLesClasses().get(indexClasse), lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().get(indexGroupe), nouvelEDT);
 			JOptionPane.showMessageDialog(null, "L'élève " + nomEleve + " " + prenomEleve + " a été ajouté.");
 			System.out.println("Eleve : " + nomEleve + " " + prenomEleve + " - " + lesClasses.getLesClasses().get(indexClasse).getNiveauClasse() + " " + lesClasses.getLesClasses().get(indexClasse).getNomClasse() + " - " + lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().get(indexGroupe).getNomGroupe());
 			

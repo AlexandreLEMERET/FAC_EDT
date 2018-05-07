@@ -27,13 +27,15 @@ public class MGroupe implements Serializable {
 		return this.lesGroupes;
 	}
 
-	public void ajoutGroupe(String nomGroupe, int indexClasse, MClasse lesClasses) {
+	public void ajoutGroupe(String nomGroupe, int indexClasse, MClasse lesClasses, MEdt lesEDT) {
 		if(indexClasse < 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir une classe !");
 		} else if (nomGroupe.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom de groupe !");
 		} else {
-			Groupe nouveauGroupe = new Groupe(nomGroupe, lesClasses.getLesClasses().get(indexClasse));
+			Edt nouvelEDT = new Edt();
+			lesEDT.ajoutEDT(nouvelEDT);
+			Groupe nouveauGroupe = new Groupe(nomGroupe, lesClasses.getLesClasses().get(indexClasse), nouvelEDT);
 			lesGroupes.add(nouveauGroupe);
 			lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().add(nouveauGroupe);
 			JOptionPane.showMessageDialog(null, "Le groupe a été ajouté.");

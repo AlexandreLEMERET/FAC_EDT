@@ -3,11 +3,11 @@ package PROJET.Model;
 import java.util.*;
 import java.util.ArrayList;
 
-public class EDT {
+public class Edt {
 	
 	private ArrayList<Jour> lesJours;
 
-	public EDT() {
+	public Edt() {
 		lesJours = new ArrayList<Jour>();
 		this.initialiserLesJours();
 	}

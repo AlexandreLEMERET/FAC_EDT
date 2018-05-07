@@ -26,14 +26,16 @@ public class MSalle implements Serializable {
 	}
 
 	/* Permet d'ajouter une salle */
-	public void ajoutSalle(String numeroSalle, String nombrePlace, String typeSalle) {
+	public void ajoutSalle(String numeroSalle, String nombrePlace, String typeSalle, MEdt lesEDT) {
 		if (numeroSalle.length() == 0) {
 			JOptionPane.showMessageDialog(null,"Erreur : Vous devez indiquer un nom de salle !");
 		} else if(nombrePlace == "") {
 			JOptionPane.showMessageDialog(null,"Erreur : Vous devez indiquer un nombre de place !");
 		} else {
 			try {
-	        	Salle nouvelleSalle = new Salle(numeroSalle, Integer.parseInt(nombrePlace), typeSalle);
+				Edt nouvelEDT = new Edt();
+				lesEDT.ajoutEDT(nouvelEDT);
+	        	Salle nouvelleSalle = new Salle(numeroSalle, Integer.parseInt(nombrePlace), typeSalle, nouvelEDT);
 	   			lesSalles.add(nouvelleSalle);
 				JOptionPane.showMessageDialog(null,"La salle " + numeroSalle + " a été ajouté."); 
 				System.out.println("Numéro salle : " + numeroSalle + " - Nombre places : " + nombrePlace + " - Type salle : " + typeSalle);

@@ -28,7 +28,7 @@ public class MProfesseur implements Serializable {
 		return this.lesProfesseurs;
 	}
 	
-	public void ajoutProfesseur(String nomProfesseur, String prenomProfesseur, int indexMatiereProfesseur, String nombreHeureProfesseur, MMatiere lesMatieres) {
+	public void ajoutProfesseur(String nomProfesseur, String prenomProfesseur, int indexMatiereProfesseur, String nombreHeureProfesseur, MMatiere lesMatieres, MEdt lesEDT) {
 		if(nomProfesseur.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour le professeur !");
 		} else if(prenomProfesseur.length() == 0) {
@@ -37,7 +37,9 @@ public class MProfesseur implements Serializable {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir une matière pour le professeur !");
 		} else {
 			try {
-				Professeur nouveauProfesseur = new Professeur(nomProfesseur, prenomProfesseur, lesMatieres.getLesMatieres().get(indexMatiereProfesseur), Integer.parseInt(nombreHeureProfesseur));
+				Edt nouvelEDT = new Edt();
+				lesEDT.ajoutEDT(nouvelEDT);
+				Professeur nouveauProfesseur = new Professeur(nomProfesseur, prenomProfesseur, lesMatieres.getLesMatieres().get(indexMatiereProfesseur), Integer.parseInt(nombreHeureProfesseur), nouvelEDT);
 				lesProfesseurs.add(nouveauProfesseur);
 				lesMatieres.getLesMatieres().get(indexMatiereProfesseur).setProfesseurMatiere(nouveauProfesseur);
 				JOptionPane.showMessageDialog(null,"Le professeur a été ajouté.");

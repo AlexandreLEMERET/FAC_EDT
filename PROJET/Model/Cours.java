@@ -8,19 +8,22 @@ public class Cours {
 	private int heureFin;
 	private Matiere laMatiere;
 	private Professeur leProfesseur;
+	private boolean occupe;
 	
 	public Cours() {}
 	
 	public Cours(int p_heureDebut, int p_heureFin) {
-		heureDebut = p_heureDebut;
-		heureFin = p_heureFin;
+		this.heureDebut = p_heureDebut;
+		this.heureFin = p_heureFin;
+		this.occupe = false;
 	}
 
 	public Cours(int p_heureDebut, int p_heureFin, Matiere p_laMatiere, Professeur p_leProfesseur) {
-		heureDebut = p_heureDebut;
-		heureFin = p_heureFin;
-		laMatiere = p_laMatiere;
-		leProfesseur = p_leProfesseur;
+		this.heureDebut = p_heureDebut;
+		this.heureFin = p_heureFin;
+		this.laMatiere = p_laMatiere;
+		this.leProfesseur = p_leProfesseur;
+		this.occupe = true;
 	}
 	
 	public int getHeureDebut() {
@@ -37,6 +40,10 @@ public class Cours {
 
 	public Professeur getProfesseur() {
 		return this.leProfesseur;
+	}
+
+	public boolean getOccupe() {
+		return this.occupe;
 	}
 
 	public void setLaMatiere(Matiere p_laMatiere) {

@@ -38,7 +38,7 @@ public class InterfaceGraphique extends JFrame {
 			
 	private JTextArea textCreation;
 			
-	private JButton boutonPrecedent, boutonSuivant, boutonAjouter, boutonCreation, boutonEDT, boutonAccepterSalle, boutonAccepterProfesseur, boutonAccepterClasse, 
+	private JButton boutonPrecedent, boutonSuivant, boutonAjouter, boutonCreation, boutonGenerer, boutonEDT, boutonAccepterSalle, boutonAccepterProfesseur, boutonAccepterClasse, 
 			boutonAccepterGroupe, boutonAccepterEleve, boutonAccepterMatiere, boutonCouleurClasse, boutonCouleurMatiere, boutonImporter;
 			
 	private JComboBox<String> cmbMessageList, cmbTypeList, cmbChoixList, cmbNiveauClasse, cmbTypeSalle, cmbMatiereProfesseur, cmbClasseGroupe, cmbClasseEleve, cmbGroupeEleve;
@@ -173,10 +173,12 @@ public class InterfaceGraphique extends JFrame {
 		cmbMessageList = new JComboBox<String>(messageStrings);
 		boutonAjouter = new JButton("Ajouter");
 		boutonImporter = new JButton("Importer");
+		boutonGenerer = new JButton("Génération");
 
 		panelBoutonCardCreation.add(cmbMessageList);
 		panelBoutonCardCreation.add(boutonAjouter);
 		panelBoutonCardCreation.add(boutonImporter);
+		panelBoutonCardCreation.add(boutonGenerer);
 
 		cmbMessageList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -717,6 +719,10 @@ public class InterfaceGraphique extends JFrame {
 	
 	public JButton getBoutonCreation() {
 		return this.boutonCreation;
+	}
+
+	public JButton getBoutonGenerer() {
+		return this.boutonGenerer;
 	}
 
 	public JButton getBoutonPrecedent() {

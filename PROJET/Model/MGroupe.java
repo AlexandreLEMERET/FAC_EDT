@@ -27,7 +27,7 @@ public class MGroupe implements Serializable {
 		return this.lesGroupes;
 	}
 
-	public void ajoutGroupe(String nomGroupe, int indexClasse, MClasse lesClasses, MEdt lesEDT) {
+	public int ajoutGroupe(String nomGroupe, int indexClasse, MClasse lesClasses, MEdt lesEDT) {
 		if(indexClasse < 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir une classe !");
 		} else if (nomGroupe.length() == 0) {
@@ -47,10 +47,12 @@ public class MGroupe implements Serializable {
 				BufferedWriter out = new BufferedWriter(monFichier);
 				out.write(nomGroupe + "\n" + indexClasse + "\n");
 				out.close();
+				return 0;
 			} catch (IOException ex) {
 				System.out.println("Erreur : " + ex);
 			}
 		}
+		return 1;
 	}
 	
 	public void chargerLesGroupes(MClasse lesClasses) {

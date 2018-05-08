@@ -8,6 +8,7 @@ public class Classe {
 	private String nomClasse;
 	private String niveauClasse;
 	private ArrayList<Groupe> lesGroupes;
+	private int nombreEleveClasse;
 	private Color couleurClasse;
 	private Edt edtClasse;
 	
@@ -40,7 +41,25 @@ public class Classe {
 		return this.lesGroupes;
 	}
 	
+	public int getNombreEleveClasse() {
+		return this.nombreEleveClasse;
+	}
+
 	public Color getCouleurClasse() {
 		return this.couleurClasse;
+	}
+
+	public Edt getEdtClasse() {
+		return this.edtClasse;
+	}
+
+	public void getNombreEleveClasse(MEleve lesEleves, Classe laClasse) {
+		int nombreEleve = 0;
+		for(Eleve e : lesEleves.getLesEleves()) {
+			if(e.getClasseEleve() == laClasse) { 
+				nombreEleve++; 
+			}
+		}
+		this.nombreEleveClasse = nombreEleve;
 	}
 }

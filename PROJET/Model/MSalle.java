@@ -26,7 +26,7 @@ public class MSalle implements Serializable {
 	}
 
 	/* Permet d'ajouter une salle */
-	public void ajoutSalle(String numeroSalle, String nombrePlace, String typeSalle, MEdt lesEDT) {
+	public int ajoutSalle(String numeroSalle, String nombrePlace, String typeSalle, MEdt lesEDT) {
 		if (numeroSalle.length() == 0) {
 			JOptionPane.showMessageDialog(null,"Erreur : Vous devez indiquer un nom de salle !");
 		} else if(nombrePlace == "") {
@@ -46,6 +46,7 @@ public class MSalle implements Serializable {
 					BufferedWriter out = new BufferedWriter(monFichier);
 					out.write(numeroSalle + "\n" + nombrePlace + "\n" + typeSalle + "\n");
 					out.close();
+					return 0;
 				} catch (IOException ex) {
 					System.out.println("Erreur : " + ex);
 				}
@@ -54,6 +55,7 @@ public class MSalle implements Serializable {
 	        	JOptionPane.showMessageDialog(null,"Erreur : Le nombre de place doit être un chiffre entier !"); 
 	    	}
 	    }
+	    return 1;
 	}
 	
 	public void chargerLesSalles() {

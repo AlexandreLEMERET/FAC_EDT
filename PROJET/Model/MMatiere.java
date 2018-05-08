@@ -27,7 +27,7 @@ public class MMatiere implements Serializable {
 		return this.lesMatieres;
 	}
 	
-	public void ajoutMatiere(String nomMatiere, String nombreHeureCM, String nombreHeureTP, String nombreHeureTD, Color couleurMatiere) {
+	public int ajoutMatiere(String nomMatiere, String nombreHeureCM, String nombreHeureTP, String nombreHeureTD, Color couleurMatiere) {
 		if(nomMatiere == "") {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour la matière !");
 		} else if(nombreHeureCM == "") {
@@ -51,6 +51,7 @@ public class MMatiere implements Serializable {
 					BufferedWriter out = new BufferedWriter(monFichier);
 					out.write(nomMatiere + "\n" + nombreHeureCM + "\n" + nombreHeureTP + "\n" + nombreHeureTD + "\n" + Integer.toString(couleurMatiere.getRGB()) + "\n");
 					out.close();
+					return 0;
 				} catch (IOException ex) {
 					System.out.println("Erreur : " + ex);
 				}
@@ -59,6 +60,7 @@ public class MMatiere implements Serializable {
 				JOptionPane.showMessageDialog(null, "Erreur : Vous devez entre un chiffre entier pour les nombres d'heures !");
 			}
 		}
+		return 1;
 	}
 	
 	public void chargerLesMatieres() {

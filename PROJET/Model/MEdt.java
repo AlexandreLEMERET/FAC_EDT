@@ -20,4 +20,17 @@ public class MEdt {
 		this.lesEDT.add(p_edt);
 	}
 
+	public void genererLesEDT(MClasse lesClasses, MEleve lesEleves) {
+		for(Classe c : lesClasses.getLesClasses()) {
+			c.getNombreEleveClasse(lesEleves, c);
+			for(Jour j : c.getEdtClasse().getLesJours()) {
+				for(Cours co : j.getLesCours()) {
+					if(co.getOccupe() == false) {
+						//System.out.println("HD : " + co.getHeureDebut() + " - HF : " + co.getHeureFin());
+					}	
+				}
+			}
+		}
+	}
+
 }

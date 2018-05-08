@@ -25,7 +25,7 @@ public class MClasse implements Serializable {
 		return this.lesClasses;
 	}
 
-	public void ajoutClasse(String nomClasse, String niveauClasse, Color couleurClasse, MEdt lesEDT) {
+	public int ajoutClasse(String nomClasse, String niveauClasse, Color couleurClasse, MEdt lesEDT) {
 		if(nomClasse.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Le nom de la classe doit contenir au moins 1 caractère !");
 		} else if(couleurClasse.getRed() == 238 && couleurClasse.getGreen() == 238 && couleurClasse.getBlue() == 238) {
@@ -36,7 +36,7 @@ public class MClasse implements Serializable {
 			Classe nouvelleClasse = new Classe(nomClasse, niveauClasse, couleurClasse, nouvelEDT);
 			lesClasses.add(nouvelleClasse);
 			JOptionPane.showMessageDialog(null, "La classe de " + niveauClasse + " " + nomClasse + " a été ajouté.");
-			System.out.println("Nom classe " + nomClasse + " - Niveau classe : " + niveauClasse + " - Couleur : " + couleurClasse);
+			//System.out.println("Nom classe " + nomClasse + " - Niveau classe : " + niveauClasse + " - Couleur : " + couleurClasse);
 			
 			/* Ajout d'une classe dans le fichier saveClasse.txt */
 			try {
@@ -44,10 +44,12 @@ public class MClasse implements Serializable {
 				BufferedWriter out = new BufferedWriter(monFichier);
 				out.write(nomClasse + "\n" + niveauClasse + "\n" + Integer.toString(couleurClasse.getRGB()) + "\n");
 				out.close();
+				return 0;
 			} catch (IOException ex) {
 				System.out.println("Erreur : " + ex);
 			}
 		}
+		return 1;
 	}
 	
 	public void chargerLesClasses() {
@@ -76,4 +78,6 @@ public class MClasse implements Serializable {
 			System.out.println("Erreur : " + ex);
 		}
 	}
+
+	
 }

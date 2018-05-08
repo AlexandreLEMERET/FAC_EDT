@@ -28,7 +28,7 @@ public class MProfesseur implements Serializable {
 		return this.lesProfesseurs;
 	}
 	
-	public void ajoutProfesseur(String nomProfesseur, String prenomProfesseur, int indexMatiereProfesseur, String nombreHeureProfesseur, MMatiere lesMatieres, MEdt lesEDT) {
+	public int ajoutProfesseur(String nomProfesseur, String prenomProfesseur, int indexMatiereProfesseur, String nombreHeureProfesseur, MMatiere lesMatieres, MEdt lesEDT) {
 		if(nomProfesseur.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour le professeur !");
 		} else if(prenomProfesseur.length() == 0) {
@@ -51,6 +51,7 @@ public class MProfesseur implements Serializable {
 					BufferedWriter out = new BufferedWriter(monFichier);
 					out.write(nomProfesseur + "\n" + prenomProfesseur + "\n" + indexMatiereProfesseur + "\n" + nombreHeureProfesseur + "\n");
 					out.close();
+					return 0;
 				} catch (IOException ex) {
 					System.out.println("Erreur : " + ex);
 				}
@@ -59,6 +60,7 @@ public class MProfesseur implements Serializable {
 				JOptionPane.showMessageDialog(null, "Erreur : Le nombre d'heure doit être un chiffre entier !");
 			}
 		}
+		return 1;
 	}
 
 	public void chargerComboBoxProfesseur(MMatiere lesMatieres, JComboBox<String> cmbMatiereProfesseur) {

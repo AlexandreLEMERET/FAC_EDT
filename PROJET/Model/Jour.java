@@ -11,8 +11,9 @@ public class Jour {
 	public Jour() {}
 	
 	public Jour(String p_nomJour) {
-		nomJour = p_nomJour;
-		initialiserLesCours();
+		this.nomJour = p_nomJour;
+		this.lesCours = new ArrayList<Cours>();
+		this.initialiserLesCours();
 	}
 	
 	public String getNomJour() {
@@ -24,6 +25,14 @@ public class Jour {
 		Cours cours10_12 = new Cours(10, 12);
 		Cours cours14_16 = new Cours(14, 16);
 		Cours cours16_18 = new Cours(16, 18);
+		this.lesCours.add(cours8_10);
+		this.lesCours.add(cours10_12);
+		this.lesCours.add(cours14_16);
+		this.lesCours.add(cours16_18);
+	}
+
+	public ArrayList<Cours> getLesCours() {
+		return this.lesCours;
 	}
 	
 }

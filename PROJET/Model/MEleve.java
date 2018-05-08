@@ -28,7 +28,7 @@ public class MEleve implements Serializable {
 	}
 	
 	/* Ajout d'un eleve dans une classe sans groupe */
-	public void ajoutEleve(String nomEleve, String prenomEleve, int indexClasse, MClasse lesClasses, MEdt lesEDT) {
+	public int ajoutEleve(String nomEleve, String prenomEleve, int indexClasse, MClasse lesClasses, MEdt lesEDT) {
 		if(nomEleve.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour l'élève !");
 		} else if(prenomEleve.length() == 0) {
@@ -37,8 +37,9 @@ public class MEleve implements Serializable {
 			Edt nouvelEDT = new Edt();
 			lesEDT.ajoutEDT(nouvelEDT); 
 			Eleve nouvelEleve = new Eleve(nomEleve, prenomEleve, lesClasses.getLesClasses().get(indexClasse), nouvelEDT);
+			lesEleves.add(nouvelEleve);
 			JOptionPane.showMessageDialog(null, "L'élève " + nomEleve + " " + prenomEleve + " a été ajouté.");
-			System.out.println("Eleve : " + nomEleve + " " + prenomEleve + " - " + lesClasses.getLesClasses().get(indexClasse).getNiveauClasse() + " " + lesClasses.getLesClasses().get(indexClasse).getNomClasse() + " - Pas de groupe");
+			//System.out.println("Eleve : " + nomEleve + " " + prenomEleve + " - " + lesClasses.getLesClasses().get(indexClasse).getNiveauClasse() + " " + lesClasses.getLesClasses().get(indexClasse).getNomClasse() + " - Pas de groupe");
 		
 			/* Ajout d'un nouvel élève dans le fichier saveEleve.txt */
 			try {
@@ -46,15 +47,16 @@ public class MEleve implements Serializable {
 				BufferedWriter out = new BufferedWriter(monFichier);
 				out.write(nomEleve + "\n" + prenomEleve + "\n" + indexClasse + "\n" + "-\n");
 				out.close();
+				return 0;
 			} catch (IOException ex) {
 				System.out.println("Erreur : " + ex);
 			}
 		}
-		
+		return 1;
 	}
 
 	/* Ajout d'un eleve dans une classe avec un groupe */
-	public void ajoutEleve(String nomEleve, String prenomEleve, int indexClasse, int indexGroupe, MClasse lesClasses, MEdt lesEDT) {
+	public int ajoutEleve(String nomEleve, String prenomEleve, int indexClasse, int indexGroupe, MClasse lesClasses, MEdt lesEDT) {
 		if(nomEleve.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour l'élève !");
 		} else if(prenomEleve.length() == 0) {
@@ -63,8 +65,9 @@ public class MEleve implements Serializable {
 			Edt nouvelEDT = new Edt();
 			lesEDT.ajoutEDT(nouvelEDT);
 			Eleve nouvelEleve = new Eleve(nomEleve, prenomEleve, lesClasses.getLesClasses().get(indexClasse), lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().get(indexGroupe), nouvelEDT);
+			lesEleves.add(nouvelEleve);
 			JOptionPane.showMessageDialog(null, "L'élève " + nomEleve + " " + prenomEleve + " a été ajouté.");
-			System.out.println("Eleve : " + nomEleve + " " + prenomEleve + " - " + lesClasses.getLesClasses().get(indexClasse).getNiveauClasse() + " " + lesClasses.getLesClasses().get(indexClasse).getNomClasse() + " - " + lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().get(indexGroupe).getNomGroupe());
+			//System.out.println("Eleve : " + nomEleve + " " + prenomEleve + " - " + lesClasses.getLesClasses().get(indexClasse).getNiveauClasse() + " " + lesClasses.getLesClasses().get(indexClasse).getNomClasse() + " - " + lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().get(indexGroupe).getNomGroupe());
 			
 			/* Ajout d'un nouvel élève dans le fichier saveEleve.txt */
 			try {
@@ -72,16 +75,17 @@ public class MEleve implements Serializable {
 				BufferedWriter out = new BufferedWriter(monFichier);
 				out.write(nomEleve + "\n" + prenomEleve + "\n" + indexClasse + "\n" + indexGroupe + "\n");
 				out.close();
+				return 0;
 			} catch (IOException ex) {
 				System.out.println("Erreur : " + ex);
 			}
 		}
-		
+		return 1;		
 	}
 	
 	public void chargerLesEleves(MClasse lesClasses) {
 		try {
-			Charset  charset = Charset.forName("ISO-8859-1");
+			Charset  charset = Charset.forName("UTF-8");
 			Path path = Paths.get("saveEleve.txt");
 			List<String> lignes = Files.readAllLines(path, charset);
 			int i = 0, indexClasse = 0, indexGroupe = 0;
@@ -93,9 +97,11 @@ public class MEleve implements Serializable {
 				if(i == 1) { prenomEleve = ligne; }
 				if(i == 2) { indexClasse = Integer.parseInt(ligne); }
 				if(i == 3) {  
-					if(ligne == "-") {
+					if(ligne.equals("-")) {
+						System.out.println("On passe en haut");
 						nouvelEleve = new Eleve(nomEleve, prenomEleve, lesClasses.getLesClasses().get(indexClasse));
 					} else {
+						System.out.println("On basse en bas");
 						indexGroupe = Integer.parseInt(ligne);
 						nouvelEleve = new Eleve(nomEleve, prenomEleve, lesClasses.getLesClasses().get(indexClasse), lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().get(indexGroupe));
 					}

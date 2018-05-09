@@ -52,6 +52,10 @@ public class Classe {
 		return this.couleurClasse;
 	}
 
+	public ArrayList<Matiere> getLesMatieres() {
+		return this.lesMatieres;
+	}
+
 	public Edt getEdtClasse() {
 		return this.edtClasse;
 	}
@@ -67,12 +71,31 @@ public class Classe {
 	}
 
 	public void setLesMatieres(MMatiere lesMatieres) {
-		System.out.println("Classe : " + this.niveauClasse);
 		for(Matiere m : lesMatieres.getLesMatieres()) {
 			if(m.getNiveauMatiere() == this.niveauClasse) {
-				System.out.println("Matiere : " + m.getNomMatiere());
 				this.lesMatieres.add(m);
 			}
 		}
+	}
+
+	public void trierLesMatieres() {
+		int i = 0;
+		ArrayList<Matiere> tmpMatiere = new ArrayList<Matiere>();
+		if(this.lesMatieres.size() > 0) {
+			tmpMatiere.add(lesMatieres.get(0));
+			this.lesMatieres.remove(0);
+			if(this.lesMatieres.size() > 0) {
+				for(Matiere m : lesMatieres) {
+					while(i < tmpMatiere.size() && tmpMatiere.get(i).getMaxHeureRestante() > m.getMaxHeureRestante()) {
+						i++;
+					}
+					if(i == tmpMatiere.size()) { System.out.println("On passe ici"); tmpMatiere.add(m); }
+					else { tmpMatiere.add(i, m);}
+					i = 0;
+				}
+			}
+		}
+
+		this.lesMatieres = tmpMatiere;
 	}
 }

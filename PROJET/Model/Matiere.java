@@ -1,6 +1,7 @@
 package PROJET.Model;
 
 import java.util.*;
+import java.lang.Math;
 import java.awt.Color;
 
 public class Matiere {
@@ -49,6 +50,22 @@ public class Matiere {
 	
 	public int getNombreHeureTD() {
 		return this.nombreHeureTD;
+	}
+
+	public int getNombreHeureCMrestante() {
+		return this.nombreHeureCMrestante;
+	}
+
+	public int getNombreHeureTPrestante() {
+		return this.nombreHeureTPrestante;
+	}
+
+	public int getNombreHeureTDrestante() {
+		return this.nombreHeureTDrestante;
+	}
+
+	public int getMaxHeureRestante() {
+		return Math.max(this.nombreHeureCMrestante, Math.max(this.nombreHeureTDrestante, this.nombreHeureTPrestante));
 	}
 
 	public String getNiveauMatiere() {

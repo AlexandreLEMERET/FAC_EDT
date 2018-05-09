@@ -61,10 +61,9 @@ public class Generateur {
 
 						case "Professeur":
 							interfaceGraphique.create_frameAjoutProfesseur();
-							lesProfesseurs.chargerComboBoxProfesseur(lesMatieres, interfaceGraphique.getCmbMatiereProfesseur());
 							interfaceGraphique.getBoutonAccepterProfesseur().addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent event) {
-									res = lesProfesseurs.ajoutProfesseur(interfaceGraphique.getTfNomProfesseur().getText(), interfaceGraphique.getTfPrenomProfesseur().getText(), interfaceGraphique.getCmbMatiereProfesseur().getSelectedIndex(), interfaceGraphique.getTfNombreHeureProfesseur().getText(), lesMatieres, lesEDT);
+									res = lesProfesseurs.ajoutProfesseur(interfaceGraphique.getTfNomProfesseur().getText(), interfaceGraphique.getTfPrenomProfesseur().getText(), interfaceGraphique.getTfNombreHeureProfesseur().getText(), lesEDT);
 									if( res == 0) { interfaceGraphique.create_buttonProfesseur(true, interfaceGraphique.getTfNomProfesseur().getText(), interfaceGraphique.getTfPrenomProfesseur().getText()); }
 								}
 							});
@@ -126,6 +125,7 @@ public class Generateur {
 
 						case "Matiere":
 							interfaceGraphique.create_frameAjoutMatiere();
+							lesMatieres.chargerComboBoxProfesseurMatiere(lesProfesseurs, interfaceGraphique.getCmbProfesseurMatiere());
 							interfaceGraphique.getBoutonCouleurMatiere().addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent event) {
 										Color couleur = JColorChooser.showDialog(null, "Couleur du fond", Color.WHITE);
@@ -135,7 +135,7 @@ public class Generateur {
 							});
 							interfaceGraphique.getBoutonAccepterMatiere().addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent event) {
-									res = lesMatieres.ajoutMatiere(interfaceGraphique.getTfNomMatiere().getText(), interfaceGraphique.getTfNombreHeureCM().getText(), interfaceGraphique.getTfNombreHeureTD().getText(), interfaceGraphique.getTfNombreHeureTP().getText(), interfaceGraphique.getBoutonCouleurMatiere().getBackground());
+									res = lesMatieres.ajoutMatiere(interfaceGraphique.getTfNomMatiere().getText(), interfaceGraphique.getTfNombreHeureCM().getText(), interfaceGraphique.getTfNombreHeureTD().getText(), interfaceGraphique.getTfNombreHeureTP().getText(), interfaceGraphique.getCmbNiveauMatiere().getSelectedItem().toString(), interfaceGraphique.getCmbProfesseurMatiere().getSelectedIndex(), interfaceGraphique.getBoutonCouleurMatiere().getBackground(), lesProfesseurs);
 									if(res == 0) { interfaceGraphique.create_buttonMatiere(true, interfaceGraphique.getTfNomMatiere().getText(), interfaceGraphique.getBoutonCouleurMatiere().getBackground()); }
 								}
 							});
@@ -145,7 +145,7 @@ public class Generateur {
 		});
 		
 		/* Les boutons pour importer les différentes classes */
-		interfaceGraphique.getBoutonImporter().addActionListener(new ActionListener() {
+		/*interfaceGraphique.getBoutonImporter().addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent event) {
 					
 					switch(interfaceGraphique.getCmbMessageList().getSelectedItem().toString()) {
@@ -163,8 +163,7 @@ public class Generateur {
 						case "Professeur":
 							interfaceGraphique.vider_button(interfaceGraphique.getCmbMessageList().getSelectedItem().toString());
 							System.out.println("Nombre de professeurs : " + lesProfesseurs.getLesProfesseurs().size());
-							lesMatieres.chargerLesMatieres();
-							lesProfesseurs.chargerLesProfesseurs(lesMatieres);
+							lesProfesseurs.chargerLesProfesseurs();
 							for(Matiere matiere : lesMatieres.getLesMatieres()) {
 								interfaceGraphique.create_buttonMatiere(false, matiere.getNomMatiere(), matiere.getCouleurMatiere());
 							}
@@ -220,7 +219,8 @@ public class Generateur {
 						case "Matiere":
 							interfaceGraphique.vider_button(interfaceGraphique.getCmbMessageList().getSelectedItem().toString());
 							System.out.println("Nombre de matière : " + lesMatieres.getLesMatieres().size());
-							lesMatieres.chargerLesMatieres();
+							lesProfesseurs.chargerLesProfesseurs();
+							lesMatieres.chargerLesMatieres(lesProfesseurs);
 							for(Matiere matiere : lesMatieres.getLesMatieres()) {
 								interfaceGraphique.create_buttonMatiere(true, matiere.getNomMatiere(), matiere.getCouleurMatiere());
 							}
@@ -228,13 +228,16 @@ public class Generateur {
 							break;
 					}
 				}
-		});
+		});*/
 
 
 		/* Bouton qui permet de générer les emplois du temps */
 		interfaceGraphique.getBoutonGenerer().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				lesEDT.genererLesEDT(lesClasses, lesEleves);
+				for(Classe c : lesClasses.getLesClasses()) {
+					c.setLesMatieres(lesMatieres);
+				}
+				//lesEDT.genererLesEDT(lesClasses, lesEleves);
 			}
 		});
 

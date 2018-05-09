@@ -6,23 +6,20 @@ public class Professeur {
 	
 	private String nomProfesseur;
 	private String prenomProfesseur;
-	private Matiere matiereProfesseur;
 	private int nombreHeuresProfesseur;
 	private Edt edtProfesseur;
 	
 	public Professeur() {}
 	
-	public Professeur(String p_nomProfesseur, String p_prenomProfesseur, Matiere p_matiereProfesseur, int p_nombreHeuresProfesseur) {
+	public Professeur(String p_nomProfesseur, String p_prenomProfesseur, int p_nombreHeuresProfesseur) {
 		this.nomProfesseur = p_nomProfesseur;
 		this.prenomProfesseur = p_prenomProfesseur;
-		this.matiereProfesseur = p_matiereProfesseur;
 		this.nombreHeuresProfesseur = p_nombreHeuresProfesseur;
 	}
 
-	public Professeur(String p_nomProfesseur, String p_prenomProfesseur, Matiere p_matiereProfesseur, int p_nombreHeuresProfesseur, Edt p_edtProfesseur) {
+	public Professeur(String p_nomProfesseur, String p_prenomProfesseur, int p_nombreHeuresProfesseur, Edt p_edtProfesseur) {
 		this.nomProfesseur = p_nomProfesseur;
 		this.prenomProfesseur = p_prenomProfesseur;
-		this.matiereProfesseur = p_matiereProfesseur;
 		this.nombreHeuresProfesseur = p_nombreHeuresProfesseur;
 		this.edtProfesseur = p_edtProfesseur;
 	}
@@ -33,10 +30,6 @@ public class Professeur {
 	
 	public String getPrenomProfesseur() {
 		return this.prenomProfesseur;
-	}
-	
-	public Matiere getMatiereProfesseur() {
-		return this.matiereProfesseur;
 	}
 	
 	public int getNombreHeuresProfesseur() {

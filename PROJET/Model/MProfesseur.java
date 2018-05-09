@@ -28,28 +28,25 @@ public class MProfesseur implements Serializable {
 		return this.lesProfesseurs;
 	}
 	
-	public int ajoutProfesseur(String nomProfesseur, String prenomProfesseur, int indexMatiereProfesseur, String nombreHeureProfesseur, MMatiere lesMatieres, MEdt lesEDT) {
+	public int ajoutProfesseur(String nomProfesseur, String prenomProfesseur, String nombreHeureProfesseur, MEdt lesEDT) {
 		if(nomProfesseur.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour le professeur !");
 		} else if(prenomProfesseur.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour le professeur !");
-		} else if(indexMatiereProfesseur < 0) {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir une matière pour le professeur !");
 		} else {
 			try {
 				Edt nouvelEDT = new Edt();
 				lesEDT.ajoutEDT(nouvelEDT);
-				Professeur nouveauProfesseur = new Professeur(nomProfesseur, prenomProfesseur, lesMatieres.getLesMatieres().get(indexMatiereProfesseur), Integer.parseInt(nombreHeureProfesseur), nouvelEDT);
+				Professeur nouveauProfesseur = new Professeur(nomProfesseur, prenomProfesseur, Integer.parseInt(nombreHeureProfesseur), nouvelEDT);
 				lesProfesseurs.add(nouveauProfesseur);
-				lesMatieres.getLesMatieres().get(indexMatiereProfesseur).setProfesseurMatiere(nouveauProfesseur);
 				JOptionPane.showMessageDialog(null,"Le professeur a été ajouté.");
-				System.out.println("Nom professeur : " + nomProfesseur + " " + prenomProfesseur + " - Matiere : " + lesMatieres.getLesMatieres().get(indexMatiereProfesseur).getNomMatiere() + " - Nombre heure : " + nombreHeureProfesseur);
+				System.out.println("Nom professeur : " + nomProfesseur + " " + prenomProfesseur + " - Nombre heure : " + nombreHeureProfesseur);
 			
 				/* Ajout du nouveau professeur dans le fichier saveProfesseur.txt */
 				try {
 					FileWriter monFichier = new FileWriter("saveProfesseur.txt", true);
 					BufferedWriter out = new BufferedWriter(monFichier);
-					out.write(nomProfesseur + "\n" + prenomProfesseur + "\n" + indexMatiereProfesseur + "\n" + nombreHeureProfesseur + "\n");
+					out.write(nomProfesseur + "\n" + prenomProfesseur + "\n" + nombreHeureProfesseur + "\n");
 					out.close();
 					return 0;
 				} catch (IOException ex) {
@@ -63,13 +60,7 @@ public class MProfesseur implements Serializable {
 		return 1;
 	}
 
-	public void chargerComboBoxProfesseur(MMatiere lesMatieres, JComboBox<String> cmbMatiereProfesseur) {
-		for(Matiere m : lesMatieres.getLesMatieres()) {
-			cmbMatiereProfesseur.addItem(m.getNomMatiere());
-		}
-	}
-
-	public void chargerLesProfesseurs(MMatiere lesMatieres) {
+	public void chargerLesProfesseurs() {
 		try {
 			Charset  charset = Charset.forName("UTF-8");
 			Path path = Paths.get("saveProfesseur.txt");
@@ -81,10 +72,9 @@ public class MProfesseur implements Serializable {
 			for(String ligne : lignes) {
 				if(i == 0) { nomProfesseur = ligne; }
 				if(i == 1) { prenomProfesseur = ligne; }
-				if(i == 2) { indexMatiereProfesseur = Integer.parseInt(ligne); }
-				if(i == 3) { 
+				if(i == 2) { 
 					nombreHeureProfesseur = Integer.parseInt(ligne); 
-					nouveauProfesseur = new Professeur(nomProfesseur, prenomProfesseur, lesMatieres.getLesMatieres().get(indexMatiereProfesseur), nombreHeureProfesseur);
+					nouveauProfesseur = new Professeur(nomProfesseur, prenomProfesseur, nombreHeureProfesseur);
 					lesProfesseurs.add(nouveauProfesseur);
 					i = -1;
 				}

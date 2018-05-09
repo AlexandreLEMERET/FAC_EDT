@@ -10,6 +10,7 @@ public class Classe {
 	private ArrayList<Groupe> lesGroupes;
 	private int nombreEleveClasse;
 	private Color couleurClasse;
+	private ArrayList<Matiere> lesMatieres;
 	private Edt edtClasse;
 	
 	public Classe() {}
@@ -19,6 +20,7 @@ public class Classe {
 		this.niveauClasse = p_niveauClasse;
 		this.lesGroupes = new ArrayList<Groupe>();
 		this.couleurClasse = p_couleurClasse;
+		this.lesMatieres = new ArrayList<Matiere>();
 	}
 	
 	public Classe(String p_nomClasse, String p_niveauClasse, Color p_couleurClasse, Edt p_edtClasse) {
@@ -26,6 +28,7 @@ public class Classe {
 		this.niveauClasse = p_niveauClasse;
 		this.lesGroupes = new ArrayList<Groupe>();
 		this.couleurClasse = p_couleurClasse;
+		this.lesMatieres = new ArrayList<Matiere>();
 		this.edtClasse = p_edtClasse;
 	}
 
@@ -61,5 +64,15 @@ public class Classe {
 			}
 		}
 		this.nombreEleveClasse = nombreEleve;
+	}
+
+	public void setLesMatieres(MMatiere lesMatieres) {
+		System.out.println("Classe : " + this.niveauClasse);
+		for(Matiere m : lesMatieres.getLesMatieres()) {
+			if(m.getNiveauMatiere() == this.niveauClasse) {
+				System.out.println("Matiere : " + m.getNomMatiere());
+				this.lesMatieres.add(m);
+			}
+		}
 	}
 }

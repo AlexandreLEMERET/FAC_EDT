@@ -41,9 +41,9 @@ public class InterfaceGraphique extends JFrame {
 	private JButton boutonPrecedent, boutonSuivant, boutonAjouter, boutonCreation, boutonGenerer, boutonEDT, boutonAccepterSalle, boutonAccepterProfesseur, boutonAccepterClasse, 
 			boutonAccepterGroupe, boutonAccepterEleve, boutonAccepterMatiere, boutonCouleurClasse, boutonCouleurMatiere, boutonImporter;
 			
-	private JComboBox<String> cmbMessageList, cmbTypeList, cmbChoixList, cmbNiveauClasse, cmbTypeSalle, cmbMatiereProfesseur, cmbClasseGroupe, cmbClasseEleve, cmbGroupeEleve;
+	private JComboBox<String> cmbNiveauMatiere, cmbProfesseurMatiere, cmbMessageList, cmbTypeList, cmbChoixList, cmbNiveauClasse, cmbTypeSalle, cmbClasseGroupe, cmbClasseEleve, cmbGroupeEleve;
 	
-	private JLabel labelNumeroSalle, labelNombrePlaceSalle, labelTypeSalle, labelNomProfesseur, labelPrenomProfesseur, labelMatiereProfesseur, labelNombreHeureProfesseur, labelNomClasse, labelNiveauClasse,
+	private JLabel labelNiveauMatiere, labelProfesseurMatiere, labelNumeroSalle, labelNombrePlaceSalle, labelTypeSalle, labelNomProfesseur, labelPrenomProfesseur, labelNombreHeureProfesseur, labelNomClasse, labelNiveauClasse,
 			labelCouleurClasse, labelNomGroupe, labelClasseGroupe, labelNomEleve, labelPrenomEleve, labelClasseEleve, labelGroupeEleve, labelNomMatiere, labelNbrHCMMatiere, labelNbrHTDMatiere,labelNbrHTPMatiere,
 			labelProfMatiere, labelCouleurMatiere, text;
 			
@@ -291,16 +291,12 @@ public class InterfaceGraphique extends JFrame {
 		tfNomProfesseur = new JTextField(10);
 		labelPrenomProfesseur = new JLabel("Prénom :");
 		tfPrenomProfesseur = new JTextField(10);
-		labelMatiereProfesseur = new JLabel("Matière :");
-		cmbMatiereProfesseur = new JComboBox<String>();
 		labelNombreHeureProfesseur = new JLabel("Nombre d'heures :");
 		tfNombreHeureProfesseur = new JTextField(10);
 		panelAjoutProfesseur_1.add(labelNomProfesseur);
 		panelAjoutProfesseur_1.add(tfNomProfesseur);
 		panelAjoutProfesseur_1.add(labelPrenomProfesseur);
 		panelAjoutProfesseur_1.add(tfPrenomProfesseur);
-		panelAjoutProfesseur_1.add(labelMatiereProfesseur);
-		panelAjoutProfesseur_1.add(cmbMatiereProfesseur);
 		panelAjoutProfesseur_1.add(labelNombreHeureProfesseur);
 		panelAjoutProfesseur_1.add(tfNombreHeureProfesseur);
 		
@@ -430,7 +426,7 @@ public class InterfaceGraphique extends JFrame {
 	/* JPanel 'Ajout d'une matiere' */  
 		public JFrame create_frameAjoutMatiere() {
 		panelAjoutMatiere_1 = new JPanel();
-		panelAjoutMatiere_1.setLayout(new GridLayout(5,2));
+		panelAjoutMatiere_1.setLayout(new GridLayout(7,2));
 		
 		labelNomMatiere = new JLabel("Nom :");
 		tfNomMatiere = new JTextField(10);
@@ -440,6 +436,11 @@ public class InterfaceGraphique extends JFrame {
 		tfNbrHTDMatiere = new JTextField(10);
 		labelNbrHTPMatiere = new JLabel("Nombre d'heures de TP :");
 		tfNbrHTPMatiere = new JTextField(10);
+		labelNiveauMatiere = new JLabel("Niveau :");
+		String[] niveauxStrings = {"6 ème", "5 ème", "4 ème", "3 ème"};
+		cmbNiveauMatiere = new JComboBox<String>(niveauxStrings);
+		labelProfesseurMatiere = new JLabel("Professeur :");
+		cmbProfesseurMatiere = new JComboBox<String>();
 		labelCouleurMatiere = new JLabel("Couleur :");
 		boutonCouleurMatiere = new JButton("Couleur");
 		
@@ -451,6 +452,10 @@ public class InterfaceGraphique extends JFrame {
 		panelAjoutMatiere_1.add(tfNbrHTDMatiere);
 		panelAjoutMatiere_1.add(labelNbrHTPMatiere);
 		panelAjoutMatiere_1.add(tfNbrHTPMatiere);
+		panelAjoutMatiere_1.add(labelNiveauMatiere);
+		panelAjoutMatiere_1.add(cmbNiveauMatiere);
+		panelAjoutMatiere_1.add(labelProfesseurMatiere);
+		panelAjoutMatiere_1.add(cmbProfesseurMatiere);
 		panelAjoutMatiere_1.add(labelCouleurMatiere);
 		panelAjoutMatiere_1.add(boutonCouleurMatiere);
 		
@@ -600,10 +605,6 @@ public class InterfaceGraphique extends JFrame {
 		return this.tfNombreHeureProfesseur;
 	}
 
-	public JComboBox<String> getCmbMatiereProfesseur() {
-		return this.cmbMatiereProfesseur;
-	}
-
 	/* -------------------------------------- */
 	/* --- Getteurs JFrame Ajout Classe ----- */
 	
@@ -703,6 +704,14 @@ public class InterfaceGraphique extends JFrame {
 
 	public JTextField getTfNombreHeureTP() {
 		return this.tfNbrHTPMatiere;
+	}
+
+	public JComboBox getCmbProfesseurMatiere() {
+		return this.cmbProfesseurMatiere;
+	}
+
+	public JComboBox getCmbNiveauMatiere() {
+		return this.cmbNiveauMatiere;
 	}
 
 	/* -------------------------------------- */

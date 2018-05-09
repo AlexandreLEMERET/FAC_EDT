@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.JComboBox;
 
 public class MMatiere implements Serializable {
 	
@@ -26,8 +27,7 @@ public class MMatiere implements Serializable {
 	public ArrayList<Matiere> getLesMatieres(){
 		return this.lesMatieres;
 	}
-	
-	public int ajoutMatiere(String nomMatiere, String nombreHeureCM, String nombreHeureTP, String nombreHeureTD, Color couleurMatiere) {
+	public int ajoutMatiere(String nomMatiere, String nombreHeureCM, String nombreHeureTP, String nombreHeureTD, String niveauMatiere, int indexProfesseur, Color couleurMatiere, MProfesseur lesProfesseurs) {
 		if(nomMatiere == "") {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour la matière !");
 		} else if(nombreHeureCM == "") {
@@ -36,11 +36,13 @@ public class MMatiere implements Serializable {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de TD pour la matière !");
 		} else if(nombreHeureTP == "") {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de TP pour la matière !");
+		} else if(indexProfesseur == -1) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir un professeur pour la matiere !");
 		} else if(couleurMatiere.getRed() == 238 && couleurMatiere.getGreen() == 238 && couleurMatiere.getBlue() == 238) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir une couleur pour la matière !");
 		} else {
 			try {
-				Matiere nouvelMatiere = new Matiere(nomMatiere, Integer.parseInt(nombreHeureCM), Integer.parseInt(nombreHeureTP), Integer.parseInt(nombreHeureTD), couleurMatiere);
+				Matiere nouvelMatiere = new Matiere(nomMatiere, Integer.parseInt(nombreHeureCM), Integer.parseInt(nombreHeureTP), Integer.parseInt(nombreHeureTD), niveauMatiere, lesProfesseurs.getLesProfesseurs().get(indexProfesseur), couleurMatiere);
 				lesMatieres.add(nouvelMatiere);
 				JOptionPane.showMessageDialog(null, "La matière " + nomMatiere + " a été ajouté.");
 				System.out.println("Matiere : " + nomMatiere + " - CM : " + nombreHeureCM + " - TP : " + nombreHeureTP + " - TD : " + nombreHeureTD + " - Couleur : " + couleurMatiere);
@@ -62,14 +64,21 @@ public class MMatiere implements Serializable {
 		}
 		return 1;
 	}
-	
-	public void chargerLesMatieres() {
+
+	public void chargerComboBoxProfesseurMatiere(MProfesseur lesProfesseurs, JComboBox<String> cmbProfesseurMatiere) {
+		for(Professeur p : lesProfesseurs.getLesProfesseurs()) {
+			cmbProfesseurMatiere.addItem(p.getNomProfesseur() + " " + p.getPrenomProfesseur());
+		}
+	}
+
+
+	public void chargerLesMatieres(MProfesseur lesProfesseurs) {
 		try {
 			Charset  charset = Charset.forName("UTF-8");
 			Path path = Paths.get("saveMatiere.txt");
 			List<String> lignes = Files.readAllLines(path, charset);
-			int i = 0, nombreHeureCM = 0, nombreHeureTP = 0, nombreHeureTD = 0;
-			String nomMatiere = "";
+			int i = 0, nombreHeureCM = 0, nombreHeureTP = 0, nombreHeureTD = 0, indexProfesseur = 0;
+			String nomMatiere = "", niveauClasse = "";
 			Color couleurMatiere;
 			Matiere nouvelleMatiere;
 			
@@ -78,9 +87,11 @@ public class MMatiere implements Serializable {
 				if(i == 1) { nombreHeureCM = Integer.parseInt(ligne); }
 				if(i == 2) { nombreHeureTP = Integer.parseInt(ligne); }
 				if(i == 3) { nombreHeureTD = Integer.parseInt(ligne); }
-				if(i == 4) {
+				if(i == 4) { niveauClasse = ligne; }
+				if(i == 5) { indexProfesseur = Integer.parseInt(ligne); }
+				if(i == 6) {
 					couleurMatiere = new Color(Integer.parseInt(ligne), true);
-					nouvelleMatiere = new Matiere(nomMatiere, nombreHeureCM, nombreHeureTP, nombreHeureTD, couleurMatiere);
+					nouvelleMatiere = new Matiere(nomMatiere, nombreHeureCM, nombreHeureTP, nombreHeureTD, niveauClasse, lesProfesseurs.getLesProfesseurs().get(indexProfesseur), couleurMatiere);
 					lesMatieres.add(nouvelleMatiere);
 					i = -1;
 				}

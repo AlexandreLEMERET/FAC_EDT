@@ -56,7 +56,7 @@ public class Classe {
 		return this.lesMatieres;
 	}
 
-	public Edt getEdtClasse() {
+	public Edt getEDT() {
 		return this.edtClasse;
 	}
 

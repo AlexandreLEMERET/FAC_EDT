@@ -238,6 +238,7 @@ public class Generateur {
 					c.setLesMatieres(lesMatieres);
 				}
 				lesEDT.genererLesEDT(lesClasses, lesEleves, lesSalles);
+				lesEDT.afficherLesEDT(lesClasses);
 			}
 		});
 

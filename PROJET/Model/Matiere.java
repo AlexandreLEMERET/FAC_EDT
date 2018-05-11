@@ -91,12 +91,12 @@ public class Matiere {
 	}
 
 	public void enleverHeureRestante(String p_typeCours) {
-		if(p_typeCours.equals("CM") { 
-			this.nombreHeureCM = this.nombreHeureCM - 2;
-		} else if(p_typeCours.equals("TP") {
-			this.nombreHeureTP = this.nombreHeureTP - 2;
-		} else if(p_typeCours.equals("TP") {
-			this.nombreHeureTD = this.nombreHeureTD - 2;
+		if(p_typeCours.equals("CM")) { 
+			this.nombreHeureCMrestante = this.nombreHeureCMrestante - 2;
+		} else if(p_typeCours.equals("TP")) {
+			this.nombreHeureTPrestante = this.nombreHeureTPrestante - 2;
+		} else if(p_typeCours.equals("TP")) {
+			this.nombreHeureTDrestante = this.nombreHeureTDrestante - 2;
 		}
 	}
 	

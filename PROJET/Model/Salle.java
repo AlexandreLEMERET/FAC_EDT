@@ -54,8 +54,12 @@ public class Salle implements Serializable {
 		return "Numero salle : " + this.numeroSalle + "\n Nbr places : " + this.nombrePlacesSalle + "\n Type salle : " + this.typeSalle + "\n"; 
 	} 
 
-	public boolean estLibre(Jour p_leJour, Cours p_leCours) {
+	public boolean estOccupe(Jour p_leJour, Cours p_leCours) {
 		return this.edtSalle.getLeJour(p_leJour).getLeCours(p_leCours).getOccupe();
+	}
+
+	public Edt getEDT() {
+		return this.edtSalle;
 	}
 
 }

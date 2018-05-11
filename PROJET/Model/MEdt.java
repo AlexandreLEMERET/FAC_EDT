@@ -36,7 +36,6 @@ public class MEdt {
 						/* Si le cours est libre */
 						if(co.getOccupe() == false) {
 
-							/* On trie les matières suivant le nombre d'heure de cours restante à placer */
 							c.trierLesMatieres();
 							boolean salleLibre = false;
 							boolean professeurLibre = false;
@@ -53,7 +52,8 @@ public class MEdt {
 
 								/* On parcourt la liste de salle afin d'en trouver une qui correspond aux critères */
 								for(Salle s : lesSalles.getLesSalles()) {
-									if(s.estLibre(j, co) == true && s.getNombrePlacesSalle() >= c.getNombreEleveClasse() && laMatiere.getTypeMatiereMaxHeureRestante() == s.getTypeSalle()) {
+									if(s.estOccupe(j, co) == false && s.getNombrePlacesSalle() >= c.getNombreEleveClasse() && laMatiere.getTypeMatiereMaxHeureRestante() == s.getTypeSalle()) {
+										System.out.println("La salle numéro " + s.getNumeroSalle() + " correspond aux critères");
 										laSalle = s;
 										salleLibre = true;
 									}
@@ -61,7 +61,7 @@ public class MEdt {
 								}
 
 								/* On cherche un professeur qui est libre pour assurer cette matière */
-								if(laMatiere.getProfesseurMatiere().estLibre(j, co) == true) {
+								if(laMatiere.getProfesseurMatiere().estOccupe(j, co) == false) {
 									leProfesseur = laMatiere.getProfesseurMatiere();
 									professeurLibre = true;
 								}
@@ -69,6 +69,16 @@ public class MEdt {
 							}
 
 							if(salleLibre == true && professeurLibre == true) {
+								/* On soustrait les 2 heures de cours placées */
+								laMatiere.enleverHeureRestante(laMatiere.getTypeMatiereMaxHeureRestante());
+
+								/* On met à jour l'EDT du professeur */
+								leProfesseur.getEDT().getLeJour(j).getLeCours(co).setLaMatiere(laMatiere);
+								leProfesseur.getEDT().getLeJour(j).getLeCours(co).setLaSalle(laSalle);
+								leProfesseur.getEDT().getLeJour(j).getLeCours(co).setLaClasse(c);
+								leProfesseur.getEDT().getLeJour(j).getLeCours(co).setOccupe();
+
+
 								System.out.println("Un professeur et une salle ont été trouvé pour le cours.");
 								System.out.println("Classe : " + c.getNiveauClasse() + " " + c.getNomClasse());
 								System.out.println("Matiere : " + laMatiere.getNomMatiere());
@@ -86,3 +96,9 @@ public class MEdt {
 	}
 
 }
+
+	private Matiere laMatiere;
+	private Professeur leProfesseur;
+	private Salle laSalle;
+	private Classe laClasse;
+	private boolean occupe;

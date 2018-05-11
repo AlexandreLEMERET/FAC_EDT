@@ -36,7 +36,11 @@ public class Professeur {
 		return this.nombreHeuresProfesseur;
 	}
 
-	public boolean estLibre(Jour p_leJour, Cours p_leCours) {
+	public Edt getEDT() {
+		return this.edtProfesseur;
+	}
+
+	public boolean estOccupe(Jour p_leJour, Cours p_leCours) {
 		return this.edtProfesseur.getLeJour(p_leJour).getLeCours(p_leCours).getOccupe();
 	}
 	

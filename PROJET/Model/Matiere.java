@@ -90,16 +90,14 @@ public class Matiere {
 		return this.couleurMatiere;
 	}
 
-	public void enleverHeureCMrestante(int nbHeureCM) {
-		this.nombreHeureCM = this.nombreHeureCM - nbHeureCM;
-	}
-
-	public void enleverHeureTPrestante(int nbHeureTP) {
-		this.nombreHeureTP = this.nombreHeureTP - nbHeureTP;
-	}
-
-	public void enleverHeureTDrestante(int nbHeureTD) {
-		this.nombreHeureTD = this.nombreHeureTD - nbHeureTD;
+	public void enleverHeureRestante(String p_typeCours) {
+		if(p_typeCours.equals("CM") { 
+			this.nombreHeureCM = this.nombreHeureCM - 2;
+		} else if(p_typeCours.equals("TP") {
+			this.nombreHeureTP = this.nombreHeureTP - 2;
+		} else if(p_typeCours.equals("TP") {
+			this.nombreHeureTD = this.nombreHeureTD - 2;
+		}
 	}
 	
 }

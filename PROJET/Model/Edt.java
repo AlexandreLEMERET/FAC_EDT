@@ -28,5 +28,15 @@ public class Edt {
 		this.lesJours.add(jourJeudi);
 		this.lesJours.add(jourVendredi);
 	}
+
+	public Jour getLeJour(Jour p_leJour) {
+		for(Jour j : lesJours) {
+			if(j.getNomJour().equals(p_leJour.getNomJour())) {
+				return j;
+			}
+		}
+
+		return null;
+	}
 	
 }

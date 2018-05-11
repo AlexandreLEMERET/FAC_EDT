@@ -34,5 +34,15 @@ public class Jour {
 	public ArrayList<Cours> getLesCours() {
 		return this.lesCours;
 	}
+
+	public Cours getLeCours(Cours p_leCours) {
+		for(Cours c : lesCours) {
+			if(c.getHeureDebut() == p_leCours.getHeureDebut() && c.getHeureFin() == p_leCours.getHeureFin()) {
+				return c;
+			}
+		}
+
+		return null;
+	}
 	
 }

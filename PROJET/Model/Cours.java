@@ -53,5 +53,9 @@ public class Cours {
 	public void setLeProfesseur(Professeur p_leProfesseur) {
 		this.leProfesseur = p_leProfesseur;
 	}
+
+	public void setOccupe() {
+		this.occupe = true;
+	}
 	
 }

@@ -68,6 +68,16 @@ public class Matiere {
 		return Math.max(this.nombreHeureCMrestante, Math.max(this.nombreHeureTDrestante, this.nombreHeureTPrestante));
 	}
 
+	public String getTypeMatiereMaxHeureRestante() {
+		if(this.nombreHeureCMrestante >= this.nombreHeureTDrestante && this.nombreHeureCMrestante >= this.nombreHeureTPrestante) {
+			return "CM";
+		} else if(this.nombreHeureTDrestante >= this.nombreHeureCMrestante && this.nombreHeureTDrestante >= this.nombreHeureTPrestante) {
+			return "TD";
+		} else {
+			return "TP";
+		}
+	}
+
 	public String getNiveauMatiere() {
 		return this.niveauMatiere;
 	}

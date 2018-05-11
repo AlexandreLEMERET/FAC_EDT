@@ -35,5 +35,9 @@ public class Professeur {
 	public int getNombreHeuresProfesseur() {
 		return this.nombreHeuresProfesseur;
 	}
+
+	public boolean estLibre(Jour p_leJour, Cours p_leCours) {
+		return this.edtProfesseur.getLeJour(p_leJour).getLeCours(p_leCours).getOccupe();
+	}
 	
 }

@@ -237,7 +237,7 @@ public class Generateur {
 				for(Classe c : lesClasses.getLesClasses()) {
 					c.setLesMatieres(lesMatieres);
 				}
-				lesEDT.genererLesEDT(lesClasses, lesEleves);
+				lesEDT.genererLesEDT(lesClasses, lesEleves, lesSalles);
 			}
 		});
 

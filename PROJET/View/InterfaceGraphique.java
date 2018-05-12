@@ -22,6 +22,8 @@ import javax.swing.JColorChooser;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
+import javax.swing.SwingConstants;
+import javax.swing.BorderFactory;
 import java.util.*;
 
 /* Interface graphique */
@@ -34,7 +36,7 @@ public class InterfaceGraphique extends JFrame {
 	private JFrame frameAjoutSalle, frameAjoutProfesseur, frameAjoutClasse, frameAjoutGroupe, frameAjoutEleve, frameAjoutMatiere;
 	
 	private JPanel panelGlobal, panelBoutonCardCreation, cardCreation, cardObjetsCrees, panelBoutonObjetsCrees, panelBoutonPrecedent, panelBoutonSuivant, cardEDT, boutonPane, panelAjoutSalle_1, panelAjoutSalle_2, panelAjoutProfesseur_1, panelAjoutProfesseur_2, panelAjoutClasse_1, panelAjoutClasse_2,
-			panelAjoutGroupe_1, panelAjoutGroupe_2, panelAjoutEleve_1, panelAjoutEleve_2, panelAjoutMatiere_1, panelAjoutMatiere_2;
+			panelAjoutGroupe_1, panelAjoutGroupe_2, panelAjoutEleve_1, panelAjoutEleve_2, panelAjoutMatiere_1, panelAjoutMatiere_2, panelEDT, panelBoutonCardEDT;
 			
 	private JTextArea textCreation;
 			
@@ -202,16 +204,302 @@ public class InterfaceGraphique extends JFrame {
 		return cardCreation;
 	}
 
+	/* JPanel des EDT sur CardEDT */
+	private JPanel panelEDT(){
+
+		panelEDT = new JPanel();
+		panelEDT.setLayout(new GridLayout(5,6));
+		panelEDT.setBackground(Color.white);
+
+
+
+		 /* PREMIERE LIGNE DE GAUCHE A DROITE */
+
+		 JLabel label1 = new JLabel("/", SwingConstants.CENTER);
+		 JPanel panel1 = new JPanel();
+		 panel1.setLayout(new BorderLayout());
+		 panel1.setBackground(Color.white);
+		 //												Haut, Gauche, Bas, Droite
+		 panel1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel1.add(label1, BorderLayout.CENTER);
+
+		 JLabel label2 = new JLabel("LUNDI", SwingConstants.CENTER);
+		 JPanel panel2 = new JPanel();
+		 panel2.setLayout(new BorderLayout());
+		 panel2.setBackground(Color.white);
+		 panel2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel2.add(label2, BorderLayout.CENTER);
+
+		 JLabel label3 = new JLabel("MARDI", SwingConstants.CENTER);
+		 JPanel panel3 = new JPanel();
+		 panel3.setLayout(new BorderLayout());
+		 panel3.setBackground(Color.white);
+		 panel3.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel3.add(label3, BorderLayout.CENTER);
+
+		 JLabel label4 = new JLabel("MERCREDI", SwingConstants.CENTER);
+		 JPanel panel4 = new JPanel();
+		 panel4.setLayout(new BorderLayout());
+		 panel4.setBackground(Color.white);
+		 panel4.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel4.add(label4, BorderLayout.CENTER);
+
+		 JLabel label5 = new JLabel("JEUDI", SwingConstants.CENTER);
+		 JPanel panel5 = new JPanel();
+		 panel5.setLayout(new BorderLayout());
+		 panel5.setBackground(Color.white);
+		 panel5.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel5.add(label5, BorderLayout.CENTER);
+
+		 JLabel label6 = new JLabel("VENDREDI", SwingConstants.CENTER);
+		 JPanel panel6 = new JPanel();
+		 panel6.setLayout(new BorderLayout());
+		 panel6.setBackground(Color.white);
+		 panel6.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+		 panel6.add(label6, BorderLayout.CENTER);
+
+         /* DEUXIEME LIGNE DE GAUCHE A DROITE */
+
+         JLabel label7 = new JLabel("8h - 10h", SwingConstants.CENTER);
+		 JPanel panel7 = new JPanel();
+		 panel7.setLayout(new BorderLayout());
+		 panel7.setBackground(Color.white);
+		 panel7.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel7.add(label7, BorderLayout.CENTER);
+
+		 JLabel label8 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel8 = new JPanel();
+		 panel8.setLayout(new BorderLayout());
+		 panel8.setBackground(Color.white);
+		 panel8.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel8.add(label8, BorderLayout.CENTER);
+
+		 JLabel label9 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel9 = new JPanel();
+		 panel9.setLayout(new BorderLayout());
+		 panel9.setBackground(Color.white);
+		 panel9.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel9.add(label9, BorderLayout.CENTER);
+
+		 JLabel label10 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel10 = new JPanel();
+		 panel10.setLayout(new BorderLayout());
+		 panel10.setBackground(Color.white);
+		 panel10.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel10.add(label10, BorderLayout.CENTER);
+
+		 JLabel label11 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel11 = new JPanel();
+		 panel11.setLayout(new BorderLayout());
+		 panel11.setBackground(Color.white);
+		 panel11.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel11.add(label11, BorderLayout.CENTER);
+
+		 JLabel label12 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel12 = new JPanel();
+		 panel12.setLayout(new BorderLayout());
+		 panel12.setBackground(Color.white);
+		 panel12.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+		 panel12.add(label12, BorderLayout.CENTER);
+
+         /* TROISIEME LIGNE DE GAUCHE A DROITE */
+
+         JLabel label13 = new JLabel("10h - 12h", SwingConstants.CENTER);
+		 JPanel panel13 = new JPanel();
+		 panel13.setLayout(new BorderLayout());
+		 panel13.setBackground(Color.white);
+		 panel13.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel13.add(label13, BorderLayout.CENTER);
+
+		 JLabel label14 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel14 = new JPanel();
+		 panel14.setLayout(new BorderLayout());
+		 panel14.setBackground(Color.white);
+		 panel14.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel14.add(label14, BorderLayout.CENTER);
+
+		 JLabel label15 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel15 = new JPanel();
+		 panel15.setLayout(new BorderLayout());
+		 panel15.setBackground(Color.white);
+		 panel15.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel15.add(label15, BorderLayout.CENTER);
+
+		 JLabel label16 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel16 = new JPanel();
+		 panel16.setLayout(new BorderLayout());
+		 panel16.setBackground(Color.white);
+		 panel16.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel16.add(label16, BorderLayout.CENTER);
+
+		 JLabel label17 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel17 = new JPanel();
+		 panel17.setLayout(new BorderLayout());
+		 panel17.setBackground(Color.white);
+		 panel17.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel17.add(label17, BorderLayout.CENTER);
+
+		 JLabel label18 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel18 = new JPanel();
+		 panel18.setLayout(new BorderLayout());
+		 panel18.setBackground(Color.white);
+		 panel18.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+		 panel18.add(label18, BorderLayout.CENTER);
+
+         /* QUATRIEME LIGNE DE GAUCHE A DROITE */
+
+         JLabel label19 = new JLabel("12h - 14h", SwingConstants.CENTER);
+		 JPanel panel19 = new JPanel();
+		 panel19.setLayout(new BorderLayout());
+		 panel19.setBackground(Color.white);
+		 panel19.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel19.add(label19, BorderLayout.CENTER);
+
+		 JLabel label20 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel20 = new JPanel();
+		 panel20.setLayout(new BorderLayout());
+		 panel20.setBackground(Color.white);
+		 panel20.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel20.add(label20, BorderLayout.CENTER);
+
+		 JLabel label21 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel21 = new JPanel();
+		 panel21.setLayout(new BorderLayout());
+		 panel21.setBackground(Color.white);
+		 panel21.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel21.add(label21, BorderLayout.CENTER);
+
+		 JLabel label22 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel22 = new JPanel();
+		 panel22.setLayout(new BorderLayout());
+		 panel22.setBackground(Color.white);
+		 panel22.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel22.add(label22, BorderLayout.CENTER);
+
+		 JLabel label23 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel23 = new JPanel();
+		 panel23.setLayout(new BorderLayout());
+		 panel23.setBackground(Color.white);
+		 panel23.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+		 panel23.add(label23, BorderLayout.CENTER);
+
+		 JLabel label24 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel24 = new JPanel();
+		 panel24.setLayout(new BorderLayout());
+		 panel24.setBackground(Color.white);
+		 panel24.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+		 panel24.add(label24, BorderLayout.CENTER);
+
+         /* CINQUIEME LIGNE DE GAUCHE A DROITE */
+
+         JLabel label25 = new JLabel("14h - 16h", SwingConstants.CENTER);
+		 JPanel panel25 = new JPanel();
+		 panel25.setLayout(new BorderLayout());
+		 panel25.setBackground(Color.white);
+		 panel25.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+		 panel25.add(label25, BorderLayout.CENTER);
+
+		 JLabel label26 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel26 = new JPanel();
+		 panel26.setLayout(new BorderLayout());
+		 panel26.setBackground(Color.white);
+		 panel26.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+		 panel26.add(label26, BorderLayout.CENTER);
+
+		 JLabel label27 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel27 = new JPanel();
+		 panel27.setLayout(new BorderLayout());
+		 panel27.setBackground(Color.white);
+		 panel27.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+		 panel27.add(label27, BorderLayout.CENTER);
+
+		 JLabel label28 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel28 = new JPanel();
+		 panel28.setLayout(new BorderLayout());
+		 panel28.setBackground(Color.white);
+		 panel28.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+		 panel28.add(label28, BorderLayout.CENTER);
+
+		 JLabel label29 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel29 = new JPanel();
+		 panel29.setLayout(new BorderLayout());
+		 panel29.setBackground(Color.white);
+		 panel29.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+		 panel29.add(label29, BorderLayout.CENTER);
+
+		 JLabel label30 = new JLabel("", SwingConstants.CENTER);
+		 JPanel panel30 = new JPanel();
+		 panel30.setLayout(new BorderLayout());
+		 panel30.setBackground(Color.white);
+		 panel30.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.BLACK));
+		 panel30.add(label30, BorderLayout.CENTER);
+
+
+
+		 /* Les Adds */
+
+         panelEDT.add(panel1);
+		 panelEDT.add(panel2);
+		 panelEDT.add(panel3);
+		 panelEDT.add(panel4);
+		 panelEDT.add(panel5);
+		 panelEDT.add(panel6);
+		 panelEDT.add(panel7);
+		 panelEDT.add(panel8);
+		 panelEDT.add(panel9);
+		 panelEDT.add(panel10);
+		 panelEDT.add(panel11);
+		 panelEDT.add(panel12);
+		 panelEDT.add(panel13);
+		 panelEDT.add(panel14);
+		 panelEDT.add(panel15);
+		 panelEDT.add(panel16);
+		 panelEDT.add(panel17);
+		 panelEDT.add(panel18);
+		 panelEDT.add(panel19);
+		 panelEDT.add(panel20);
+		 panelEDT.add(panel21);
+		 panelEDT.add(panel22);
+		 panelEDT.add(panel23);
+		 panelEDT.add(panel24);
+		 panelEDT.add(panel25);
+		 panelEDT.add(panel26);
+		 panelEDT.add(panel27);
+		 panelEDT.add(panel28);
+		 panelEDT.add(panel29);
+		 panelEDT.add(panel30);
+		
+
+		return panelEDT;
+		
+	}
+
+	/* JPanel CombBox cardEDT */
+	private JPanel panelBoutonCardEDT() {
+		panelBoutonCardEDT = new JPanel();
+		panelBoutonCardEDT.setBackground(Color.yellow);
+
+		String[] typeStrings = {"Salle", "Professeur", "Classe", "Groupe", "Eleve", "Matiere"};
+		cmbTypeList = new JComboBox<String>(typeStrings);
+		cmbChoixList = new JComboBox<String>();
+
+		panelBoutonCardEDT.add(cmbTypeList);
+		panelBoutonCardEDT.add(cmbChoixList);
+	
+		return panelBoutonCardEDT;
+	}
+
 	
 	/* JPanel qui affiche les emplois du temps crées */
 	private JPanel cardEDT() {
 		cardEDT = new JPanel();
+		cardEDT.setLayout(new BorderLayout());
 		cardEDT.setBackground(Color.red);
-		String[] typeStrings = {"Salle", "Professeur", "Classe", "Groupe", "Eleve"};
-		cmbTypeList = new JComboBox<String>(typeStrings);
-		cmbChoixList = new JComboBox<String>();
-		cardEDT.add(cmbTypeList);
-		cardEDT.add(cmbChoixList);
+		//String[] typeStrings = {"Salle", "Professeur", "Classe", "Groupe", "Eleve"};
+		//cmbTypeList = new JComboBox<String>(typeStrings);
+		//cmbChoixList = new JComboBox<String>();
+		cardEDT.add(panelBoutonCardEDT(), BorderLayout.NORTH);
+		cardEDT.add(panelEDT(), BorderLayout.CENTER);
 		
 		return cardEDT;
 	}

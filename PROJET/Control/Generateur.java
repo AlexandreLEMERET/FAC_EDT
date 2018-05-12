@@ -246,9 +246,37 @@ public class Generateur {
 		interfaceGraphique.getBoutonEDT().addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent event) {
 					System.out.println("Chargement des JComboBox");
+					lesSalles.remplirJComboBoxSalle(interfaceGraphique.getCmbChoixList(), lesSalles);		
 				}
 		});
 
+		/* Chargement des JComboBox sur l'onglet des EDT */
+		interfaceGraphique.getCmbTypeList().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				switch(interfaceGraphique.getCmbTypeList().getSelectedItem().toString()) {
+
+						case "Salle":
+							lesSalles.remplirJComboBoxSalle(interfaceGraphique.getCmbChoixList(), lesSalles);
+							break;
+
+						case "Professeur":
+							lesProfesseurs.remplirJComboBoxProfesseur(interfaceGraphique.getCmbChoixList(), lesProfesseurs);
+							break;
+
+						case "Classe":
+							lesClasses.remplirJComboBoxClasse(interfaceGraphique.getCmbChoixList(), lesClasses);
+							break;
+						
+						case "Groupe":
+							lesGroupes.remplirJComboBoxGroupe(interfaceGraphique.getCmbChoixList(), lesGroupes);
+							break;
+						
+						case "Eleve":
+							lesEleves.remplirJComboBoxEleve(interfaceGraphique.getCmbChoixList(), lesEleves);
+							break;
+				}
+			}
+		});
 
 	}
 	

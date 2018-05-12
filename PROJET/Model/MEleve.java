@@ -133,5 +133,12 @@ public class MEleve implements Serializable {
 			cmbGroupe.addItem(g.getNomGroupe());
 		}
 	}
+
+	public void remplirJComboBoxEleve(JComboBox cmbEleve, MEleve lesEleves) {
+		cmbEleve.removeAllItems();
+		for(Eleve e : lesEleves.getLesEleves()) {
+			cmbEleve.addItem(e.getNomEleve() + " " + e.getPrenomEleve());
+		}
+	}
 	
 }

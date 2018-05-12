@@ -73,7 +73,7 @@ public class Classe {
 	public void setLesMatieres(MMatiere lesMatieres) {
 		for(Matiere m : lesMatieres.getLesMatieres()) {
 			if(m.getNiveauMatiere() == this.niveauClasse) {
-				this.lesMatieres.add(m);
+				this.lesMatieres.add((Matiere)m.clone());
 			}
 		}
 	}

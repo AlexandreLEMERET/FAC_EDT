@@ -84,5 +84,13 @@ public class MProfesseur implements Serializable {
 			System.out.println("Erreur : " + ex);
 		}
 	}
+
+	public void remplirJComboBoxProfesseur(JComboBox cmbProfesseur, MProfesseur lesProfesseurs) {
+		cmbProfesseur.removeAllItems();
+		for(Professeur p :lesProfesseurs.getLesProfesseurs()) {
+			cmbProfesseur.addItem(p.getNomProfesseur() + " " + p.getPrenomProfesseur());
+		}
+
+	}
  				
 }

@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JComboBox;
 
 public class MSalle implements Serializable {
 	
@@ -80,6 +81,14 @@ public class MSalle implements Serializable {
 		} catch(Exception ex) {
 			System.out.println("Erreur : " + ex);
 		}
+	}
+
+	public void remplirJComboBoxSalle(JComboBox cmbSalle, MSalle lesSalles) {
+		cmbSalle.removeAllItems();
+		for(Salle s : lesSalles.getLesSalles()) {
+			cmbSalle.addItem(s.getNumeroSalle());
+		}
+
 	}
 	
 }

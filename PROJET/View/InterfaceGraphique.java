@@ -207,7 +207,7 @@ public class InterfaceGraphique extends JFrame {
 	private JPanel cardEDT() {
 		cardEDT = new JPanel();
 		cardEDT.setBackground(Color.red);
-		String[] typeStrings = {"Salle", "Professeur", "Classe", "Groupe", "Eleve", "Matiere"};
+		String[] typeStrings = {"Salle", "Professeur", "Classe", "Groupe", "Eleve"};
 		cmbTypeList = new JComboBox<String>(typeStrings);
 		cmbChoixList = new JComboBox<String>();
 		cardEDT.add(cmbTypeList);

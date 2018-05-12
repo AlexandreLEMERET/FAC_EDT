@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.JComboBox;
 
 public class MClasse implements Serializable {
 	
@@ -78,6 +79,14 @@ public class MClasse implements Serializable {
 			System.out.println("Erreur : " + ex);
 		}
 	}
+
+	public void remplirJComboBoxClasse(JComboBox cmbClasse, MClasse lesClasses) {
+		cmbClasse.removeAllItems();
+		for(Classe c : lesClasses.getLesClasses()) {
+			cmbClasse.addItem(c.getNiveauClasse() + " " + c.getNomClasse());
+		}
+	}
+							
 
 	
 }

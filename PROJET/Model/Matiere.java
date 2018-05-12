@@ -4,7 +4,7 @@ import java.util.*;
 import java.lang.Math;
 import java.awt.Color;
 
-public class Matiere {
+public class Matiere implements Cloneable {
 	
 	private String nomMatiere;
 	private int nombreHeureCM;
@@ -19,7 +19,7 @@ public class Matiere {
 	
 	public Matiere() {}
 	
-	public Matiere(String p_nomMatiere, int p_nombreHeureCM, int p_nombreHeureTP, int p_nombreHeureTD, String p_niveauMatiere, Professeur p_professeurMatiere, Color p_couleurMatiere) {
+	public Matiere(String p_nomMatiere, int p_nombreHeureCM, int p_nombreHeureTD, int p_nombreHeureTP, String p_niveauMatiere, Professeur p_professeurMatiere, Color p_couleurMatiere) {
 		this.nomMatiere = p_nomMatiere;
 		this.nombreHeureCM = p_nombreHeureCM;
 		this.nombreHeureTP = p_nombreHeureTP;
@@ -95,9 +95,19 @@ public class Matiere {
 			this.nombreHeureCMrestante = this.nombreHeureCMrestante - 2;
 		} else if(p_typeCours.equals("TP")) {
 			this.nombreHeureTPrestante = this.nombreHeureTPrestante - 2;
-		} else if(p_typeCours.equals("TP")) {
+		} else if(p_typeCours.equals("TD")) {
 			this.nombreHeureTDrestante = this.nombreHeureTDrestante - 2;
 		}
 	}
+
+	public Object clone() {
+    	Object o = null;
+    	try {
+      		o = super.clone();
+    	} catch(CloneNotSupportedException cnse) {
+      		cnse.printStackTrace(System.err);
+	    }
+	    return o;
+  	}
 	
 }

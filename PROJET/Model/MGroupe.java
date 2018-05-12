@@ -87,4 +87,11 @@ public class MGroupe implements Serializable {
 		}
 	}
 
+	public void remplirJComboBoxGroupe(JComboBox cmbGroupe, MGroupe lesGroupes) {
+		cmbGroupe.removeAllItems();
+		for(Groupe g : lesGroupes.getLesGroupes()) {
+			cmbGroupe.addItem(g.getNomGroupe());
+		}
+	}
+
 }

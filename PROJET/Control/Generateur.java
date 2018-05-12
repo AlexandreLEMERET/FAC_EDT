@@ -245,8 +245,7 @@ public class Generateur {
 
 		interfaceGraphique.getBoutonEDT().addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent event) {
-					System.out.println("Chargement des JComboBox");
-					lesSalles.remplirJComboBoxSalle(interfaceGraphique.getCmbChoixList(), lesSalles);		
+					lesSalles.remplirJComboBoxSalle(interfaceGraphique.getCmbChoixList(), lesSalles); 	
 				}
 		});
 
@@ -278,19 +277,30 @@ public class Generateur {
 			}
 		});
 
+		/* Chargement des EDT suivant ce qui est selectionné dans les JComboBox */
+		interfaceGraphique.getCmbChoixList().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				switch(interfaceGraphique.getCmbTypeList().getSelectedItem().toString()) {
+						case "Salle":
+							//interfaceGraphique.updateCardEDT(lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0).getLesCours().get(0).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0).getLesCours().get(0).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1).getLesCours().get(0).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1).getLesCours().get(0).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2).getLesCours().get(0).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2).getLesCours().get(0).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3).getLesCours().get(0).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3).getLesCours().get(0).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4).getLesCours().get(0).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4).getLesCours().get(0).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0).getLesCours().get(1).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0).getLesCours().get(1).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1).getLesCours().get(1).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1).getLesCours().get(1).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2).getLesCours().get(1).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2).getLesCours().get(1).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3).getLesCours().get(1).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3).getLesCours().get(1).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4).getLesCours().get(1).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4).getLesCours().get(1).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0).getLesCours().get(2).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0).getLesCours().get(2).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1).getLesCours().get(2).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1).getLesCours().get(2).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2).getLesCours().get(2).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2).getLesCours().get(2).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3).getLesCours().get(2).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3).getLesCours().get(2).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4).getLesCours().get(2).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4).getLesCours().get(2).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0).getLesCours().get(3).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0).getLesCours().get(3).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1).getLesCours().get(3).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1).getLesCours().get(3).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2).getLesCours().get(3).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2).getLesCours().get(3).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3).getLesCours().get(3).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3).getLesCours().get(3).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4).getLesCours().get(3).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4).getLesCours().get(3).getMatiere().getCouleurMatiere());
+							break;
+
+						case "Professeur":
+							break;
+
+						case "Classe":
+							break;
+						
+						case "Groupe":
+							break;
+						
+						case "Eleve":
+							break;
+				}
+			}
+		});
+
 	}
 	
-	
-	/* Savoir si on sauvegarde tous les champs ou les objets */ 
-	/* Afficher les erreurs dans les ordes quand un champs n'est pas rempli */
-	/* Si les objects Matiere/Couleur/etc ne peuvent pas etre importer, sauvegarder tous les champs de l'objet pour le recréer */
-	/* Throws l'erreur quand on quitte le choix de couleur */
-	/* Faire des JCardBox automatiquement suivant le nombre d'élement a charger, avec des boutons permettant d'edit les elemtns */
-	/* Sauvegader peut etre l'objet matiere dans saveProfesseur au lieu de juste le nom */
-	/* Pouvoir supprimer des objets */
-	/* Arriver a tenir a jour les textes avec les objets */
-	/* Arriver a générer un empoi du temps */
-	/* Faire des classes EmploiDuTemps  */
-	/* Enlever le focus des JComboBox quand ils sont premiers dans les fenetres */
 }
 

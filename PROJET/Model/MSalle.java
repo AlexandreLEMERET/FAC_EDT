@@ -85,10 +85,11 @@ public class MSalle implements Serializable {
 
 	public void remplirJComboBoxSalle(JComboBox cmbSalle, MSalle lesSalles) {
 		cmbSalle.removeAllItems();
+		System.out.println("Nombre de salles : " + lesSalles.getLesSalles().size());
 		for(Salle s : lesSalles.getLesSalles()) {
+			System.out.println("Numero salle : " + s.getNumeroSalle());
 			cmbSalle.addItem(s.getNumeroSalle());
 		}
-
 	}
 	
 }

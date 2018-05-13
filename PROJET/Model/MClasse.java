@@ -32,23 +32,10 @@ public class MClasse implements Serializable {
 		} else if(couleurClasse.getRed() == 238 && couleurClasse.getGreen() == 238 && couleurClasse.getBlue() == 238) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir une couleur pour la classe !");
 		} else {
-			Edt nouvelEDT = new Edt();
-			lesEDT.ajoutEDT(nouvelEDT);
-			Classe nouvelleClasse = new Classe(nomClasse, niveauClasse, couleurClasse, nouvelEDT);
+			Classe nouvelleClasse = new Classe(nomClasse, niveauClasse, couleurClasse);
 			lesClasses.add(nouvelleClasse);
 			JOptionPane.showMessageDialog(null, "La classe de " + niveauClasse + " " + nomClasse + " a été ajouté.");
-			//System.out.println("Nom classe " + nomClasse + " - Niveau classe : " + niveauClasse + " - Couleur : " + couleurClasse);
-			
-			/* Ajout d'une classe dans le fichier saveClasse.txt */
-			try {
-				FileWriter monFichier = new FileWriter("saveClasse.txt", true);
-				BufferedWriter out = new BufferedWriter(monFichier);
-				out.write(nomClasse + "\n" + niveauClasse + "\n" + Integer.toString(couleurClasse.getRGB()) + "\n");
-				out.close();
-				return 0;
-			} catch (IOException ex) {
-				System.out.println("Erreur : " + ex);
-			}
+			return 0;
 		}
 		return 1;
 	}
@@ -76,6 +63,20 @@ public class MClasse implements Serializable {
 			}
 			
 		} catch(Exception ex) {
+			System.out.println("Erreur : " + ex);
+		}
+	}
+
+	public void sauvegarderLesClasses() {
+		/* Ajout des classes dans le fichier saveClasse.txt */
+		try {
+			FileWriter monFichier = new FileWriter("saveClasse.txt");
+			BufferedWriter out = new BufferedWriter(monFichier);
+			for(Classe c : lesClasses) {
+				out.write(c.getNomClasse() + "\n" + c.getNiveauClasse() + "\n" + Integer.toString(c.getCouleurClasse().getRGB()) + "\n");
+			}
+			out.close();
+		} catch (IOException ex) {
 			System.out.println("Erreur : " + ex);
 		}
 	}

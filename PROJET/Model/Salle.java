@@ -29,13 +29,7 @@ public class Salle implements Serializable {
 		this.numeroSalle = p_numeroSalle;
 		this.nombrePlacesSalle = p_nombrePlacesSalle;
 		this.typeSalle = p_typeSalle;
-	}
-
-	public Salle(String p_numeroSalle, int p_nombrePlacesSalle, String p_typeSalle, Edt p_edtSalle) {
-		this.numeroSalle = p_numeroSalle;
-		this.nombrePlacesSalle = p_nombrePlacesSalle;
-		this.typeSalle = p_typeSalle;
-		this.edtSalle = p_edtSalle;
+		this.edtSalle = new Edt();
 	}
 	
 	public String getNumeroSalle() {

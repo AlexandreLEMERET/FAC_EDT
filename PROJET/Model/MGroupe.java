@@ -33,24 +33,13 @@ public class MGroupe implements Serializable {
 		} else if (nomGroupe.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom de groupe !");
 		} else {
-			Edt nouvelEDT = new Edt();
-			lesEDT.ajoutEDT(nouvelEDT);
-			Groupe nouveauGroupe = new Groupe(nomGroupe, lesClasses.getLesClasses().get(indexClasse), nouvelEDT);
+			Groupe nouveauGroupe = new Groupe(nomGroupe, lesClasses.getLesClasses().get(indexClasse));
 			lesGroupes.add(nouveauGroupe);
 			lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().add(nouveauGroupe);
 			JOptionPane.showMessageDialog(null, "Le groupe a été ajouté.");
-			System.out.println("Nom groupe : " + nomGroupe + " - Index classe : " + indexClasse + " - Classe : " + lesClasses.getLesClasses().get(indexClasse).getNiveauClasse() + " " + lesClasses.getLesClasses().get(indexClasse).getNomClasse());
-	   
-			/* Ajout du groupe dans le fichier saveGroupe.txt */
-			try {
-				FileWriter monFichier = new FileWriter("saveGroupe.txt", true);
-				BufferedWriter out = new BufferedWriter(monFichier);
-				out.write(nomGroupe + "\n" + indexClasse + "\n");
-				out.close();
-				return 0;
-			} catch (IOException ex) {
-				System.out.println("Erreur : " + ex);
-			}
+			//System.out.println("Nom groupe : " + nomGroupe + " - Index classe : " + indexClasse + " - Classe : " + lesClasses.getLesClasses().get(indexClasse).getNiveauClasse() + " " + lesClasses.getLesClasses().get(indexClasse).getNomClasse());
+	   		return 0;
+			
 		}
 		return 1;
 	}
@@ -76,6 +65,24 @@ public class MGroupe implements Serializable {
 				i++;
 			}
 		} catch (Exception ex) {
+			System.out.println("Erreur : " + ex);
+		}
+	}
+
+	public void sauvegarderLesGroupes(MClasse lesClasses) {
+		/* Ajout du groupe dans le fichier saveGroupe.txt */
+		try {
+			FileWriter monFichier = new FileWriter("saveGroupe.txt");
+			BufferedWriter out = new BufferedWriter(monFichier);
+			int i = 0;
+			for(Classe c : lesClasses.getLesClasses()) {
+				for(Groupe g : c.getLesGroupesClasse()) {
+					out.write(g.getNomGroupe() + "\n" + i + "\n");
+				}
+				i++;
+			}
+			out.close();
+		} catch (IOException ex) {
 			System.out.println("Erreur : " + ex);
 		}
 	}

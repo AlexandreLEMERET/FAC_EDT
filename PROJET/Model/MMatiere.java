@@ -45,18 +45,7 @@ public class MMatiere implements Serializable {
 				Matiere nouvelMatiere = new Matiere(nomMatiere, Integer.parseInt(nombreHeureCM), Integer.parseInt(nombreHeureTP), Integer.parseInt(nombreHeureTD), niveauMatiere, lesProfesseurs.getLesProfesseurs().get(indexProfesseur), couleurMatiere);
 				lesMatieres.add(nouvelMatiere);
 				JOptionPane.showMessageDialog(null, "La matière " + nomMatiere + " a été ajouté.");
-				System.out.println("Matiere : " + nomMatiere + " - CM : " + nombreHeureCM + " - TP : " + nombreHeureTP + " - TD : " + nombreHeureTD + " - Couleur : " + couleurMatiere);
-			
-				/* Ajout de la matière dans le fichier saveMatiere.txt */
-				try {
-					FileWriter monFichier = new FileWriter("saveMatiere.txt", true);
-					BufferedWriter out = new BufferedWriter(monFichier);
-					out.write(nomMatiere + "\n" + nombreHeureCM + "\n" + nombreHeureTP + "\n" + nombreHeureTD + "\n" + Integer.toString(couleurMatiere.getRGB()) + "\n");
-					out.close();
-					return 0;
-				} catch (IOException ex) {
-					System.out.println("Erreur : " + ex);
-				}
+				return 0;				
 			
 			} catch(NumberFormatException e) {
 				JOptionPane.showMessageDialog(null, "Erreur : Vous devez entre un chiffre entier pour les nombres d'heures !");
@@ -72,7 +61,7 @@ public class MMatiere implements Serializable {
 	}
 
 
-	public void chargerLesMatieres(MProfesseur lesProfesseurs) {
+	public void chargerLesMatieres(MProfesseur lesProfesseurs, MClasse lesClasses) {
 		try {
 			Charset  charset = Charset.forName("UTF-8");
 			Path path = Paths.get("saveMatiere.txt");
@@ -81,7 +70,6 @@ public class MMatiere implements Serializable {
 			String nomMatiere = "", niveauClasse = "";
 			Color couleurMatiere;
 			Matiere nouvelleMatiere;
-			
 			for(String ligne : lignes) {
 				if(i == 0) { nomMatiere = ligne; }
 				if(i == 1) { nombreHeureCM = Integer.parseInt(ligne); }
@@ -91,8 +79,15 @@ public class MMatiere implements Serializable {
 				if(i == 5) { indexProfesseur = Integer.parseInt(ligne); }
 				if(i == 6) {
 					couleurMatiere = new Color(Integer.parseInt(ligne), true);
-					nouvelleMatiere = new Matiere(nomMatiere, nombreHeureCM, nombreHeureTP, nombreHeureTD, niveauClasse, lesProfesseurs.getLesProfesseurs().get(indexProfesseur), couleurMatiere);
+					nouvelleMatiere = new Matiere(nomMatiere, nombreHeureCM, nombreHeureTD, nombreHeureTP, niveauClasse, lesProfesseurs.getLesProfesseurs().get(indexProfesseur), couleurMatiere);
 					lesMatieres.add(nouvelleMatiere);
+
+					for(Classe c : lesClasses.getLesClasses()) {
+						if(niveauClasse.equals(c.getNiveauClasse())) {
+							c.getLesMatieres().add(nouvelleMatiere);
+						}
+					}
+
 					i = -1;
 				}
 				i++;
@@ -101,5 +96,25 @@ public class MMatiere implements Serializable {
 			System.out.println("Erreur : " + ex);
 		}
 	}
-	
+				
+	public void sauvegarderLesMatieres(MProfesseur lesProfesseurs) {
+		/* Ajout des matieres dans le fichier saveMatiere.txt */
+		try {
+			FileWriter monFichier = new FileWriter("saveMatiere.txt");
+			BufferedWriter out = new BufferedWriter(monFichier);
+			int i = 0;
+			for(Professeur p : lesProfesseurs.getLesProfesseurs()) {
+				for(Matiere m : lesMatieres) {
+					if(m.getProfesseurMatiere() == p) {
+						out.write(m.getNomMatiere() + "\n" + m.getNombreHeureCM() + "\n" + m.getNombreHeureTP() + "\n" + m.getNombreHeureTD() + "\n" + m.getNiveauMatiere() + "\n" +  i + "\n" + Integer.toString(m.getCouleurMatiere().getRGB()) + "\n");
+					}
+				}	
+				i++;
+			}
+			out.close();
+		} catch (IOException ex) {
+			System.out.println("Erreur : " + ex);
+		}
+	}
+
 }

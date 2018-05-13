@@ -44,7 +44,10 @@ public class MEdt {
 							Matiere laMatiere = new Matiere();
 							int i = 0;
 
-							
+							//System.out.println("salleLibre : " + salleLibre);
+							//System.out.println("professeurLibre : " + professeurLibre);
+							//System.out.println("nombre de matière : " + c.getLesMatieres().size());
+							//System.out.println("i : " + i);
 							/* Tant qu'on ne trouve pas une salle libre correspondant aux critères, un professeur libre et qu'il reste des matières possibles à placer sur l'EDT */
 							while(salleLibre == false && professeurLibre == false && i < c.getLesMatieres().size()) {
 
@@ -62,9 +65,11 @@ public class MEdt {
 									//System.out.println("Type d'heure restante : " + laMatiere.getTypeMatiereMaxHeureRestante());
 								/* On parcourt la liste de salle afin d'en trouver une qui correspond aux critères */
 									for(Salle s : lesSalles.getLesSalles()) {
-										System.out.println("Salle : " + s.getNumeroSalle() + " - Occupé : " + s.estOccupe(j, co));
+										//System.out.println("Salle : " + s.getNumeroSalle() + " - Occupé : " + s.estOccupe(j, co));
 										//System.out.println("Nombre d'eleve de la classe : " + c.getNombreEleveClasse() + " - Nombre de place : " + s.getNombrePlacesSalle());
-										if(s.estOccupe(j, co) == false && s.getNombrePlacesSalle() >= c.getNombreEleveClasse() && laMatiere.getTypeMatiereMaxHeureRestante() == s.getTypeSalle()) {
+										//System.out.println("laMatiere.getTypeMatiereMaxHeureRestante() :" + laMatiere.getTypeMatiereMaxHeureRestante() + " - s.getTypeSalle() : " + s.getTypeSalle());
+										if(s.estOccupe(j, co) == false && s.getNombrePlacesSalle() >= c.getNombreEleveClasse() && laMatiere.getTypeMatiereMaxHeureRestante().equals(s.getTypeSalle())) {
+											//System.out.println("ISSOU");
 											laSalle = s;
 											salleLibre = true;
 											break;
@@ -141,6 +146,24 @@ public class MEdt {
 					}
 					System.out.println("-----");
 				}
+			}
+		}
+	}
+
+	public void afficherLesEDT(MProfesseur lesProfesseurs, MClasse lesClasses) {
+		for(Professeur p : lesProfesseurs.getLesProfesseurs()) {
+			System.out.println("Professeur :" + p.getNomProfesseur() + " " + p.getPrenomProfesseur());
+
+			for(Jour j : p.getEDT().getLesJours()) {
+				System.out.println("Jour : " + j.getNomJour());
+				for(Cours co : j.getLesCours()) {
+					if(p.getEDT().getLeJour(j).getLeCours(co).getMatiere() != null & p.getEDT().getLeJour(j).getLeCours(co).getSalle() != null) {
+						System.out.println("	Cours de " + co.getHeureDebut() + " à " + co.getHeureFin() + " - C : " + p.getEDT().getLeJour(j).getLeCours(co).getClasse().getNiveauClasse() + " " + p.getEDT().getLeJour(j).getLeCours(co).getClasse().getNomClasse() + " - M :" + p.getEDT().getLeJour(j).getLeCours(co).getMatiere().getNomMatiere());
+					} else {
+						System.out.println("	Cours de " + co.getHeureDebut() + " à " + co.getHeureFin());
+					}
+				}
+				System.out.println("-----");
 			}
 		}
 	}

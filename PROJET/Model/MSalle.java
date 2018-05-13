@@ -34,23 +34,12 @@ public class MSalle implements Serializable {
 			JOptionPane.showMessageDialog(null,"Erreur : Vous devez indiquer un nombre de place !");
 		} else {
 			try {
-				Edt nouvelEDT = new Edt();
-				lesEDT.ajoutEDT(nouvelEDT);
-	        	Salle nouvelleSalle = new Salle(numeroSalle, Integer.parseInt(nombrePlace), typeSalle, nouvelEDT);
+	        	Salle nouvelleSalle = new Salle(numeroSalle, Integer.parseInt(nombrePlace), typeSalle);
 	   			lesSalles.add(nouvelleSalle);
 				JOptionPane.showMessageDialog(null,"La salle " + numeroSalle + " a été ajouté."); 
-				System.out.println("Numéro salle : " + numeroSalle + " - Nombre places : " + nombrePlace + " - Type salle : " + typeSalle);
+				//System.out.println("Numéro salle : " + numeroSalle + " - Nombre places : " + nombrePlace + " - Type salle : " + typeSalle);
+				return 0;
 				
-				/* Ajout de la nouvelle salle dans le fichier saveSalle.txt */
-				try {
-					FileWriter monFichier = new FileWriter("saveSalle.txt", true);
-					BufferedWriter out = new BufferedWriter(monFichier);
-					out.write(numeroSalle + "\n" + nombrePlace + "\n" + typeSalle + "\n");
-					out.close();
-					return 0;
-				} catch (IOException ex) {
-					System.out.println("Erreur : " + ex);
-				}
 			
 	   		} catch(NumberFormatException e) {
 	        	JOptionPane.showMessageDialog(null,"Erreur : Le nombre de place doit être un chiffre entier !"); 
@@ -83,11 +72,26 @@ public class MSalle implements Serializable {
 		}
 	}
 
+	public void sauvegarderLesSalles() {
+		/* Ajout des dans le fichier saveSalle.txt */
+		try {
+			FileWriter monFichier = new FileWriter("saveSalle.txt");
+			BufferedWriter out = new BufferedWriter(monFichier);
+			for(Salle s : lesSalles) {
+				out.write(s.getNumeroSalle() + "\n" + s.getNombrePlacesSalle() + "\n" + s.getTypeSalle() + "\n");
+			}
+			out.close();
+		} catch (IOException ex) {
+			System.out.println("Erreur : " + ex);
+		}
+	}
+
 	public void remplirJComboBoxSalle(JComboBox cmbSalle, MSalle lesSalles) {
 		cmbSalle.removeAllItems();
-		System.out.println("Nombre de salles : " + lesSalles.getLesSalles().size());
+		System.out.println("On charge les salles");
+		//System.out.println("Nombre de salles : " + lesSalles.getLesSalles().size());
 		for(Salle s : lesSalles.getLesSalles()) {
-			System.out.println("Numero salle : " + s.getNumeroSalle());
+			//System.out.println("Numero salle : " + s.getNumeroSalle());
 			cmbSalle.addItem(s.getNumeroSalle());
 		}
 	}

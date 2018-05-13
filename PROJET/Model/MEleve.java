@@ -34,23 +34,12 @@ public class MEleve implements Serializable {
 		} else if(prenomEleve.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour l'élève !");
 		} else {
-			Edt nouvelEDT = new Edt();
-			lesEDT.ajoutEDT(nouvelEDT); 
-			Eleve nouvelEleve = new Eleve(nomEleve, prenomEleve, lesClasses.getLesClasses().get(indexClasse), nouvelEDT);
+			Eleve nouvelEleve = new Eleve(nomEleve, prenomEleve, lesClasses.getLesClasses().get(indexClasse));
 			lesEleves.add(nouvelEleve);
+			lesClasses.getLesClasses().get(indexClasse).getLesEleves().add(nouvelEleve);
 			JOptionPane.showMessageDialog(null, "L'élève " + nomEleve + " " + prenomEleve + " a été ajouté.");
-			//System.out.println("Eleve : " + nomEleve + " " + prenomEleve + " - " + lesClasses.getLesClasses().get(indexClasse).getNiveauClasse() + " " + lesClasses.getLesClasses().get(indexClasse).getNomClasse() + " - Pas de groupe");
-		
-			/* Ajout d'un nouvel élève dans le fichier saveEleve.txt */
-			try {
-				FileWriter monFichier = new FileWriter("saveEleve.txt", true);
-				BufferedWriter out = new BufferedWriter(monFichier);
-				out.write(nomEleve + "\n" + prenomEleve + "\n" + indexClasse + "\n" + "-\n");
-				out.close();
-				return 0;
-			} catch (IOException ex) {
-				System.out.println("Erreur : " + ex);
-			}
+			return 0;
+			
 		}
 		return 1;
 	}
@@ -62,23 +51,12 @@ public class MEleve implements Serializable {
 		} else if(prenomEleve.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour l'élève !");
 		} else {
-			Edt nouvelEDT = new Edt();
-			lesEDT.ajoutEDT(nouvelEDT);
-			Eleve nouvelEleve = new Eleve(nomEleve, prenomEleve, lesClasses.getLesClasses().get(indexClasse), lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().get(indexGroupe), nouvelEDT);
+			Eleve nouvelEleve = new Eleve(nomEleve, prenomEleve, lesClasses.getLesClasses().get(indexClasse), lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().get(indexGroupe));
 			lesEleves.add(nouvelEleve);
+			lesClasses.getLesClasses().get(indexClasse).getLesEleves().add(nouvelEleve);
 			JOptionPane.showMessageDialog(null, "L'élève " + nomEleve + " " + prenomEleve + " a été ajouté.");
-			//System.out.println("Eleve : " + nomEleve + " " + prenomEleve + " - " + lesClasses.getLesClasses().get(indexClasse).getNiveauClasse() + " " + lesClasses.getLesClasses().get(indexClasse).getNomClasse() + " - " + lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().get(indexGroupe).getNomGroupe());
+			return 0;
 			
-			/* Ajout d'un nouvel élève dans le fichier saveEleve.txt */
-			try {
-				FileWriter monFichier = new FileWriter("saveEleve.txt", true);
-				BufferedWriter out = new BufferedWriter(monFichier);
-				out.write(nomEleve + "\n" + prenomEleve + "\n" + indexClasse + "\n" + indexGroupe + "\n");
-				out.close();
-				return 0;
-			} catch (IOException ex) {
-				System.out.println("Erreur : " + ex);
-			}
 		}
 		return 1;		
 	}
@@ -98,14 +76,13 @@ public class MEleve implements Serializable {
 				if(i == 2) { indexClasse = Integer.parseInt(ligne); }
 				if(i == 3) {  
 					if(ligne.equals("-")) {
-						System.out.println("On passe en haut");
 						nouvelEleve = new Eleve(nomEleve, prenomEleve, lesClasses.getLesClasses().get(indexClasse));
 					} else {
-						System.out.println("On basse en bas");
 						indexGroupe = Integer.parseInt(ligne);
 						nouvelEleve = new Eleve(nomEleve, prenomEleve, lesClasses.getLesClasses().get(indexClasse), lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().get(indexGroupe));
 					}
 					lesEleves.add(nouvelEleve);
+					lesClasses.getLesClasses().get(indexClasse).getLesEleves().add(nouvelEleve);
 					i = -1;
 				}
 				i++;
@@ -113,6 +90,34 @@ public class MEleve implements Serializable {
 		} catch(Exception ex) {
 			System.out.println("Erreur : " + ex);
 		}			
+	}
+
+	public void sauvegarderLesEleves(MClasse lesClasses) {
+		/* Ajout des eleves dans le fichier saveEleve.txt */
+		try {
+			FileWriter monFichier = new FileWriter("saveEleve.txt");
+			BufferedWriter out = new BufferedWriter(monFichier);
+			int i = 0;
+			for(Classe c : lesClasses.getLesClasses()) { 
+				if(c.getLesGroupesClasse().size() > 0) {
+					int j = 0;
+					for(Groupe g : c.getLesGroupesClasse()) {
+						for(Eleve e : c.getLesEleves()) {
+						out.write(e.getNomEleve() + "\n" + e.getPrenomEleve() + "\n" + i + "\n" + j + "\n");
+						}
+						j++;
+					}
+				} else {
+					for(Eleve e : c.getLesEleves()) {
+						out.write(e.getNomEleve() + "\n" + e.getPrenomEleve() + "\n" + i + "\n" + "-" + "\n");
+					}
+				}
+				i++;
+			}
+			out.close();
+		} catch (IOException ex) {
+			System.out.println("Erreur : " + ex);
+		}
 	}
 				
 	public void chargerComboBoxEleve(MClasse lesClasses, JComboBox<String> cmbClasse, JComboBox<String> cmbGroupe) {

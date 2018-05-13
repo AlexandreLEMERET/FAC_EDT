@@ -64,7 +64,7 @@ public class Generateur {
 							interfaceGraphique.getBoutonAccepterProfesseur().addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent event) {
 									res = lesProfesseurs.ajoutProfesseur(interfaceGraphique.getTfNomProfesseur().getText(), interfaceGraphique.getTfPrenomProfesseur().getText(), interfaceGraphique.getTfNombreHeureProfesseur().getText(), lesEDT);
-									if( res == 0) { interfaceGraphique.create_buttonProfesseur(true, interfaceGraphique.getTfNomProfesseur().getText(), interfaceGraphique.getTfPrenomProfesseur().getText()); }
+									if(res == 0) { interfaceGraphique.create_buttonProfesseur(true, interfaceGraphique.getTfNomProfesseur().getText(), interfaceGraphique.getTfPrenomProfesseur().getText()); }
 								}
 							});
 							break;
@@ -75,7 +75,6 @@ public class Generateur {
 								public void actionPerformed(ActionEvent event) {
 									try {
 									Color couleur = JColorChooser.showDialog(null, "couleur du fond", Color.WHITE);
-									//System.out.println("Couleur :" + couleur.toString());
 									interfaceGraphique.getBoutonCouleurClasse().setBackground(couleur);
 									} catch (Exception ex) {
 										System.out.println("Erreur : " + ex);
@@ -144,91 +143,53 @@ public class Generateur {
 				}
 		});
 		
-		/* Les boutons pour importer les différentes classes */
-		/*interfaceGraphique.getBoutonImporter().addActionListener(new ActionListener() {
+		/* Le bouton qui permet de sauvegarder les différentes classes */
+		interfaceGraphique.getBoutonSauvegarder().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				lesSalles.sauvegarderLesSalles();
+				lesProfesseurs.sauvegarderLesProfesseurs();
+				lesClasses.sauvegarderLesClasses();
+				lesGroupes.sauvegarderLesGroupes(lesClasses);
+				lesEleves.sauvegarderLesEleves(lesClasses);
+				lesMatieres.sauvegarderLesMatieres(lesProfesseurs);
+			}
+		});
+
+		/* Le bouton pour importer les classes à partir des fichiers de sauvegarde */
+		interfaceGraphique.getBoutonImporter().addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent event) {
 					
-					switch(interfaceGraphique.getCmbMessageList().getSelectedItem().toString()) {
-
-						case "Salle":
-							interfaceGraphique.vider_button(interfaceGraphique.getCmbMessageList().getSelectedItem().toString());
-							System.out.println("Nombre de salles : " + lesSalles.getLesSalles().size());
-							lesSalles.chargerLesSalles();
-							for(Salle salle : lesSalles.getLesSalles()) {
-								interfaceGraphique.create_buttonSalle(true, salle.getNumeroSalle());
-							}
-							System.out.println("Nombre de salles : " + lesSalles.getLesSalles().size());
-							break;
-
-						case "Professeur":
-							interfaceGraphique.vider_button(interfaceGraphique.getCmbMessageList().getSelectedItem().toString());
-							System.out.println("Nombre de professeurs : " + lesProfesseurs.getLesProfesseurs().size());
-							lesProfesseurs.chargerLesProfesseurs();
-							for(Matiere matiere : lesMatieres.getLesMatieres()) {
-								interfaceGraphique.create_buttonMatiere(false, matiere.getNomMatiere(), matiere.getCouleurMatiere());
-							}
-							for(Professeur professeur : lesProfesseurs.getLesProfesseurs()) {
-								interfaceGraphique.create_buttonProfesseur(true, professeur.getNomProfesseur(), professeur.getPrenomProfesseur());
-							}
-							System.out.println("Nombre de professeurs : " + lesProfesseurs.getLesProfesseurs().size());
-							break;
-
-						case "Classe":
-							interfaceGraphique.vider_button(interfaceGraphique.getCmbMessageList().getSelectedItem().toString());
-							System.out.println("Nombre de classes : " + lesClasses.getLesClasses().size());
-							lesClasses.chargerLesClasses();
-							for(Classe classe : lesClasses.getLesClasses()) {
-								interfaceGraphique.create_buttonClasse(true, classe.getNiveauClasse(), classe.getNomClasse(), classe.getCouleurClasse());
-							}
-							System.out.println("Nombre de classes : " + lesClasses.getLesClasses().size());
-							break;
-
-						case "Groupe":
-							interfaceGraphique.vider_button(interfaceGraphique.getCmbMessageList().getSelectedItem().toString());
-							System.out.println("Nombre de groupes : " + lesGroupes.getLesGroupes().size());
-							lesClasses.chargerLesClasses();
-							lesGroupes.chargerLesGroupes(lesClasses);
-							for(Classe classe : lesClasses.getLesClasses()) {
-								interfaceGraphique.create_buttonClasse(false, classe.getNiveauClasse(), classe.getNomClasse(), classe.getCouleurClasse());
-							}
-							for(Groupe groupe : lesGroupes.getLesGroupes()) {
-								interfaceGraphique.create_buttonGroupe(true, groupe.getNomGroupe(), groupe.getClasseGroupe().getNomClasse());
-							}
-							System.out.println("Nombre de groupes : " + lesGroupes.getLesGroupes().size());
-							System.out.println("Nombre de classes : " + lesClasses.getLesClasses().size());	
-							break;
-
-						case "Eleve":
-							interfaceGraphique.vider_button(interfaceGraphique.getCmbMessageList().getSelectedItem().toString());
-							System.out.println("Nombre d'eleves : " + lesEleves.getLesEleves().size());
-							lesClasses.chargerLesClasses();
-							lesGroupes.chargerLesGroupes(lesClasses);
-							lesEleves.chargerLesEleves(lesClasses);
-							for(Classe classe : lesClasses.getLesClasses()) {
-								interfaceGraphique.create_buttonClasse(false, classe.getNiveauClasse(), classe.getNomClasse(), classe.getCouleurClasse());
-							}
-							for(Groupe groupe : lesGroupes.getLesGroupes()) {
-								interfaceGraphique.create_buttonGroupe(false, groupe.getNomGroupe(), groupe.getClasseGroupe().getNomClasse());
-							}
-							for(Eleve eleve : lesEleves.getLesEleves()) {
-								interfaceGraphique.create_buttonEleve(true, eleve.getNomEleve(), eleve.getPrenomEleve());
-							}
-							System.out.println("Nombre d'eleves : " + lesEleves.getLesEleves().size());
-							break;
-
-						case "Matiere":
-							interfaceGraphique.vider_button(interfaceGraphique.getCmbMessageList().getSelectedItem().toString());
-							System.out.println("Nombre de matière : " + lesMatieres.getLesMatieres().size());
-							lesProfesseurs.chargerLesProfesseurs();
-							lesMatieres.chargerLesMatieres(lesProfesseurs);
-							for(Matiere matiere : lesMatieres.getLesMatieres()) {
-								interfaceGraphique.create_buttonMatiere(true, matiere.getNomMatiere(), matiere.getCouleurMatiere());
-							}
-							System.out.println("Nombre de matière : " + lesMatieres.getLesMatieres().size());
-							break;
+					
+					interfaceGraphique.vider_button();
+					lesSalles.chargerLesSalles();
+					lesProfesseurs.chargerLesProfesseurs();
+					lesClasses.chargerLesClasses();
+					lesGroupes.chargerLesGroupes(lesClasses);
+					lesEleves.chargerLesEleves(lesClasses);
+					lesMatieres.chargerLesMatieres(lesProfesseurs, lesClasses);
+					
+					for(Salle salle : lesSalles.getLesSalles()) {
+						interfaceGraphique.create_buttonSalle(false, salle.getNumeroSalle());
 					}
+					for(Professeur professeur : lesProfesseurs.getLesProfesseurs()) {
+						interfaceGraphique.create_buttonProfesseur(false, professeur.getNomProfesseur(), professeur.getPrenomProfesseur());
+					}			
+					for(Classe classe : lesClasses.getLesClasses()) {
+						interfaceGraphique.create_buttonClasse(false, classe.getNiveauClasse(), classe.getNomClasse(), classe.getCouleurClasse());
+					}
+					for(Groupe groupe : lesGroupes.getLesGroupes()) {
+						interfaceGraphique.create_buttonGroupe(false, groupe.getNomGroupe(), groupe.getClasseGroupe().getNomClasse());
+					}
+					for(Eleve eleve : lesEleves.getLesEleves()) {
+						interfaceGraphique.create_buttonEleve(false, eleve.getNomEleve(), eleve.getPrenomEleve());
+					}
+					for(Matiere matiere : lesMatieres.getLesMatieres()) {
+						interfaceGraphique.create_buttonMatiere(false, matiere.getNomMatiere(), matiere.getCouleurMatiere());
+					}
+
+					interfaceGraphique.update_panelBoutonObjetsCrees();
 				}
-		});*/
+		});
 
 
 		/* Bouton qui permet de générer les emplois du temps */
@@ -239,10 +200,12 @@ public class Generateur {
 				}
 				lesEDT.genererLesEDT(lesClasses, lesEleves, lesSalles);
 				lesEDT.afficherLesEDT(lesClasses);
+				lesEDT.afficherLesEDT(lesProfesseurs, lesClasses);
 			}
 		});
 
 
+		/* Chargement du JComboBox qui contient les salles */
 		interfaceGraphique.getBoutonEDT().addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent event) {
 					lesSalles.remplirJComboBoxSalle(interfaceGraphique.getCmbChoixList(), lesSalles); 	
@@ -282,20 +245,30 @@ public class Generateur {
 			public void actionPerformed(ActionEvent event) {
 				switch(interfaceGraphique.getCmbTypeList().getSelectedItem().toString()) {
 						case "Salle":
-							//interfaceGraphique.updateCardEDT(lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0).getLesCours().get(0).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0).getLesCours().get(0).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1).getLesCours().get(0).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1).getLesCours().get(0).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2).getLesCours().get(0).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2).getLesCours().get(0).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3).getLesCours().get(0).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3).getLesCours().get(0).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4).getLesCours().get(0).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4).getLesCours().get(0).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0).getLesCours().get(1).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0).getLesCours().get(1).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1).getLesCours().get(1).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1).getLesCours().get(1).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2).getLesCours().get(1).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2).getLesCours().get(1).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3).getLesCours().get(1).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3).getLesCours().get(1).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4).getLesCours().get(1).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4).getLesCours().get(1).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0).getLesCours().get(2).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0).getLesCours().get(2).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1).getLesCours().get(2).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1).getLesCours().get(2).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2).getLesCours().get(2).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2).getLesCours().get(2).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3).getLesCours().get(2).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3).getLesCours().get(2).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4).getLesCours().get(2).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4).getLesCours().get(2).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0).getLesCours().get(3).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0).getLesCours().get(3).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1).getLesCours().get(3).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1).getLesCours().get(3).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2).getLesCours().get(3).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2).getLesCours().get(3).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3).getLesCours().get(3).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3).getLesCours().get(3).getMatiere().getCouleurMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4).getLesCours().get(3).getMatiere().getNomMatiere(), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4).getLesCours().get(3).getMatiere().getCouleurMatiere());
+							System.out.println("Emploi du temps des salles chargées");
+							lesSalles.remplirJComboBoxSalle(interfaceGraphique.getCmbChoixList(), lesSalles);
+							interfaceGraphique.updateCardEDT("Salle", lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4));
 							break;
 
 						case "Professeur":
+							lesProfesseurs.remplirJComboBoxProfesseur(interfaceGraphique.getCmbChoixList(), lesProfesseurs);
+							interfaceGraphique.updateCardEDT("Professeur", lesProfesseurs.getLesProfesseurs().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0), lesProfesseurs.getLesProfesseurs().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1), lesProfesseurs.getLesProfesseurs().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2), lesProfesseurs.getLesProfesseurs().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3), lesProfesseurs.getLesProfesseurs().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4));
 							break;
 
-						case "Classe":
+						/*case "Classe":
+							lesClasses.remplirJComboBoxClasse(interfaceGraphique.getCmbChoixList(), lesClasses);
+							interfaceGraphique.updateCardEDT("Classe", lesClasses.getLesClasses().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0), lesClasses.getLesClasses().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1), lesClasses.getLesClasses().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2), lesClasses.getLesClasses().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3), lesClasses.getLesClasses().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4));
 							break;
 						
 						case "Groupe":
+							lesGroupes.remplirJComboBoxGroupe(interfaceGraphique.getCmbChoixList(), lesGroupes);
+							interfaceGraphique.updateCardEDT("Groupe", lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0), lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1), lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2), lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3), lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4));
 							break;
 						
 						case "Eleve":
-							break;
+							lesEleves.remplirJComboBoxEleve(interfaceGraphique.getCmbChoixList(), lesEleves);
+							interfaceGraphique.updateCardEDT("Eleve", lesEleves.getLesEleves().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0), lesEleves.getLesEleves().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1), lesEleves.getLesEleves().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2), lesEleves.getLesEleves().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3), lesEleves.getLesEleves().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4));
+							break;*/
 				}
 			}
 		});
@@ -303,4 +276,3 @@ public class Generateur {
 	}
 	
 }
-

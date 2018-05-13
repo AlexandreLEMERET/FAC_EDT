@@ -16,6 +16,7 @@ public class Eleve {
 		this.nomEleve = p_nomEleve;
 		this.prenomEleve = p_prenomEleve;
 		this.classeEleve = p_classeEleve;
+		this.edtEleve = new Edt();
 	}
 
 	public Eleve(String p_nomEleve, String p_prenomEleve, Classe p_classeEleve, Groupe p_groupeEleve) {
@@ -23,21 +24,7 @@ public class Eleve {
 		this.prenomEleve = p_prenomEleve;
 		this.classeEleve = p_classeEleve;
 		this.groupeEleve = p_groupeEleve;
-	}
-
-	public Eleve(String p_nomEleve, String p_prenomEleve, Classe p_classeEleve, Edt p_edtEleve) {
-		this.nomEleve = p_nomEleve;
-		this.prenomEleve = p_prenomEleve;
-		this.classeEleve = p_classeEleve;
-		this.edtEleve = p_edtEleve;
-	}
-
-	public Eleve(String p_nomEleve, String p_prenomEleve, Classe p_classeEleve, Groupe p_groupeEleve, Edt p_edtEleve) {
-		this.nomEleve = p_nomEleve;
-		this.prenomEleve = p_prenomEleve;
-		this.classeEleve = p_classeEleve;
-		this.groupeEleve = p_groupeEleve;
-		this.edtEleve = p_edtEleve;
+		this.edtEleve = new Edt();
 	}
 	
 	public String getNomEleve() {
@@ -56,7 +43,7 @@ public class Eleve {
 		return this.groupeEleve;
 	}
 
-	public Edt getEDTEleve() {
+	public Edt getEDT() {
 		return this.edtEleve;
 	}
 }

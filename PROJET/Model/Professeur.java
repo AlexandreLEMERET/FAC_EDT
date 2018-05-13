@@ -15,13 +15,7 @@ public class Professeur {
 		this.nomProfesseur = p_nomProfesseur;
 		this.prenomProfesseur = p_prenomProfesseur;
 		this.nombreHeuresProfesseur = p_nombreHeuresProfesseur;
-	}
-
-	public Professeur(String p_nomProfesseur, String p_prenomProfesseur, int p_nombreHeuresProfesseur, Edt p_edtProfesseur) {
-		this.nomProfesseur = p_nomProfesseur;
-		this.prenomProfesseur = p_prenomProfesseur;
-		this.nombreHeuresProfesseur = p_nombreHeuresProfesseur;
-		this.edtProfesseur = p_edtProfesseur;
+		this.edtProfesseur = new Edt();
 	}
 	
 	public String getNomProfesseur() {

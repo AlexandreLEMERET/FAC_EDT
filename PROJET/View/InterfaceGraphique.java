@@ -40,7 +40,7 @@ public class InterfaceGraphique extends JFrame {
 			
 	private JTextArea textCreation;
 			
-	private JButton boutonPrecedent, boutonSuivant, boutonAjouter, boutonCreation, boutonGenerer, boutonEDT, boutonAccepterSalle, boutonAccepterProfesseur, boutonAccepterClasse, 
+	private JButton boutonSauvegarder, boutonPrecedent, boutonSuivant, boutonAjouter, boutonCreation, boutonGenerer, boutonEDT, boutonAccepterSalle, boutonAccepterProfesseur, boutonAccepterClasse, 
 			boutonAccepterGroupe, boutonAccepterEleve, boutonAccepterMatiere, boutonCouleurClasse, boutonCouleurMatiere, boutonImporter;
 			
 	private JComboBox<String> cmbNiveauMatiere, cmbProfesseurMatiere, cmbMessageList, cmbTypeList, cmbChoixList, cmbNiveauClasse, cmbTypeSalle, cmbClasseGroupe, cmbClasseEleve, cmbGroupeEleve;
@@ -91,7 +91,7 @@ public class InterfaceGraphique extends JFrame {
 	}
 
 	/* Met à jour les boutons du panelBoutonObjetsCrees */
-	private void update_panelBoutonObjetsCrees() {
+	public void update_panelBoutonObjetsCrees() {
 		
 		switch(cmbMessageList.getSelectedItem().toString()) {
 			case "Salle" : 
@@ -169,11 +169,13 @@ public class InterfaceGraphique extends JFrame {
 		cmbMessageList = new JComboBox<String>(messageStrings);
 		boutonAjouter = new JButton("Ajouter");
 		boutonImporter = new JButton("Importer");
+		boutonSauvegarder = new JButton("Sauvegarder");
 		boutonGenerer = new JButton("Génération");
 
 		panelBoutonCardCreation.add(cmbMessageList);
 		panelBoutonCardCreation.add(boutonAjouter);
 		panelBoutonCardCreation.add(boutonImporter);
+		panelBoutonCardCreation.add(boutonSauvegarder);
 		panelBoutonCardCreation.add(boutonGenerer);
 
 		cmbMessageList.addActionListener(new ActionListener() {
@@ -207,7 +209,7 @@ public class InterfaceGraphique extends JFrame {
 
 
 
-		 /* PREMIERE LIGNE DE GAUCHE A DROITE */
+		 // PREMIERE LIGNE DE GAUCHE A DROITE
 
 		 JLabel label1 = new JLabel("/", SwingConstants.CENTER);
 		 JPanel panel1 = new JPanel();
@@ -252,7 +254,7 @@ public class InterfaceGraphique extends JFrame {
 		 panel6.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 		 panel6.add(label6, BorderLayout.CENTER);
 
-         /* DEUXIEME LIGNE DE GAUCHE A DROITE */
+         // DEUXIEME LIGNE DE GAUCHE A DROITE
 
          JLabel label7 = new JLabel("8h - 10h", SwingConstants.CENTER);
 		 JPanel panel7 = new JPanel();
@@ -296,7 +298,7 @@ public class InterfaceGraphique extends JFrame {
 		 panel12.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 		 panel12.add(label12, BorderLayout.CENTER);
 
-         /* TROISIEME LIGNE DE GAUCHE A DROITE */
+         // TROISIEME LIGNE DE GAUCHE A DROITE 
 
          JLabel label13 = new JLabel("10h - 12h", SwingConstants.CENTER);
 		 JPanel panel13 = new JPanel();
@@ -340,7 +342,7 @@ public class InterfaceGraphique extends JFrame {
 		 panel18.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 		 panel18.add(label18, BorderLayout.CENTER);
 
-         /* QUATRIEME LIGNE DE GAUCHE A DROITE */
+         // QUATRIEME LIGNE DE GAUCHE A DROITE //
 
          JLabel label19 = new JLabel("12h - 14h", SwingConstants.CENTER);
 		 JPanel panel19 = new JPanel();
@@ -384,7 +386,7 @@ public class InterfaceGraphique extends JFrame {
 		 panel24.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 		 panel24.add(label24, BorderLayout.CENTER);
 
-         /* CINQUIEME LIGNE DE GAUCHE A DROITE */
+         // CINQUIEME LIGNE DE GAUCHE A DROITE 
 
          JLabel label25 = new JLabel("14h - 16h", SwingConstants.CENTER);
 		 JPanel panel25 = new JPanel();
@@ -430,7 +432,7 @@ public class InterfaceGraphique extends JFrame {
 
 
 
-		 /* Les Adds */
+		 // Les Adds 
 
          panelEDT.add(panel1);
 		 panelEDT.add(panel2);
@@ -468,297 +470,1406 @@ public class InterfaceGraphique extends JFrame {
 		
 	}
 
-	public void updateCardEDT(String p_labelPanel8, Color p_colorPanel8, String p_labelPanel9, Color p_colorPanel9, String p_labelPanel10, Color p_colorPanel10, String p_labelPanel11, Color p_colorPanel11, String p_labelPanel12, Color p_colorPanel12, String p_labelPanel14, Color p_colorPanel14, String p_labelPanel15, Color p_colorPanel15, String p_labelPanel16, Color p_colorPanel16, String p_labelPanel17, Color p_colorPanel17, String p_labelPanel18, Color p_colorPanel18, String p_labelPanel20, Color p_colorPanel20, String p_labelPanel21, Color p_colorPanel21, String p_labelPanel22, Color p_colorPanel22, String p_labelPanel23, Color p_colorPanel23, String p_labelPanel24, Color p_colorPanel24, String p_labelPanel26, Color p_colorPanel26, String p_labelPanel27, Color p_colorPanel27, String p_labelPanel28, Color p_colorPanel28, String p_labelPanel29, Color p_colorPanel29, String p_labelPanel30,Color p_colorPanel30) {
-
+	public void updateCardEDT(String type, Jour p_jour1, Jour p_jour2, Jour p_jour3, Jour p_jour4, Jour p_jour5) {
 		System.out.println("Le panel est supprimé");
-		/*this.cardEDT.remove(panelEDT);
+		this.cardEDT.remove(panelEDT);
 		this.cardEDT.updateUI();
 
 		panelEDT = new JPanel();
 		panelEDT.setLayout(new GridLayout(5,6));
-		panelEDT.setBackground(Color.white);*/
+		panelEDT.setBackground(Color.white);
+		JLabel label1, label2, label3, label4, label5, label6, label7, label8, label8_1, label9, label9_1, label10, label10_1, label11, label11_1, label12, label12_1, label13, label13_1, label14, label14_1, label15, label15_1, label16, label16_1, label17, label17_1, label18, label18_1, label19, label19_1, label20, label20_1, label21, label21_1, label22, label22_1, label23, label23_1, label24, label24_1, label25, label25_1, label26, label26_1, label27, label27_1, label28, label28_1, label29, label29_1, label30, label30_1;
+		JPanel panel1 = new JPanel(), panel2 = new JPanel(), panel3 = new JPanel(), panel4 = new JPanel(), panel5 = new JPanel(), panel6 = new JPanel(), panel7 = new JPanel(), panel8 = new JPanel(), panel9 = new JPanel(), panel10 = new JPanel(), panel11 = new JPanel(), panel12 = new JPanel(), panel13 = new JPanel(), panel14 = new JPanel(), panel15 = new JPanel(), panel16 = new JPanel(), panel17 = new JPanel(), panel18 = new JPanel(), panel19 = new JPanel(), panel20 = new JPanel(), panel21 = new JPanel(), panel22 = new JPanel(), panel23 = new JPanel(), panel24 = new JPanel(), panel25 = new JPanel(), panel26 = new JPanel(), panel27 = new JPanel(), panel28 = new JPanel(), panel29 = new JPanel(), panel30 = new JPanel();
+		
+		switch(type) {
+
+				case "Salle":
+
+					// Premiere ligne 
+					//System.out.println("On passe ici");
+					label1 = new JLabel("/", SwingConstants.CENTER);
+					panel1 = new JPanel();
+					panel1.setLayout(new BorderLayout());
+					panel1.setBackground(Color.white);
+					panel1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel1.add(label1, BorderLayout.CENTER);
+
+					label2 = new JLabel("LUNDI", SwingConstants.CENTER);
+					panel2 = new JPanel();
+					panel2.setLayout(new BorderLayout());
+					panel2.setBackground(Color.white);
+					panel2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel2.add(label2, BorderLayout.CENTER);
+
+					label3 = new JLabel("MARDI", SwingConstants.CENTER);
+					panel3 = new JPanel();
+					panel3.setLayout(new BorderLayout());
+					panel3.setBackground(Color.white);
+					panel3.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel3.add(label3, BorderLayout.CENTER);
+
+					label4 = new JLabel("MERCREDI", SwingConstants.CENTER);
+					panel4 = new JPanel();
+					panel4.setLayout(new BorderLayout());
+					panel4.setBackground(Color.white);
+					panel4.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel4.add(label4, BorderLayout.CENTER);
+
+					label5 = new JLabel("JEUDI", SwingConstants.CENTER);
+					panel5 = new JPanel();
+					panel5.setLayout(new BorderLayout());
+					panel5.setBackground(Color.white);
+					panel5.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel5.add(label5, BorderLayout.CENTER);
+
+					label6 = new JLabel("VENDREDI", SwingConstants.CENTER);
+					panel6 = new JPanel();
+					panel6.setLayout(new BorderLayout());
+					panel6.setBackground(Color.white);
+					panel6.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel6.add(label6, BorderLayout.CENTER);
 
 
+					// DEUXIEME LIGNE DE GAUCHE A DROITE 
 
-		 /* PREMIERE LIGNE DE GAUCHE A DROITE */
-		 
-		 /*JLabel label1 = new JLabel("/", SwingConstants.CENTER);
-		 JPanel panel1 = new JPanel();
-		 panel1.setLayout(new BorderLayout());
-		 panel1.setBackground(Color.white);
-		 panel1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel1.add(label1, BorderLayout.CENTER);
+			        label7 = new JLabel("8h - 10h", SwingConstants.CENTER);
+					panel7 = new JPanel();
+					panel7.setLayout(new BorderLayout());
+					panel7.setBackground(Color.white);
+					panel7.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel7.add(label7, BorderLayout.CENTER);
 
-		 JLabel label2 = new JLabel("LUNDI", SwingConstants.CENTER);
-		 JPanel panel2 = new JPanel();
-		 panel2.setLayout(new BorderLayout());
-		 panel2.setBackground(Color.white);
-		 panel2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel2.add(label2, BorderLayout.CENTER);
+					label8 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { label8 = new JLabel("Libre", SwingConstants.CENTER); } else { label8 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel8 = new JPanel();
+					panel8.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel8.setBackground(Color.white); } else { panel8.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel8.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel8.add(label8, BorderLayout.CENTER);
 
-		 JLabel label3 = new JLabel("MARDI", SwingConstants.CENTER);
-		 JPanel panel3 = new JPanel();
-		 panel3.setLayout(new BorderLayout());
-		 panel3.setBackground(Color.white);
-		 panel3.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel3.add(label3, BorderLayout.CENTER);
+					label9 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { label9 = new JLabel("Libre", SwingConstants.CENTER); } else { label9 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel9 = new JPanel();
+					panel9.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel9.setBackground(Color.white); } else { panel9.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel9.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel9.add(label9, BorderLayout.CENTER);
 
-		 JLabel label4 = new JLabel("MERCREDI", SwingConstants.CENTER);
-		 JPanel panel4 = new JPanel();
-		 panel4.setLayout(new BorderLayout());
-		 panel4.setBackground(Color.white);
-		 panel4.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel4.add(label4, BorderLayout.CENTER);
+					label10 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { label10 = new JLabel("Libre", SwingConstants.CENTER); } else { label10 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel10 = new JPanel();
+					panel10.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel10.setBackground(Color.white); } else { panel10.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel10.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel10.add(label10, BorderLayout.CENTER);
 
-		 JLabel label5 = new JLabel("JEUDI", SwingConstants.CENTER);
-		 JPanel panel5 = new JPanel();
-		 panel5.setLayout(new BorderLayout());
-		 panel5.setBackground(Color.white);
-		 panel5.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel5.add(label5, BorderLayout.CENTER);
+					label11 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { label11 = new JLabel("Libre", SwingConstants.CENTER); } else { label11 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel11 = new JPanel();
+					panel11.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel11.setBackground(Color.white); } else { panel11.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel11.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel11.add(label11, BorderLayout.CENTER);
 
-		 JLabel label6 = new JLabel("VENDREDI", SwingConstants.CENTER);
-		 JPanel panel6 = new JPanel();
-		 panel6.setLayout(new BorderLayout());
-		 panel6.setBackground(Color.white);
-		 panel6.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-		 panel6.add(label6, BorderLayout.CENTER);*/
+					label12 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { label12 = new JLabel("Libre", SwingConstants.CENTER); } else { label12 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel12 = new JPanel();
+					panel12.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel12.setBackground(Color.white); } else { panel12.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel12.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel12.add(label12, BorderLayout.CENTER);
 
-         /* DEUXIEME LIGNE DE GAUCHE A DROITE */
+					// TROISIEME LIGNE DE GAUCHE A DROITE 
 
-         /*JLabel label7 = new JLabel("8h - 10h", SwingConstants.CENTER);
-		 JPanel panel7 = new JPanel();
-		 panel7.setLayout(new BorderLayout());
-		 panel7.setBackground(Color.white);
-		 panel7.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel7.add(label7, BorderLayout.CENTER);
+			        label13 = new JLabel("10h - 12h", SwingConstants.CENTER);
+					panel13 = new JPanel();
+					panel13.setLayout(new BorderLayout());
+					panel13.setBackground(Color.white);
+					panel13.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel13.add(label13, BorderLayout.CENTER);
 
-		 JLabel label8 = new JLabel();
-		 if(p_labelPanel8 == null) { label8 = new JLabel("Libre", SwingConstants.CENTER); } else { label8 = new JLabel(p_labelPanel8, SwingConstants.CENTER); }
-		 JPanel panel8 = new JPanel();
-		 panel8.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel8.setBackground(Color.white); } else { panel8.setBackground(p_colorPanel8); }
-		 panel8.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel8.add(label8, BorderLayout.CENTER);
+					label14 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { label14 = new JLabel("Libre", SwingConstants.CENTER); } else { label14 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel14 = new JPanel();
+					panel14.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel14.setBackground(Color.white); } else { panel14.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel14.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel14.add(label14, BorderLayout.CENTER);
 
-		 JLabel label9 = new JLabel();
-		 if(p_labelPanel9 == null) { label9 = new JLabel("Libre", SwingConstants.CENTER); } else { label9 = new JLabel(p_labelPanel9, SwingConstants.CENTER); }
-		 JPanel panel9 = new JPanel();
-		 panel9.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel9.setBackground(Color.white); } else { panel9.setBackground(p_colorPanel9); }
-		 panel9.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel9.add(label9, BorderLayout.CENTER);
+					label15 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { label15 = new JLabel("Libre", SwingConstants.CENTER); } else { label15 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel15 = new JPanel();
+					panel15.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel15.setBackground(Color.white); } else { panel15.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel15.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel15.add(label15, BorderLayout.CENTER);
 
-		 JLabel label10 = new JLabel();
-		 if(p_labelPanel10 == null) { label10 = new JLabel("Libre", SwingConstants.CENTER); } else { label10 = new JLabel(p_labelPanel10, SwingConstants.CENTER); }
-		 JPanel panel10 = new JPanel();
-		 panel10.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel10.setBackground(Color.white); } else { panel10.setBackground(p_colorPanel10); }
-		 panel10.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel10.add(label10, BorderLayout.CENTER);
+					label16 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { label16 = new JLabel("Libre", SwingConstants.CENTER); } else { label16 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel16 = new JPanel();
+					panel16.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel16.setBackground(Color.white); } else { panel16.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel16.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel16.add(label16, BorderLayout.CENTER);
 
-		 JLabel label11 = new JLabel();
-		 if(p_labelPanel11 == null) { label11 = new JLabel("Libre", SwingConstants.CENTER); } else { label11 = new JLabel(p_labelPanel11, SwingConstants.CENTER); }
-		 JPanel panel11 = new JPanel();
-		 panel11.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel11.setBackground(Color.white); } else { panel11.setBackground(p_colorPanel11); }
-		 panel11.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel11.add(label11, BorderLayout.CENTER);
+					label17 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { label17 = new JLabel("Libre", SwingConstants.CENTER); } else { label17 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel17 = new JPanel();
+					panel17.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel17.setBackground(Color.white); } else { panel17.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel17.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel17.add(label17, BorderLayout.CENTER);
 
-		 JLabel label12 = new JLabel();
-		 if(p_labelPanel12 == null) { label12 = new JLabel("Libre", SwingConstants.CENTER); } else { label12 = new JLabel(p_labelPanel12, SwingConstants.CENTER); }
-		 JPanel panel12 = new JPanel();
-		 panel12.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel12.setBackground(Color.white); } else { panel12.setBackground(p_colorPanel12); }
-		 panel12.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-		 panel12.add(label12, BorderLayout.CENTER);*/
-
-         /* TROISIEME LIGNE DE GAUCHE A DROITE */
-
-         /*JLabel label13 = new JLabel("10h - 12h", SwingConstants.CENTER);
-		 JPanel panel13 = new JPanel();
-		 panel13.setLayout(new BorderLayout());
-		 panel13.setBackground(Color.white);
-		 panel13.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel13.add(label13, BorderLayout.CENTER);
-
-		 JLabel label14 = new JLabel();
-		 if(p_labelPanel14 == null) { label14 = new JLabel("Libre", SwingConstants.CENTER); } else { label14 = new JLabel(p_labelPanel14, SwingConstants.CENTER); }
-		 JPanel panel14 = new JPanel();
-		 panel14.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel14.setBackground(Color.white); } else { panel14.setBackground(p_colorPanel14); }
-		 panel14.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel14.add(label14, BorderLayout.CENTER);
-
-		 JLabel label15 = new JLabel();
-		 if(p_labelPanel15 == null) { label15 = new JLabel("Libre", SwingConstants.CENTER); } else { label15 = new JLabel(p_labelPanel15, SwingConstants.CENTER); }
-		 JPanel panel15 = new JPanel();
-		 panel15.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel15.setBackground(Color.white); } else { panel15.setBackground(p_colorPanel15); }
-		 panel15.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel15.add(label15, BorderLayout.CENTER);
-
-		 JLabel label16 = new JLabel();
-		 if(p_labelPanel16 == null) { label16 = new JLabel("Libre", SwingConstants.CENTER); } else { label16 = new JLabel(p_labelPanel16, SwingConstants.CENTER); }
-		 JPanel panel16 = new JPanel();
-		 panel16.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel16.setBackground(Color.white); } else { panel16.setBackground(p_colorPanel16); }
-		 panel16.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel16.add(label16, BorderLayout.CENTER);
-
-		 JLabel label17 = new JLabel();
-		 if(p_labelPanel17 == null) { label17 = new JLabel("Libre", SwingConstants.CENTER); } else { label17 = new JLabel(p_labelPanel17, SwingConstants.CENTER); }
-		 JPanel panel17 = new JPanel();
-		 panel17.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel17.setBackground(Color.white); } else { panel17.setBackground(p_colorPanel17); }
-		 panel17.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel17.add(label17, BorderLayout.CENTER);
-
-		 JLabel label18 = new JLabel();
-		 if(p_labelPanel18 == null) { label18 = new JLabel("Libre", SwingConstants.CENTER); } else { label18 = new JLabel(p_labelPanel18, SwingConstants.CENTER); }
-		 JPanel panel18 = new JPanel();
-		 panel18.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel18.setBackground(Color.white); } else { panel18.setBackground(p_colorPanel18); }
-		 panel18.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-		 panel18.add(label18, BorderLayout.CENTER);*/
-
-         /* QUATRIEME LIGNE DE GAUCHE A DROITE */
-
-         /*JLabel label19 = new JLabel("12h - 14h", SwingConstants.CENTER);
-		 JPanel panel19 = new JPanel();
-		 panel19.setLayout(new BorderLayout());
-		 panel19.setBackground(Color.white);
-		 panel19.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel19.add(label19, BorderLayout.CENTER);
-
-		 JLabel label20 = new JLabel();
-		 if(p_labelPanel20 == null) { label20 = new JLabel("Libre", SwingConstants.CENTER); } else { label20 = new JLabel(p_labelPanel20, SwingConstants.CENTER); }
-		 JPanel panel20 = new JPanel();
-		 panel20.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel20.setBackground(Color.white); } else { panel20.setBackground(p_colorPanel20); }
-		 panel20.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel20.add(label20, BorderLayout.CENTER);
-
-		 JLabel label21 = new JLabel();
-		 if(p_labelPanel21 == null) { label21 = new JLabel("Libre", SwingConstants.CENTER); } else { label21 = new JLabel(p_labelPanel21, SwingConstants.CENTER); }
-		 JPanel panel21 = new JPanel();
-		 panel21.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel21.setBackground(Color.white); } else { panel21.setBackground(p_colorPanel21); }
-		 panel21.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel21.add(label21, BorderLayout.CENTER);
-
-		 JLabel label22 = new JLabel();
-		 if(p_labelPanel22 == null) { label22 = new JLabel("Libre", SwingConstants.CENTER); } else { label22 = new JLabel(p_labelPanel22, SwingConstants.CENTER); }
-		 JPanel panel22 = new JPanel();
-		 panel22.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel22.setBackground(Color.white); } else { panel22.setBackground(p_colorPanel22); }
-		 panel22.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel22.add(label22, BorderLayout.CENTER);
-
-		 JLabel label23 = new JLabel();
-		 if(p_labelPanel23 == null) { label23 = new JLabel("Libre", SwingConstants.CENTER); } else { label23 = new JLabel(p_labelPanel23, SwingConstants.CENTER); }
-		 JPanel panel23 = new JPanel();
-		 panel23.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel23.setBackground(Color.white); } else { panel23.setBackground(p_colorPanel23); }
-		 panel23.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
-		 panel23.add(label23, BorderLayout.CENTER);
-
-		 JLabel label24 = new JLabel();
-		 if(p_labelPanel24 == null) { label24 = new JLabel("Libre", SwingConstants.CENTER); } else { label24 = new JLabel(p_labelPanel24, SwingConstants.CENTER); }
-		 JPanel panel24 = new JPanel();
-		 panel24.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel24.setBackground(Color.white); } else { panel24.setBackground(p_colorPanel24); }
-		 panel24.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-		 panel24.add(label24, BorderLayout.CENTER);*/
-
-         /* CINQUIEME LIGNE DE GAUCHE A DROITE */
-
-         /*JLabel label25 = new JLabel("14h - 16h", SwingConstants.CENTER);
-		 JPanel panel25 = new JPanel();
-		 panel25.setLayout(new BorderLayout());
-		 panel25.setBackground(Color.white);
-		 panel25.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
-		 panel25.add(label25, BorderLayout.CENTER);
-
-		 JLabel label26 = new JLabel();
-		 if(p_labelPanel26 == null) { label26 = new JLabel("Libre", SwingConstants.CENTER); } else { label26 = new JLabel(p_labelPanel26, SwingConstants.CENTER); }
-		 JPanel panel26 = new JPanel();
-		 panel26.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel26.setBackground(Color.white); } else { panel26.setBackground(p_colorPanel26); }
-		 panel26.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
-		 panel26.add(label26, BorderLayout.CENTER);
-
-		 JLabel label27 = new JLabel();
-		 if(p_labelPanel27 == null) { label27 = new JLabel("Libre", SwingConstants.CENTER); } else { label27 = new JLabel(p_labelPanel27, SwingConstants.CENTER); }
-		 JPanel panel27 = new JPanel();
-		 panel27.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel27.setBackground(Color.white); } else { panel27.setBackground(p_colorPanel27); }
-		 panel27.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
-		 panel27.add(label27, BorderLayout.CENTER);
-
-		 JLabel label28 = new JLabel();
-		 if(p_labelPanel28 == null) { label28 = new JLabel("Libre", SwingConstants.CENTER); } else { label28 = new JLabel(p_labelPanel28, SwingConstants.CENTER); }
-		 JPanel panel28 = new JPanel();
-		 panel28.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel28.setBackground(Color.white); } else { panel28.setBackground(p_colorPanel28); }
-		 panel28.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
-		 panel28.add(label28, BorderLayout.CENTER);
-
-		 JLabel label29 = new JLabel();
-		 if(p_labelPanel29 == null) { label29 = new JLabel("Libre", SwingConstants.CENTER); } else { label29 = new JLabel(p_labelPanel29, SwingConstants.CENTER); }
-		 JPanel panel29 = new JPanel();
-		 panel29.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel29.setBackground(Color.white); } else { panel29.setBackground(p_colorPanel29); }
-		 panel29.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
-		 panel29.add(label29, BorderLayout.CENTER);
-
-		 JLabel label30 = new JLabel();
-		 if(p_labelPanel30 == null) { label30 = new JLabel("Libre", SwingConstants.CENTER); } else { label30 = new JLabel(p_labelPanel30, SwingConstants.CENTER); }
-		 JPanel panel30 = new JPanel();
-		 panel30.setLayout(new BorderLayout());
-		 if(p_colorPanel8 == null) { panel30.setBackground(Color.white); } else { panel30.setBackground(p_colorPanel30); }
-		 panel30.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.BLACK));
-		 panel30.add(label30, BorderLayout.CENTER);*/
+					label18 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { label18 = new JLabel("Libre", SwingConstants.CENTER); } else { label18 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel18 = new JPanel();
+					panel18.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel18.setBackground(Color.white); } else { panel18.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel18.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel18.add(label18, BorderLayout.CENTER);
 
 
+					// QUATRIEME LIGNE DE GAUCHE A DROITE 
 
-		 /* Les Adds */
+			        label19 = new JLabel("12h - 14h", SwingConstants.CENTER);
+					panel19 = new JPanel();
+					panel19.setLayout(new BorderLayout());
+					panel19.setBackground(Color.white);
+					panel19.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel19.add(label19, BorderLayout.CENTER);
 
-         /*panelEDT.add(panel1);
-		 panelEDT.add(panel2);
-		 panelEDT.add(panel3);
-		 panelEDT.add(panel4);
-		 panelEDT.add(panel5);
-		 panelEDT.add(panel6);
-		 panelEDT.add(panel7);
-		 panelEDT.add(panel8);
-		 panelEDT.add(panel9);
-		 panelEDT.add(panel10);
-		 panelEDT.add(panel11);
-		 panelEDT.add(panel12);
-		 panelEDT.add(panel13);
-		 panelEDT.add(panel14);
-		 panelEDT.add(panel15);
-		 panelEDT.add(panel16);
-		 panelEDT.add(panel17);
-		 panelEDT.add(panel18);
-		 panelEDT.add(panel19);
-		 panelEDT.add(panel20);
-		 panelEDT.add(panel21);
-		 panelEDT.add(panel22);
-		 panelEDT.add(panel23);
-		 panelEDT.add(panel24);
-		 panelEDT.add(panel25);
-		 panelEDT.add(panel26);
-		 panelEDT.add(panel27);
-		 panelEDT.add(panel28);
-		 panelEDT.add(panel29);
-		 panelEDT.add(panel30);*/
+					label20 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { label20 = new JLabel("Libre", SwingConstants.CENTER); } else { label20 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel20 = new JPanel();
+					panel20.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel20.setBackground(Color.white); } else { panel20.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel20.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel20.add(label20, BorderLayout.CENTER);
+
+					label21 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { label21 = new JLabel("Libre", SwingConstants.CENTER); } else { label21 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel21 = new JPanel();
+					panel21.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel21.setBackground(Color.white); } else { panel21.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel21.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel21.add(label21, BorderLayout.CENTER);
+
+					label22 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { label22 = new JLabel("Libre", SwingConstants.CENTER); } else { label22 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel22 = new JPanel();
+					panel22.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel22.setBackground(Color.white); } else { panel22.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel22.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel22.add(label22, BorderLayout.CENTER);
+
+					label23 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { label23 = new JLabel("Libre", SwingConstants.CENTER); } else { label23 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel23 = new JPanel();
+					panel23.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel23.setBackground(Color.white); } else { panel23.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel23.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel23.add(label23, BorderLayout.CENTER);
+
+					label24 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { label24 = new JLabel("Libre", SwingConstants.CENTER); } else { label24 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel24 = new JPanel();
+					panel24.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel24.setBackground(Color.white); } else { panel24.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel24.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel24.add(label24, BorderLayout.CENTER);
+
+					// CINQUIEME LIGNE DE GAUCHE A DROITE 
+
+			        label25 = new JLabel("14h - 16h", SwingConstants.CENTER);
+					panel25 = new JPanel();
+					panel25.setLayout(new BorderLayout());
+					panel25.setBackground(Color.white);
+					panel25.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel25.add(label25, BorderLayout.CENTER);
+
+					label26 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { label26 = new JLabel("Libre", SwingConstants.CENTER); } else { label26 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel26 = new JPanel();
+					panel26.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel26.setBackground(Color.white); } else { panel26.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel26.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel26.add(label26, BorderLayout.CENTER);
+
+					label27 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { label27 = new JLabel("Libre", SwingConstants.CENTER); } else { label27 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel27 = new JPanel();
+					panel27.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel27.setBackground(Color.white); } else { panel27.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel27.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel27.add(label27, BorderLayout.CENTER);
+
+					label28 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { label28 = new JLabel("Libre", SwingConstants.CENTER); } else { label28 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel28 = new JPanel();
+					panel28.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel28.setBackground(Color.white); } else { panel28.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel28.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel28.add(label28, BorderLayout.CENTER);
+
+					label29 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { label29 = new JLabel("Libre", SwingConstants.CENTER); } else { label29 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel29 = new JPanel();
+					panel29.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel29.setBackground(Color.white); } else { panel29.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel29.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel29.add(label29, BorderLayout.CENTER);
+
+					label30 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { label30 = new JLabel("Libre", SwingConstants.CENTER); } else { label30 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					panel30 = new JPanel();
+					panel30.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel30.setBackground(Color.white); } else { panel30.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel30.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.BLACK));
+					panel30.add(label30, BorderLayout.CENTER);
+					break;
+
+				case "Professeur":
+
+					// Premiere ligne 
+
+					label1 = new JLabel("/", SwingConstants.CENTER);
+					panel1 = new JPanel();
+					panel1.setLayout(new BorderLayout());
+					panel1.setBackground(Color.white);
+					panel1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel1.add(label1, BorderLayout.CENTER);
+
+					label2 = new JLabel("LUNDI", SwingConstants.CENTER);
+					panel2 = new JPanel();
+					panel2.setLayout(new BorderLayout());
+					panel2.setBackground(Color.white);
+					panel2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel2.add(label2, BorderLayout.CENTER);
+
+					label3 = new JLabel("MARDI", SwingConstants.CENTER);
+					panel3 = new JPanel();
+					panel3.setLayout(new BorderLayout());
+					panel3.setBackground(Color.white);
+					panel3.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel3.add(label3, BorderLayout.CENTER);
+
+					label4 = new JLabel("MERCREDI", SwingConstants.CENTER);
+					panel4 = new JPanel();
+					panel4.setLayout(new BorderLayout());
+					panel4.setBackground(Color.white);
+					panel4.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel4.add(label4, BorderLayout.CENTER);
+
+					label5 = new JLabel("JEUDI", SwingConstants.CENTER);
+					panel5 = new JPanel();
+					panel5.setLayout(new BorderLayout());
+					panel5.setBackground(Color.white);
+					panel5.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel5.add(label5, BorderLayout.CENTER);
+
+					label6 = new JLabel("VENDREDI", SwingConstants.CENTER);
+					panel6 = new JPanel();
+					panel6.setLayout(new BorderLayout());
+					panel6.setBackground(Color.white);
+					panel6.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel6.add(label6, BorderLayout.CENTER);
+
+
+					// DEUXIEME LIGNE DE GAUCHE A DROITE 
+
+					label7 = new JLabel("8h - 10h", SwingConstants.CENTER);
+					panel7 = new JPanel();
+					panel7.setLayout(new BorderLayout());
+					panel7.setBackground(Color.white);
+					panel7.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel7.add(label7, BorderLayout.CENTER);
+
+					label8 = new JLabel();
+					label8_1 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getClasse() == null) { label8 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label8 = new JLabel(p_jour1.getLesCours().get(0).getClasse().getNiveauClasse() + " " + p_jour1.getLesCours().get(0).getClasse().getNomClasse());//, SwingConstants.CENTER); 
+						label8_1 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere());
+					 }
+					panel8 = new JPanel();
+					panel8.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getClasse() == null) { panel8.setBackground(Color.white); 
+					} else { 
+						panel8.setBackground(p_jour1.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel8.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel8.add(label8);//, BorderLayout.CENTER);
+					panel8.add(label8_1);
+
+					label9 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getClasse() == null) { label9 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label9 = new JLabel(p_jour2.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER);
+					}
+					panel9 = new JPanel();
+					panel9.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getClasse() == null) { panel9.setBackground(Color.white); 
+					} else { 
+						panel9.setBackground(p_jour2.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel9.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel9.add(label9, BorderLayout.CENTER);
+
+					label10 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getClasse() == null) { label10 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label10 = new JLabel(p_jour3.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel10 = new JPanel();
+					panel10.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getClasse() == null) { panel10.setBackground(Color.white); 
+					} else { 
+						panel10.setBackground(p_jour3.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel10.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel10.add(label10, BorderLayout.CENTER);
+
+					label11 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getClasse() == null) { label11 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label11 = new JLabel(p_jour4.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel11 = new JPanel();
+					panel11.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getClasse() == null) { panel11.setBackground(Color.white); 
+					} else { 
+						panel11.setBackground(p_jour4.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel11.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel11.add(label11, BorderLayout.CENTER);
+
+					label12 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getClasse() == null) { label12 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label12 = new JLabel(p_jour5.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel12 = new JPanel();
+					panel12.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getClasse() == null) { panel12.setBackground(Color.white); 
+					} else { 
+						panel12.setBackground(p_jour5.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel12.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel12.add(label12, BorderLayout.CENTER);
+
+					// TROISIEME LIGNE DE GAUCHE A DROITE 
+
+					label13 = new JLabel("10h - 12h", SwingConstants.CENTER);
+					panel13 = new JPanel();
+					panel13.setLayout(new BorderLayout());
+					panel13.setBackground(Color.white);
+					panel13.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel13.add(label13, BorderLayout.CENTER);
+
+					label14 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getClasse() == null) { label14 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label14 = new JLabel(p_jour1.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel14 = new JPanel();
+					panel14.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getClasse() == null) { panel14.setBackground(Color.white); 
+					} else { 
+						panel14.setBackground(p_jour1.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel14.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel14.add(label14, BorderLayout.CENTER);
+
+					label15 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getClasse() == null) { label15 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label15 = new JLabel(p_jour2.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel15 = new JPanel();
+					panel15.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getClasse() == null) { panel15.setBackground(Color.white); 
+					} else {
+						panel15.setBackground(p_jour2.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel15.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel15.add(label15, BorderLayout.CENTER);
+
+					label16 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getClasse() == null) { label16 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label16 = new JLabel(p_jour3.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel16 = new JPanel();
+					panel16.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getClasse() == null) { panel16.setBackground(Color.white); 
+					} else { 
+						panel16.setBackground(p_jour3.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel16.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel16.add(label16, BorderLayout.CENTER);
+
+					label17 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getClasse() == null) { label17 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label17 = new JLabel(p_jour4.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel17 = new JPanel();
+					panel17.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getClasse() == null) { panel17.setBackground(Color.white); 
+					} else { 
+						panel17.setBackground(p_jour4.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel17.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel17.add(label17, BorderLayout.CENTER);
+
+					label18 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getClasse() == null) { label18 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label18 = new JLabel(p_jour5.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel18 = new JPanel();
+					panel18.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getClasse() == null) { panel18.setBackground(Color.white); 
+					} else { 
+						panel18.setBackground(p_jour5.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel18.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel18.add(label18, BorderLayout.CENTER);
+
+
+					// QUATRIEME LIGNE DE GAUCHE A DROITE 
+
+					label19 = new JLabel("12h - 14h", SwingConstants.CENTER);
+					panel19 = new JPanel();
+					panel19.setLayout(new BorderLayout());
+					panel19.setBackground(Color.white);
+					panel19.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel19.add(label19, BorderLayout.CENTER);
+
+					label20 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getClasse() == null) { label20 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label20 = new JLabel(p_jour1.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel20 = new JPanel();
+					panel20.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getClasse() == null) { panel20.setBackground(Color.white); 
+					} else { 
+						panel20.setBackground(p_jour1.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel20.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel20.add(label20, BorderLayout.CENTER);
+
+					label21 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getClasse() == null) { label21 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label21 = new JLabel(p_jour2.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel21 = new JPanel();
+					panel21.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getClasse() == null) { panel21.setBackground(Color.white); 
+					} else { 
+						panel21.setBackground(p_jour2.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel21.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel21.add(label21, BorderLayout.CENTER);
+
+					label22 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getClasse() == null) { label22 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label22 = new JLabel(p_jour3.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel22 = new JPanel();
+					panel22.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getClasse() == null) { panel22.setBackground(Color.white); 
+					} else { 
+						panel22.setBackground(p_jour3.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel22.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel22.add(label22, BorderLayout.CENTER);
+
+					label23 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getClasse() == null) { label23 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label23 = new JLabel(p_jour4.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel23 = new JPanel();
+					panel23.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getClasse() == null) { panel23.setBackground(Color.white); 
+					} else { 
+						panel23.setBackground(p_jour4.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel23.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel23.add(label23, BorderLayout.CENTER);
+
+					label24 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getClasse() == null) { label24 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label24 = new JLabel(p_jour5.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel24 = new JPanel();
+					panel24.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getClasse() == null) { panel24.setBackground(Color.white); 
+					} else { 
+						panel24.setBackground(p_jour5.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel24.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel24.add(label24, BorderLayout.CENTER);
+
+					// CINQUIEME LIGNE DE GAUCHE A DROITE 
+
+					label25 = new JLabel("14h - 16h", SwingConstants.CENTER);
+					panel25 = new JPanel();
+					panel25.setLayout(new BorderLayout());
+					panel25.setBackground(Color.white);
+					panel25.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel25.add(label25, BorderLayout.CENTER);
+
+					label26 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getClasse() == null) { label26 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label26 = new JLabel(p_jour1.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel26 = new JPanel();
+					panel26.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getClasse() == null) { panel26.setBackground(Color.white); } else { panel26.setBackground(p_jour1.getLesCours().get(0).getClasse().getCouleurClasse()); }
+					panel26.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel26.add(label26, BorderLayout.CENTER);
+
+					label27 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getClasse() == null) { label27 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label27 = new JLabel(p_jour2.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel27 = new JPanel();
+					panel27.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getClasse() == null) { panel27.setBackground(Color.white); 
+					} else { 
+						panel27.setBackground(p_jour2.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel27.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel27.add(label27, BorderLayout.CENTER);
+
+					label28 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getClasse() == null) { label28 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label28 = new JLabel(p_jour3.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel28 = new JPanel();
+					panel28.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getClasse() == null) { panel28.setBackground(Color.white); 
+					} else { 
+						panel28.setBackground(p_jour3.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel28.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel28.add(label28, BorderLayout.CENTER);
+
+					label29 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getClasse() == null) { label29 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label29 = new JLabel(p_jour4.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel29 = new JPanel();
+					panel29.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getClasse() == null) { panel29.setBackground(Color.white); 
+					} else { 
+						panel29.setBackground(p_jour4.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel29.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel29.add(label29, BorderLayout.CENTER);
+
+					label30 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getClasse() == null) { label30 = new JLabel("Libre", SwingConstants.CENTER); 
+					} else { 
+						label30 = new JLabel(p_jour5.getLesCours().get(0).getClasse().getNiveauClasse(), SwingConstants.CENTER); 
+					}
+					panel30 = new JPanel();
+					panel30.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getClasse() == null) { panel30.setBackground(Color.white); 
+					} else { 
+						panel30.setBackground(p_jour5.getLesCours().get(0).getClasse().getCouleurClasse()); 
+					}
+					panel30.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.BLACK));
+					panel30.add(label30, BorderLayout.CENTER);
+					break;
+
+				/*case "Classe":
+
+					// Premiere ligne 
+
+					JLabel label1 = new JLabel("/", SwingConstants.CENTER);
+					JPanel panel1 = new JPanel();
+					panel1.setLayout(new BorderLayout());
+					panel1.setBackground(Color.white);
+					panel1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel1.add(label1, BorderLayout.CENTER);
+
+					JLabel label2 = new JLabel("LUNDI", SwingConstants.CENTER);
+					JPanel panel2 = new JPanel();
+					panel2.setLayout(new BorderLayout());
+					panel2.setBackground(Color.white);
+					panel2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel2.add(label2, BorderLayout.CENTER);
+
+					JLabel label3 = new JLabel("MARDI", SwingConstants.CENTER);
+					JPanel panel3 = new JPanel();
+					panel3.setLayout(new BorderLayout());
+					panel3.setBackground(Color.white);
+					panel3.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel3.add(label3, BorderLayout.CENTER);
+
+					JLabel label4 = new JLabel("MERCREDI", SwingConstants.CENTER);
+					JPanel panel4 = new JPanel();
+					panel4.setLayout(new BorderLayout());
+					panel4.setBackground(Color.white);
+					panel4.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel4.add(label4, BorderLayout.CENTER);
+
+					JLabel label5 = new JLabel("JEUDI", SwingConstants.CENTER);
+					JPanel panel5 = new JPanel();
+					panel5.setLayout(new BorderLayout());
+					panel5.setBackground(Color.white);
+					panel5.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel5.add(label5, BorderLayout.CENTER);
+
+					JLabel label6 = new JLabel("VENDREDI", SwingConstants.CENTER);
+					JPanel panel6 = new JPanel();
+					panel6.setLayout(new BorderLayout());
+					panel6.setBackground(Color.white);
+					panel6.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel6.add(label6, BorderLayout.CENTER);
+
+
+					// DEUXIEME LIGNE DE GAUCHE A DROITE 
+
+					JLabel label7 = new JLabel("8h - 10h", SwingConstants.CENTER);
+					JPanel panel7 = new JPanel();
+					panel7.setLayout(new BorderLayout());
+					panel7.setBackground(Color.white);
+					panel7.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel7.add(label7, BorderLayout.CENTER);
+
+					JLabel label8 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { label8 = new JLabel("Libre", SwingConstants.CENTER); } else { label8 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel8 = new JPanel();
+					panel8.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel8.setBackground(Color.white); } else { panel8.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel8.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel8.add(label8, BorderLayout.CENTER);
+
+					JLabel label9 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { label9 = new JLabel("Libre", SwingConstants.CENTER); } else { label9 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel9 = new JPanel();
+					panel9.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel9.setBackground(Color.white); } else { panel9.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel9.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel9.add(label9, BorderLayout.CENTER);
+
+					JLabel label10 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { label10 = new JLabel("Libre", SwingConstants.CENTER); } else { label10 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel10 = new JPanel();
+					panel10.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel10.setBackground(Color.white); } else { panel10.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel10.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel10.add(label10, BorderLayout.CENTER);
+
+					JLabel label11 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { label11 = new JLabel("Libre", SwingConstants.CENTER); } else { label11 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel11 = new JPanel();
+					panel11.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel11.setBackground(Color.white); } else { panel11.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel11.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel11.add(label11, BorderLayout.CENTER);
+
+					JLabel label12 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { label12 = new JLabel("Libre", SwingConstants.CENTER); } else { label12 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel12 = new JPanel();
+					panel12.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel12.setBackground(Color.white); } else { panel12.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel12.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel12.add(label12, BorderLayout.CENTER);
+
+					// TROISIEME LIGNE DE GAUCHE A DROITE 
+
+					JLabel label13 = new JLabel("10h - 12h", SwingConstants.CENTER);
+					JPanel panel13 = new JPanel();
+					panel13.setLayout(new BorderLayout());
+					panel13.setBackground(Color.white);
+					panel13.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel13.add(label13, BorderLayout.CENTER);
+
+					JLabel label14 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { label14 = new JLabel("Libre", SwingConstants.CENTER); } else { label14 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel14 = new JPanel();
+					panel14.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel14.setBackground(Color.white); } else { panel14.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel14.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel14.add(label14, BorderLayout.CENTER);
+
+					JLabel label15 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { label15 = new JLabel("Libre", SwingConstants.CENTER); } else { label15 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel15 = new JPanel();
+					panel15.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel15.setBackground(Color.white); } else { panel15.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel15.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel15.add(label15, BorderLayout.CENTER);
+
+					JLabel label16 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { label16 = new JLabel("Libre", SwingConstants.CENTER); } else { label16 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel16 = new JPanel();
+					panel16.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel16.setBackground(Color.white); } else { panel16.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel16.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel16.add(label16, BorderLayout.CENTER);
+
+					JLabel label17 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { label17 = new JLabel("Libre", SwingConstants.CENTER); } else { label17 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel17 = new JPanel();
+					panel17.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel17.setBackground(Color.white); } else { panel17.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel17.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel17.add(label17, BorderLayout.CENTER);
+
+					JLabel label18 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { label18 = new JLabel("Libre", SwingConstants.CENTER); } else { label18 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel18 = new JPanel();
+					panel18.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel18.setBackground(Color.white); } else { panel18.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel18.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel18.add(label18, BorderLayout.CENTER);
+
+
+					// QUATRIEME LIGNE DE GAUCHE A DROITE 
+
+					JLabel label19 = new JLabel("12h - 14h", SwingConstants.CENTER);
+					JPanel panel19 = new JPanel();
+					panel19.setLayout(new BorderLayout());
+					panel19.setBackground(Color.white);
+					panel19.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel19.add(label19, BorderLayout.CENTER);
+
+					JLabel label20 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { label20 = new JLabel("Libre", SwingConstants.CENTER); } else { label20 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel20 = new JPanel();
+					panel20.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel20.setBackground(Color.white); } else { panel20.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel20.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel20.add(label20, BorderLayout.CENTER);
+
+					JLabel label21 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { label21 = new JLabel("Libre", SwingConstants.CENTER); } else { label21 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel21 = new JPanel();
+					panel21.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel21.setBackground(Color.white); } else { panel21.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel21.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel21.add(label21, BorderLayout.CENTER);
+
+					JLabel label22 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { label22 = new JLabel("Libre", SwingConstants.CENTER); } else { label22 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel22 = new JPanel();
+					panel22.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel22.setBackground(Color.white); } else { panel22.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel22.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel22.add(label22, BorderLayout.CENTER);
+
+					JLabel label23 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { label23 = new JLabel("Libre", SwingConstants.CENTER); } else { label23 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel23 = new JPanel();
+					panel23.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel23.setBackground(Color.white); } else { panel23.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel23.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel23.add(label23, BorderLayout.CENTER);
+
+					JLabel label24 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { label24 = new JLabel("Libre", SwingConstants.CENTER); } else { label24 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel24 = new JPanel();
+					panel24.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel24.setBackground(Color.white); } else { panel24.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel24.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel24.add(label24, BorderLayout.CENTER);
+
+					// CINQUIEME LIGNE DE GAUCHE A DROITE 
+
+					JLabel label25 = new JLabel("14h - 16h", SwingConstants.CENTER);
+					JPanel panel25 = new JPanel();
+					panel25.setLayout(new BorderLayout());
+					panel25.setBackground(Color.white);
+					panel25.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel25.add(label25, BorderLayout.CENTER);
+
+					JLabel label26 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { label26 = new JLabel("Libre", SwingConstants.CENTER); } else { label26 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel26 = new JPanel();
+					panel26.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel26.setBackground(Color.white); } else { panel26.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel26.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel26.add(label26, BorderLayout.CENTER);
+
+					JLabel label27 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { label27 = new JLabel("Libre", SwingConstants.CENTER); } else { label27 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel27 = new JPanel();
+					panel27.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel27.setBackground(Color.white); } else { panel27.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel27.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel27.add(label27, BorderLayout.CENTER);
+
+					JLabel label28 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { label28 = new JLabel("Libre", SwingConstants.CENTER); } else { label28 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel28 = new JPanel();
+					panel28.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel28.setBackground(Color.white); } else { panel28.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel28.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel28.add(label28, BorderLayout.CENTER);
+
+					JLabel label29 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { label29 = new JLabel("Libre", SwingConstants.CENTER); } else { label29 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel29 = new JPanel();
+					panel29.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel29.setBackground(Color.white); } else { panel29.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel29.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel29.add(label29, BorderLayout.CENTER);
+
+					JLabel label30 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { label30 = new JLabel("Libre", SwingConstants.CENTER); } else { label30 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel30 = new JPanel();
+					panel30.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel30.setBackground(Color.white); } else { panel30.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel30.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.BLACK));
+					panel30.add(label30, BorderLayout.CENTER);
+					break;
+				
+				case "Groupe":
+
+					// Premiere ligne 
+
+					JLabel label1 = new JLabel("/", SwingConstants.CENTER);
+					JPanel panel1 = new JPanel();
+					panel1.setLayout(new BorderLayout());
+					panel1.setBackground(Color.white);
+					panel1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel1.add(label1, BorderLayout.CENTER);
+
+					JLabel label2 = new JLabel("LUNDI", SwingConstants.CENTER);
+					JPanel panel2 = new JPanel();
+					panel2.setLayout(new BorderLayout());
+					panel2.setBackground(Color.white);
+					panel2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel2.add(label2, BorderLayout.CENTER);
+
+					JLabel label3 = new JLabel("MARDI", SwingConstants.CENTER);
+					JPanel panel3 = new JPanel();
+					panel3.setLayout(new BorderLayout());
+					panel3.setBackground(Color.white);
+					panel3.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel3.add(label3, BorderLayout.CENTER);
+
+					JLabel label4 = new JLabel("MERCREDI", SwingConstants.CENTER);
+					JPanel panel4 = new JPanel();
+					panel4.setLayout(new BorderLayout());
+					panel4.setBackground(Color.white);
+					panel4.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel4.add(label4, BorderLayout.CENTER);
+
+					JLabel label5 = new JLabel("JEUDI", SwingConstants.CENTER);
+					JPanel panel5 = new JPanel();
+					panel5.setLayout(new BorderLayout());
+					panel5.setBackground(Color.white);
+					panel5.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel5.add(label5, BorderLayout.CENTER);
+
+					JLabel label6 = new JLabel("VENDREDI", SwingConstants.CENTER);
+					JPanel panel6 = new JPanel();
+					panel6.setLayout(new BorderLayout());
+					panel6.setBackground(Color.white);
+					panel6.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel6.add(label6, BorderLayout.CENTER);
+
+
+					// DEUXIEME LIGNE DE GAUCHE A DROITE 
+
+					JLabel label7 = new JLabel("8h - 10h", SwingConstants.CENTER);
+					JPanel panel7 = new JPanel();
+					panel7.setLayout(new BorderLayout());
+					panel7.setBackground(Color.white);
+					panel7.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel7.add(label7, BorderLayout.CENTER);
+
+					JLabel label8 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { label8 = new JLabel("Libre", SwingConstants.CENTER); } else { label8 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel8 = new JPanel();
+					panel8.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel8.setBackground(Color.white); } else { panel8.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel8.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel8.add(label8, BorderLayout.CENTER);
+
+					JLabel label9 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { label9 = new JLabel("Libre", SwingConstants.CENTER); } else { label9 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel9 = new JPanel();
+					panel9.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel9.setBackground(Color.white); } else { panel9.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel9.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel9.add(label9, BorderLayout.CENTER);
+
+					JLabel label10 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { label10 = new JLabel("Libre", SwingConstants.CENTER); } else { label10 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel10 = new JPanel();
+					panel10.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel10.setBackground(Color.white); } else { panel10.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel10.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel10.add(label10, BorderLayout.CENTER);
+
+					JLabel label11 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { label11 = new JLabel("Libre", SwingConstants.CENTER); } else { label11 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel11 = new JPanel();
+					panel11.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel11.setBackground(Color.white); } else { panel11.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel11.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel11.add(label11, BorderLayout.CENTER);
+
+					JLabel label12 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { label12 = new JLabel("Libre", SwingConstants.CENTER); } else { label12 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel12 = new JPanel();
+					panel12.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel12.setBackground(Color.white); } else { panel12.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel12.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel12.add(label12, BorderLayout.CENTER);
+
+					// TROISIEME LIGNE DE GAUCHE A DROITE 
+
+					JLabel label13 = new JLabel("10h - 12h", SwingConstants.CENTER);
+					JPanel panel13 = new JPanel();
+					panel13.setLayout(new BorderLayout());
+					panel13.setBackground(Color.white);
+					panel13.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel13.add(label13, BorderLayout.CENTER);
+
+					JLabel label14 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { label14 = new JLabel("Libre", SwingConstants.CENTER); } else { label14 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel14 = new JPanel();
+					panel14.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel14.setBackground(Color.white); } else { panel14.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel14.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel14.add(label14, BorderLayout.CENTER);
+
+					JLabel label15 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { label15 = new JLabel("Libre", SwingConstants.CENTER); } else { label15 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel15 = new JPanel();
+					panel15.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel15.setBackground(Color.white); } else { panel15.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel15.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel15.add(label15, BorderLayout.CENTER);
+
+					JLabel label16 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { label16 = new JLabel("Libre", SwingConstants.CENTER); } else { label16 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel16 = new JPanel();
+					panel16.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel16.setBackground(Color.white); } else { panel16.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel16.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel16.add(label16, BorderLayout.CENTER);
+
+					JLabel label17 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { label17 = new JLabel("Libre", SwingConstants.CENTER); } else { label17 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel17 = new JPanel();
+					panel17.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel17.setBackground(Color.white); } else { panel17.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel17.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel17.add(label17, BorderLayout.CENTER);
+
+					JLabel label18 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { label18 = new JLabel("Libre", SwingConstants.CENTER); } else { label18 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel18 = new JPanel();
+					panel18.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel18.setBackground(Color.white); } else { panel18.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel18.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel18.add(label18, BorderLayout.CENTER);
+
+
+					// QUATRIEME LIGNE DE GAUCHE A DROITE 
+
+					JLabel label19 = new JLabel("12h - 14h", SwingConstants.CENTER);
+					JPanel panel19 = new JPanel();
+					panel19.setLayout(new BorderLayout());
+					panel19.setBackground(Color.white);
+					panel19.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel19.add(label19, BorderLayout.CENTER);
+
+					JLabel label20 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { label20 = new JLabel("Libre", SwingConstants.CENTER); } else { label20 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel20 = new JPanel();
+					panel20.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel20.setBackground(Color.white); } else { panel20.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel20.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel20.add(label20, BorderLayout.CENTER);
+
+					JLabel label21 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { label21 = new JLabel("Libre", SwingConstants.CENTER); } else { label21 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel21 = new JPanel();
+					panel21.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel21.setBackground(Color.white); } else { panel21.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel21.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel21.add(label21, BorderLayout.CENTER);
+
+					JLabel label22 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { label22 = new JLabel("Libre", SwingConstants.CENTER); } else { label22 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel22 = new JPanel();
+					panel22.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel22.setBackground(Color.white); } else { panel22.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel22.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel22.add(label22, BorderLayout.CENTER);
+
+					JLabel label23 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { label23 = new JLabel("Libre", SwingConstants.CENTER); } else { label23 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel23 = new JPanel();
+					panel23.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel23.setBackground(Color.white); } else { panel23.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel23.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel23.add(label23, BorderLayout.CENTER);
+
+					JLabel label24 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { label24 = new JLabel("Libre", SwingConstants.CENTER); } else { label24 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel24 = new JPanel();
+					panel24.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel24.setBackground(Color.white); } else { panel24.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel24.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel24.add(label24, BorderLayout.CENTER);
+
+					// CINQUIEME LIGNE DE GAUCHE A DROITE 
+
+					JLabel label25 = new JLabel("14h - 16h", SwingConstants.CENTER);
+					JPanel panel25 = new JPanel();
+					panel25.setLayout(new BorderLayout());
+					panel25.setBackground(Color.white);
+					panel25.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel25.add(label25, BorderLayout.CENTER);
+
+					JLabel label26 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { label26 = new JLabel("Libre", SwingConstants.CENTER); } else { label26 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel26 = new JPanel();
+					panel26.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel26.setBackground(Color.white); } else { panel26.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel26.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel26.add(label26, BorderLayout.CENTER);
+
+					JLabel label27 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { label27 = new JLabel("Libre", SwingConstants.CENTER); } else { label27 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel27 = new JPanel();
+					panel27.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel27.setBackground(Color.white); } else { panel27.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel27.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel27.add(label27, BorderLayout.CENTER);
+
+					JLabel label28 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { label28 = new JLabel("Libre", SwingConstants.CENTER); } else { label28 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel28 = new JPanel();
+					panel28.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel28.setBackground(Color.white); } else { panel28.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel28.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel28.add(label28, BorderLayout.CENTER);
+
+					JLabel label29 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { label29 = new JLabel("Libre", SwingConstants.CENTER); } else { label29 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel29 = new JPanel();
+					panel29.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel29.setBackground(Color.white); } else { panel29.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel29.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel29.add(label29, BorderLayout.CENTER);
+
+					JLabel label30 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { label30 = new JLabel("Libre", SwingConstants.CENTER); } else { label30 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel30 = new JPanel();
+					panel30.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel30.setBackground(Color.white); } else { panel30.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel30.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.BLACK));
+					panel30.add(label30, BorderLayout.CENTER);
+					break;
+
+				case "Eleve":
+
+					// Premiere ligne 
+
+					JLabel label1 = new JLabel("/", SwingConstants.CENTER);
+					JPanel panel1 = new JPanel();
+					panel1.setLayout(new BorderLayout());
+					panel1.setBackground(Color.white);
+					panel1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel1.add(label1, BorderLayout.CENTER);
+
+					JLabel label2 = new JLabel("LUNDI", SwingConstants.CENTER);
+					JPanel panel2 = new JPanel();
+					panel2.setLayout(new BorderLayout());
+					panel2.setBackground(Color.white);
+					panel2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel2.add(label2, BorderLayout.CENTER);
+
+					JLabel label3 = new JLabel("MARDI", SwingConstants.CENTER);
+					JPanel panel3 = new JPanel();
+					panel3.setLayout(new BorderLayout());
+					panel3.setBackground(Color.white);
+					panel3.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel3.add(label3, BorderLayout.CENTER);
+
+					JLabel label4 = new JLabel("MERCREDI", SwingConstants.CENTER);
+					JPanel panel4 = new JPanel();
+					panel4.setLayout(new BorderLayout());
+					panel4.setBackground(Color.white);
+					panel4.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel4.add(label4, BorderLayout.CENTER);
+
+					JLabel label5 = new JLabel("JEUDI", SwingConstants.CENTER);
+					JPanel panel5 = new JPanel();
+					panel5.setLayout(new BorderLayout());
+					panel5.setBackground(Color.white);
+					panel5.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel5.add(label5, BorderLayout.CENTER);
+
+					JLabel label6 = new JLabel("VENDREDI", SwingConstants.CENTER);
+					JPanel panel6 = new JPanel();
+					panel6.setLayout(new BorderLayout());
+					panel6.setBackground(Color.white);
+					panel6.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel6.add(label6, BorderLayout.CENTER);
+
+
+					// DEUXIEME LIGNE DE GAUCHE A DROITE 
+
+					JLabel label7 = new JLabel("8h - 10h", SwingConstants.CENTER);
+					JPanel panel7 = new JPanel();
+					panel7.setLayout(new BorderLayout());
+					panel7.setBackground(Color.white);
+					panel7.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel7.add(label7, BorderLayout.CENTER);
+
+					JLabel label8 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { label8 = new JLabel("Libre", SwingConstants.CENTER); } else { label8 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel8 = new JPanel();
+					panel8.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel8.setBackground(Color.white); } else { panel8.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel8.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel8.add(label8, BorderLayout.CENTER);
+
+					JLabel label9 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { label9 = new JLabel("Libre", SwingConstants.CENTER); } else { label9 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel9 = new JPanel();
+					panel9.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel9.setBackground(Color.white); } else { panel9.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel9.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel9.add(label9, BorderLayout.CENTER);
+
+					JLabel label10 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { label10 = new JLabel("Libre", SwingConstants.CENTER); } else { label10 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel10 = new JPanel();
+					panel10.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel10.setBackground(Color.white); } else { panel10.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel10.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel10.add(label10, BorderLayout.CENTER);
+
+					JLabel label11 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { label11 = new JLabel("Libre", SwingConstants.CENTER); } else { label11 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel11 = new JPanel();
+					panel11.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel11.setBackground(Color.white); } else { panel11.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel11.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel11.add(label11, BorderLayout.CENTER);
+
+					JLabel label12 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { label12 = new JLabel("Libre", SwingConstants.CENTER); } else { label12 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel12 = new JPanel();
+					panel12.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel12.setBackground(Color.white); } else { panel12.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel12.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel12.add(label12, BorderLayout.CENTER);
+
+					// TROISIEME LIGNE DE GAUCHE A DROITE 
+
+					JLabel label13 = new JLabel("10h - 12h", SwingConstants.CENTER);
+					JPanel panel13 = new JPanel();
+					panel13.setLayout(new BorderLayout());
+					panel13.setBackground(Color.white);
+					panel13.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel13.add(label13, BorderLayout.CENTER);
+
+					JLabel label14 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { label14 = new JLabel("Libre", SwingConstants.CENTER); } else { label14 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel14 = new JPanel();
+					panel14.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel14.setBackground(Color.white); } else { panel14.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel14.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel14.add(label14, BorderLayout.CENTER);
+
+					JLabel label15 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { label15 = new JLabel("Libre", SwingConstants.CENTER); } else { label15 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel15 = new JPanel();
+					panel15.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel15.setBackground(Color.white); } else { panel15.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel15.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel15.add(label15, BorderLayout.CENTER);
+
+					JLabel label16 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { label16 = new JLabel("Libre", SwingConstants.CENTER); } else { label16 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel16 = new JPanel();
+					panel16.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel16.setBackground(Color.white); } else { panel16.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel16.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel16.add(label16, BorderLayout.CENTER);
+
+					JLabel label17 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { label17 = new JLabel("Libre", SwingConstants.CENTER); } else { label17 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel17 = new JPanel();
+					panel17.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel17.setBackground(Color.white); } else { panel17.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel17.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel17.add(label17, BorderLayout.CENTER);
+
+					JLabel label18 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { label18 = new JLabel("Libre", SwingConstants.CENTER); } else { label18 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel18 = new JPanel();
+					panel18.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel18.setBackground(Color.white); } else { panel18.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel18.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel18.add(label18, BorderLayout.CENTER);
+
+
+					// QUATRIEME LIGNE DE GAUCHE A DROITE 
+
+					JLabel label19 = new JLabel("12h - 14h", SwingConstants.CENTER);
+					JPanel panel19 = new JPanel();
+					panel19.setLayout(new BorderLayout());
+					panel19.setBackground(Color.white);
+					panel19.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel19.add(label19, BorderLayout.CENTER);
+
+					JLabel label20 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { label20 = new JLabel("Libre", SwingConstants.CENTER); } else { label20 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel20 = new JPanel();
+					panel20.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel20.setBackground(Color.white); } else { panel20.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel20.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel20.add(label20, BorderLayout.CENTER);
+
+					JLabel label21 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { label21 = new JLabel("Libre", SwingConstants.CENTER); } else { label21 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel21 = new JPanel();
+					panel21.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel21.setBackground(Color.white); } else { panel21.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel21.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel21.add(label21, BorderLayout.CENTER);
+
+					JLabel label22 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { label22 = new JLabel("Libre", SwingConstants.CENTER); } else { label22 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel22 = new JPanel();
+					panel22.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel22.setBackground(Color.white); } else { panel22.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel22.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel22.add(label22, BorderLayout.CENTER);
+
+					JLabel label23 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { label23 = new JLabel("Libre", SwingConstants.CENTER); } else { label23 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel23 = new JPanel();
+					panel23.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel23.setBackground(Color.white); } else { panel23.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel23.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
+					panel23.add(label23, BorderLayout.CENTER);
+
+					JLabel label24 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { label24 = new JLabel("Libre", SwingConstants.CENTER); } else { label24 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel24 = new JPanel();
+					panel24.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel24.setBackground(Color.white); } else { panel24.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel24.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+					panel24.add(label24, BorderLayout.CENTER);
+
+					// CINQUIEME LIGNE DE GAUCHE A DROITE 
+
+					JLabel label25 = new JLabel("14h - 16h", SwingConstants.CENTER);
+					JPanel panel25 = new JPanel();
+					panel25.setLayout(new BorderLayout());
+					panel25.setBackground(Color.white);
+					panel25.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel25.add(label25, BorderLayout.CENTER);
+
+					JLabel label26 = new JLabel();
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { label26 = new JLabel("Libre", SwingConstants.CENTER); } else { label26 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel26 = new JPanel();
+					panel26.setLayout(new BorderLayout());
+					if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel26.setBackground(Color.white); } else { panel26.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel26.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel26.add(label26, BorderLayout.CENTER);
+
+					JLabel label27 = new JLabel();
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { label27 = new JLabel("Libre", SwingConstants.CENTER); } else { label27 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel27 = new JPanel();
+					panel27.setLayout(new BorderLayout());
+					if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel27.setBackground(Color.white); } else { panel27.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel27.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel27.add(label27, BorderLayout.CENTER);
+
+					JLabel label28 = new JLabel();
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { label28 = new JLabel("Libre", SwingConstants.CENTER); } else { label28 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel28 = new JPanel();
+					panel28.setLayout(new BorderLayout());
+					if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel28.setBackground(Color.white); } else { panel28.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel28.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel28.add(label28, BorderLayout.CENTER);
+
+					JLabel label29 = new JLabel();
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { label29 = new JLabel("Libre", SwingConstants.CENTER); } else { label29 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel29 = new JPanel();
+					panel29.setLayout(new BorderLayout());
+					if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel29.setBackground(Color.white); } else { panel29.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel29.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+					panel29.add(label29, BorderLayout.CENTER);
+
+					JLabel label30 = new JLabel();
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { label30 = new JLabel("Libre", SwingConstants.CENTER); } else { label30 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					JPanel panel30 = new JPanel();
+					panel30.setLayout(new BorderLayout());
+					if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel30.setBackground(Color.white); } else { panel30.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+					panel30.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.BLACK));
+					panel30.add(label30, BorderLayout.CENTER);
+					break;
+				*/
+		}
+
 		
 
-		//this.cardEDT.add(panelEDT);
-		//this.cardEDT.updateUI();
+
+		//Les Adds 
+		//System.out.println("On passe ici aussi");
+        panelEDT.add(panel1);
+		panelEDT.add(panel2);
+		panelEDT.add(panel3);
+		panelEDT.add(panel4);
+		panelEDT.add(panel5);
+		panelEDT.add(panel6);
+		panelEDT.add(panel7);
+		panelEDT.add(panel8);
+		panelEDT.add(panel9);
+		panelEDT.add(panel10);
+		panelEDT.add(panel11);
+		panelEDT.add(panel12);
+		panelEDT.add(panel13);
+		panelEDT.add(panel14);
+		panelEDT.add(panel15);
+		panelEDT.add(panel16);
+		panelEDT.add(panel17);
+		panelEDT.add(panel18);
+		panelEDT.add(panel19);
+		panelEDT.add(panel20);
+		panelEDT.add(panel21);
+		panelEDT.add(panel22);
+		panelEDT.add(panel23);
+		panelEDT.add(panel24);
+		panelEDT.add(panel25);
+		panelEDT.add(panel26);
+		panelEDT.add(panel27);
+		panelEDT.add(panel28);
+		panelEDT.add(panel29);
+		panelEDT.add(panel30);
+
+		this.cardEDT.add(panelEDT, BorderLayout.CENTER);
+		this.cardEDT.updateUI();
 	}
+
 
 	/* JPanel CombBox cardEDT */
 	private JPanel panelBoutonCardEDT() {
@@ -1050,45 +2161,21 @@ public class InterfaceGraphique extends JFrame {
 		return frameAjoutMatiere;
 	}
 	
-	public void vider_button(String type) {
-		switch(type) {
-			case "Salle" : 
-				lesBoutonsSalle.clear();
-				panelBoutonObjetsCrees.removeAll();
-				break;
-
-			case "Professeur" : 
-				lesBoutonsProfesseur.clear();
-				panelBoutonObjetsCrees.removeAll();
-				break;
-
-			case "Classe" : 
-				lesBoutonsClasse.clear();
-				panelBoutonObjetsCrees.removeAll();
-				break;
-
-			case "Groupe" : 
-				lesBoutonsGroupe.clear();
-				panelBoutonObjetsCrees.removeAll();
-				break;
-
-			case "Eleve" :
-				lesBoutonsEleve.clear();
-				panelBoutonObjetsCrees.removeAll();
-				break;
-
-			case "Matiere" : 
-				lesBoutonsMatiere.clear();
-				panelBoutonObjetsCrees.removeAll();
-				break;
-		}	
+	public void vider_button() {
+		
+		lesBoutonsSalle.clear();
+		lesBoutonsProfesseur.clear();
+		lesBoutonsClasse.clear();
+		lesBoutonsGroupe.clear();
+		lesBoutonsEleve.clear();
+		lesBoutonsMatiere.clear();
+		panelBoutonObjetsCrees.removeAll();
 	}
 
 	public void create_buttonSalle(boolean visible, String nomSalle) {
 		JButton salle = new JButton(nomSalle);
 		this.lesBoutonsSalle.add(salle);
 		if(visible) { panelBoutonObjetsCrees.add(salle); }
-		System.out.println("Nombre de bouton salle : " + lesBoutonsSalle.size());
 		panelBoutonObjetsCrees.updateUI();
 	}
 
@@ -1298,6 +2385,10 @@ public class InterfaceGraphique extends JFrame {
 	
 	public JButton getBoutonImporter() {
 		return this.boutonImporter;
+	}
+
+	public JButton getBoutonSauvegarder() {
+		return this.boutonSauvegarder;
 	}
 	
 	public JButton getBoutonCreation() {

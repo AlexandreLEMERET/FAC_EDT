@@ -13,12 +13,7 @@ public class Groupe {
 	public Groupe(String p_nomGroupe, Classe p_classeGroupe) {
 		this.nomGroupe = p_nomGroupe;
 		this.classeGroupe = p_classeGroupe;
-	}
-
-	public Groupe(String p_nomGroupe, Classe p_classeGroupe, Edt p_edtGroupe) {
-		this.nomGroupe = p_nomGroupe;
-		this.classeGroupe = p_classeGroupe;
-		this.edtGroupe = p_edtGroupe;
+		this.edtGroupe = new Edt();
 	}
 	
 	public String getNomGroupe() {

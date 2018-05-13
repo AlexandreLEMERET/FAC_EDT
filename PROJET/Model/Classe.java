@@ -8,6 +8,7 @@ public class Classe {
 	private String nomClasse;
 	private String niveauClasse;
 	private ArrayList<Groupe> lesGroupes;
+	private ArrayList<Eleve> lesEleves;
 	private int nombreEleveClasse;
 	private Color couleurClasse;
 	private ArrayList<Matiere> lesMatieres;
@@ -19,17 +20,10 @@ public class Classe {
 		this.nomClasse = p_nomClasse;
 		this.niveauClasse = p_niveauClasse;
 		this.lesGroupes = new ArrayList<Groupe>();
+		this.lesEleves = new ArrayList<Eleve>();
 		this.couleurClasse = p_couleurClasse;
 		this.lesMatieres = new ArrayList<Matiere>();
-	}
-	
-	public Classe(String p_nomClasse, String p_niveauClasse, Color p_couleurClasse, Edt p_edtClasse) {
-		this.nomClasse = p_nomClasse;
-		this.niveauClasse = p_niveauClasse;
-		this.lesGroupes = new ArrayList<Groupe>();
-		this.couleurClasse = p_couleurClasse;
-		this.lesMatieres = new ArrayList<Matiere>();
-		this.edtClasse = p_edtClasse;
+		this.edtClasse = new Edt();
 	}
 
 	public String getNomClasse() {
@@ -42,6 +36,10 @@ public class Classe {
 
 	public ArrayList<Groupe> getLesGroupesClasse() {
 		return this.lesGroupes;
+	}
+
+	public ArrayList<Eleve> getLesEleves() {
+		return this.lesEleves;
 	}
 	
 	public int getNombreEleveClasse() {
@@ -89,7 +87,7 @@ public class Classe {
 					while(i < tmpMatiere.size() && tmpMatiere.get(i).getMaxHeureRestante() > m.getMaxHeureRestante()) {
 						i++;
 					}
-					if(i == tmpMatiere.size()) { System.out.println("On passe ici"); tmpMatiere.add(m); }
+					if(i == tmpMatiere.size()) { tmpMatiere.add(m); }
 					else { tmpMatiere.add(i, m);}
 					i = 0;
 				}

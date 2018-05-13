@@ -35,23 +35,11 @@ public class MProfesseur implements Serializable {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour le professeur !");
 		} else {
 			try {
-				Edt nouvelEDT = new Edt();
-				lesEDT.ajoutEDT(nouvelEDT);
-				Professeur nouveauProfesseur = new Professeur(nomProfesseur, prenomProfesseur, Integer.parseInt(nombreHeureProfesseur), nouvelEDT);
+				Professeur nouveauProfesseur = new Professeur(nomProfesseur, prenomProfesseur, Integer.parseInt(nombreHeureProfesseur));
 				lesProfesseurs.add(nouveauProfesseur);
 				JOptionPane.showMessageDialog(null,"Le professeur a été ajouté.");
-				System.out.println("Nom professeur : " + nomProfesseur + " " + prenomProfesseur + " - Nombre heure : " + nombreHeureProfesseur);
-			
-				/* Ajout du nouveau professeur dans le fichier saveProfesseur.txt */
-				try {
-					FileWriter monFichier = new FileWriter("saveProfesseur.txt", true);
-					BufferedWriter out = new BufferedWriter(monFichier);
-					out.write(nomProfesseur + "\n" + prenomProfesseur + "\n" + nombreHeureProfesseur + "\n");
-					out.close();
-					return 0;
-				} catch (IOException ex) {
-					System.out.println("Erreur : " + ex);
-				}
+				//System.out.println("Nom professeur : " + nomProfesseur + " " + prenomProfesseur + " - Nombre heure : " + nombreHeureProfesseur);
+				return 0;
 
 			} catch(NumberFormatException e) {
 				JOptionPane.showMessageDialog(null, "Erreur : Le nombre d'heure doit être un chiffre entier !");
@@ -81,6 +69,20 @@ public class MProfesseur implements Serializable {
 				i++;
 			}
 		} catch (Exception ex) {
+			System.out.println("Erreur : " + ex);
+		}
+	}
+
+	public void sauvegarderLesProfesseurs() {
+		/* Ajout des professeurs dans le fichier saveProfesseur.txt */
+		try {
+			FileWriter monFichier = new FileWriter("saveProfesseur.txt");
+			BufferedWriter out = new BufferedWriter(monFichier);
+			for(Professeur p : lesProfesseurs) {
+				out.write(p.getNomProfesseur() + "\n" + p.getPrenomProfesseur() + "\n" + p.getNombreHeuresProfesseur() + "\n");
+			}
+			out.close();
+		} catch (IOException ex) {
 			System.out.println("Erreur : " + ex);
 		}
 	}

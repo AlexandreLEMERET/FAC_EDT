@@ -1,6 +1,3 @@
 Salle CM
 10
 CM
-Salle TP
-10
-TP

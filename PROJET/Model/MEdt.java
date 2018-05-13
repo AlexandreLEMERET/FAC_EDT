@@ -150,7 +150,7 @@ public class MEdt {
 		}
 	}
 
-	public void afficherLesEDT(MProfesseur lesProfesseurs, MClasse lesClasses) {
+	/*public void afficherLesEDT(MProfesseur lesProfesseurs, MClasse lesClasses) {
 		for(Professeur p : lesProfesseurs.getLesProfesseurs()) {
 			System.out.println("Professeur :" + p.getNomProfesseur() + " " + p.getPrenomProfesseur());
 
@@ -159,6 +159,27 @@ public class MEdt {
 				for(Cours co : j.getLesCours()) {
 					if(p.getEDT().getLeJour(j).getLeCours(co).getMatiere() != null & p.getEDT().getLeJour(j).getLeCours(co).getSalle() != null) {
 						System.out.println("	Cours de " + co.getHeureDebut() + " à " + co.getHeureFin() + " - C : " + p.getEDT().getLeJour(j).getLeCours(co).getClasse().getNiveauClasse() + " " + p.getEDT().getLeJour(j).getLeCours(co).getClasse().getNomClasse() + " - M :" + p.getEDT().getLeJour(j).getLeCours(co).getMatiere().getNomMatiere());
+					} else {
+						System.out.println("	Cours de " + co.getHeureDebut() + " à " + co.getHeureFin());
+					}
+				}
+				System.out.println("-----");
+			}
+		}
+	}*/
+
+	public void afficherLesEDT(MSalle lesSalles) {
+		for(Salle s : lesSalles.getLesSalles()) {
+			System.out.println("Salle : " + s.getNumeroSalle());
+
+			for(Jour j : s.getEDT().getLesJours()) {
+				System.out.println("Jour : " + j.getNomJour());
+				for(Cours co : j.getLesCours()) {
+				System.out.println("Matiere : " + s.getEDT().getLeJour(j).getLeCours(co).getMatiere());
+				System.out.println("Classe : " + s.getEDT().getLeJour(j).getLeCours(co).getClasse());
+				System.out.println("Professeur : " + s.getEDT().getLeJour(j).getLeCours(co).getProfesseur());
+				if(s.getEDT().getLeJour(j).getLeCours(co).getMatiere() != null && s.getEDT().getLeJour(j).getLeCours(co).getClasse() != null && s.getEDT().getLeJour(j).getLeCours(co).getProfesseur() != null) {
+						System.out.println("	Cours de " + co.getHeureDebut() + " à " + co.getHeureFin() + " - M : " + s.getEDT().getLeJour(j).getLeCours(co).getMatiere().getNomMatiere() + " - C :" + s.getEDT().getLeJour(j).getLeCours(co).getClasse().getNiveauClasse() + " - P : " + s.getEDT().getLeJour(j).getLeCours(co).getProfesseur().getNomProfesseur());
 					} else {
 						System.out.println("	Cours de " + co.getHeureDebut() + " à " + co.getHeureFin());
 					}

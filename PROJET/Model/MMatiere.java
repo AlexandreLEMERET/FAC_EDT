@@ -92,6 +92,7 @@ public class MMatiere implements Serializable {
 				}
 				i++;
 			}
+			JOptionPane.showMessageDialog(null, "L'importation est terminée.");
 		} catch (Exception ex) {
 			System.out.println("Erreur : " + ex);
 		}
@@ -112,6 +113,7 @@ public class MMatiere implements Serializable {
 				i++;
 			}
 			out.close();
+			JOptionPane.showMessageDialog(null, "La sauvegarde est terminée.");
 		} catch (IOException ex) {
 			System.out.println("Erreur : " + ex);
 		}

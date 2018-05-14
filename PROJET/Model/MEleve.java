@@ -103,7 +103,7 @@ public class MEleve implements Serializable {
 					int j = 0;
 					for(Groupe g : c.getLesGroupesClasse()) {
 						for(Eleve e : c.getLesEleves()) {
-						out.write(e.getNomEleve() + "\n" + e.getPrenomEleve() + "\n" + i + "\n" + j + "\n");
+							if(g == e.getGroupeEleve()) { out.write(e.getNomEleve() + "\n" + e.getPrenomEleve() + "\n" + i + "\n" + j + "\n"); }
 						}
 						j++;
 					}

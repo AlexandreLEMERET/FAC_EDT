@@ -198,8 +198,14 @@ public class Generateur {
 				for(Classe c : lesClasses.getLesClasses()) {
 					c.setLesMatieres(lesMatieres);
 				}
+				for(Classe c : lesClasses.getLesClasses()) {
+					for(Groupe g : c.getLesGroupesClasse()) {
+						g.setLesMatieres(lesMatieres, c);
+					}
+				}
+				
 				lesEDT.genererLesEDT(lesClasses, lesEleves, lesSalles);
-				lesEDT.afficherLesEDT(lesClasses);
+				//lesEDT.afficherLesEDT(lesClasses);
 				lesEDT.afficherLesEDT(lesSalles);
 			}
 		});
@@ -235,12 +241,12 @@ public class Generateur {
 							interfaceGraphique.updateCardEDT("Classe", lesClasses.getLesClasses().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0), lesClasses.getLesClasses().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1), lesClasses.getLesClasses().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2), lesClasses.getLesClasses().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3), lesClasses.getLesClasses().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4));
 							break;
 						
-						/*case "Groupe":
+						case "Groupe":
 							lesGroupes.remplirJComboBoxGroupe(interfaceGraphique.getCmbChoixList(), lesGroupes);
 							interfaceGraphique.updateCardEDT("Groupe", lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0), lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1), lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2), lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3), lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4));
 							break;
 						
-						case "Eleve":
+						/*case "Eleve":
 							lesEleves.remplirJComboBoxEleve(interfaceGraphique.getCmbChoixList(), lesEleves);
 							interfaceGraphique.updateCardEDT("Eleve", lesEleves.getLesEleves().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0), lesEleves.getLesEleves().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1), lesEleves.getLesEleves().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2), lesEleves.getLesEleves().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3), lesEleves.getLesEleves().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4));
 							break;*/
@@ -253,7 +259,6 @@ public class Generateur {
 			public void actionPerformed(ActionEvent event) {
 				switch(interfaceGraphique.getCmbTypeList().getSelectedItem().toString()) {
 						case "Salle":
-							System.out.println("Emploi du temps des salles chargées");
 							if(interfaceGraphique.getCmbChoixList().getItemCount() > 0) { interfaceGraphique.updateCardEDT("Salle", lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3), lesSalles.getLesSalles().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4)); } 
 							break;
 
@@ -265,12 +270,11 @@ public class Generateur {
 							if(interfaceGraphique.getCmbChoixList().getItemCount() > 0) { interfaceGraphique.updateCardEDT("Classe", lesClasses.getLesClasses().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0), lesClasses.getLesClasses().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1), lesClasses.getLesClasses().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2), lesClasses.getLesClasses().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3), lesClasses.getLesClasses().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4)); }
 							break;
 						
-						/*case "Groupe":
-							lesGroupes.remplirJComboBoxGroupe(interfaceGraphique.getCmbChoixList(), lesGroupes);
-							interfaceGraphique.updateCardEDT("Groupe", lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0), lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1), lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2), lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3), lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4));
+						case "Groupe":
+							if(interfaceGraphique.getCmbChoixList().getItemCount() > 0) { interfaceGraphique.updateCardEDT("Groupe", lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0), lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1), lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2), lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3), lesGroupes.getLesGroupes().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4)); }
 							break;
 						
-						case "Eleve":
+						/*case "Eleve":
 							lesEleves.remplirJComboBoxEleve(interfaceGraphique.getCmbChoixList(), lesEleves);
 							interfaceGraphique.updateCardEDT("Eleve", lesEleves.getLesEleves().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(0), lesEleves.getLesEleves().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(1), lesEleves.getLesEleves().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(2), lesEleves.getLesEleves().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(3), lesEleves.getLesEleves().get(interfaceGraphique.getCmbChoixList().getSelectedIndex()).getEDT().getLesJours().get(4));
 							break;*/

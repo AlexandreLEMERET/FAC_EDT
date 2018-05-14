@@ -1,3 +1,9 @@
 Salle CM
 10
 CM
+Salle TP
+10
+TP
+Salle TD
+10
+TD

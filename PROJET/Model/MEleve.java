@@ -145,5 +145,19 @@ public class MEleve implements Serializable {
 			cmbEleve.addItem(e.getNomEleve() + " " + e.getPrenomEleve());
 		}
 	}
+
+	public void setEDTEleve(MClasse lesClasses, MGroupe lesGroupes) {
+		for(Classe c  : lesClasses.getLesClasses()) {
+			if(c.getLesGroupesClasse().size() > 0) {
+				for(Eleve e : c.getLesEleves()) {
+					e.setEDT(lesClasses);
+				}
+			} else {
+				for(Eleve e : c.getLesEleves()) {
+					e.setEDT(lesClasses);
+				}
+			}
+		}
+	}
 	
 }

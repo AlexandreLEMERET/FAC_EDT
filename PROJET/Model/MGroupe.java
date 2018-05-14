@@ -37,8 +37,7 @@ public class MGroupe implements Serializable {
 			lesGroupes.add(nouveauGroupe);
 			lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().add(nouveauGroupe);
 			JOptionPane.showMessageDialog(null, "Le groupe a été ajouté.");
-			//System.out.println("Nom groupe : " + nomGroupe + " - Index classe : " + indexClasse + " - Classe : " + lesClasses.getLesClasses().get(indexClasse).getNiveauClasse() + " " + lesClasses.getLesClasses().get(indexClasse).getNomClasse());
-	   		return 0;
+			return 0;
 			
 		}
 		return 1;

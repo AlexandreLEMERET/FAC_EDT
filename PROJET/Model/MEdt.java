@@ -45,10 +45,10 @@ public class MEdt {
 							Matiere laMatiere = new Matiere();
 							int i = 0;
 
-							//System.out.println("salleLibre : " + salleLibre);
-							//System.out.println("professeurLibre : " + professeurLibre);
-							//System.out.println("nombre de matière : " + c.getLesMatieres().size());
-							//System.out.println("i : " + i);
+							System.out.println("salleLibre : " + salleLibre);
+							System.out.println("professeurLibre : " + professeurLibre);
+							System.out.println("nombre de matière : " + c.getLesMatieres().size());
+							System.out.println("i : " + i);
 							/* Tant qu'on ne trouve pas une salle libre correspondant aux critères, un professeur libre et qu'il reste des matières possibles à placer sur l'EDT */
 							while(salleLibre == false && professeurLibre == false && i < c.getLesMatieres().size()) {
 
@@ -57,18 +57,18 @@ public class MEdt {
 
 								/* On vérifie si il reste des cours à placer */
 								if(laMatiere.getMaxHeureRestante() > 0) {
-									//System.out.println("---");
-									//System.out.println("Matiere : " + laMatiere.getNomMatiere());
-									//System.out.println("CM : " + laMatiere.getNombreHeureCMrestante());
-									//System.out.println("TD : " + laMatiere.getNombreHeureTDrestante());
-									//System.out.println("TP : " + laMatiere.getNombreHeureTPrestante());
-									//System.out.println("Nombre heure restante au max : " + laMatiere.getMaxHeureRestante());
-									//System.out.println("Type d'heure restante : " + laMatiere.getTypeMatiereMaxHeureRestante());
+									System.out.println("---");
+									System.out.println("Matiere : " + laMatiere.getNomMatiere());
+									System.out.println("CM : " + laMatiere.getNombreHeureCMrestante());
+									System.out.println("TD : " + laMatiere.getNombreHeureTDrestante());
+									System.out.println("TP : " + laMatiere.getNombreHeureTPrestante());
+									System.out.println("Nombre heure restante au max : " + laMatiere.getMaxHeureRestante());
+									System.out.println("Type d'heure restante : " + laMatiere.getTypeMatiereMaxHeureRestante());
 								/* On parcourt la liste de salle afin d'en trouver une qui correspond aux critères */
 									for(Salle s : lesSalles.getLesSalles()) {
-										//System.out.println("Salle : " + s.getNumeroSalle() + " - Occupé : " + s.estOccupe(j, co));
-										//System.out.println("Nombre d'eleve de la classe : " + c.getNombreEleveClasse() + " - Nombre de place : " + s.getNombrePlacesSalle());
-										//System.out.println("laMatiere.getTypeMatiereMaxHeureRestante() :" + laMatiere.getTypeMatiereMaxHeureRestante() + " - s.getTypeSalle() : " + s.getTypeSalle());
+										System.out.println("Salle : " + s.getNumeroSalle() + " - Occupé : " + s.estOccupe(j, co));
+										System.out.println("Nombre d'eleve de la classe : " + c.getNombreEleveClasse() + " - Nombre de place : " + s.getNombrePlacesSalle());
+										System.out.println("laMatiere.getTypeMatiereMaxHeureRestante() :" + laMatiere.getTypeMatiereMaxHeureRestante() + " - s.getTypeSalle() : " + s.getTypeSalle());
 										if(s.estOccupe(j, co) == false && s.getNombrePlacesSalle() >= c.getNombreEleveClasse() && laMatiere.getTypeMatiereMaxHeureRestante().equals(s.getTypeSalle())) {
 											//System.out.println("ISSOU");
 											laSalle = s;
@@ -78,7 +78,7 @@ public class MEdt {
 									}
 
 									/* On cherche un professeur qui est libre pour assurer cette matière */
-									//System.out.println("Le professeur : " + laMatiere.getProfesseurMatiere().getNomProfesseur() + " - Occupé : " + laMatiere.getProfesseurMatiere().estOccupe(j,co));
+									System.out.println("Le professeur : " + laMatiere.getProfesseurMatiere().getNomProfesseur() + " - Occupé : " + laMatiere.getProfesseurMatiere().estOccupe(j,co));
 									if(laMatiere.getProfesseurMatiere().estOccupe(j, co) == false) {
 										leProfesseur = laMatiere.getProfesseurMatiere();
 										professeurLibre = true;
@@ -94,8 +94,8 @@ public class MEdt {
 								//System.out.println("Nombre heure CM restante : " + c.getLesMatieres().get(i-i).getNombreHeureCMrestante());
 
 								//System.out.println("La matiere : " + laMatiere.getNomMatiere());
-								//System.out.println("Nombre heure CM restante : " + laMatiere.getNombreHeureCMrestante());
 								laMatiere.enleverHeureRestante(laMatiere.getTypeMatiereMaxHeureRestante());
+								//System.out.println("Nombre heure CM restante : " + laMatiere.getNombreHeureCMrestante());
 
 								/* On met à jour l'EDT du professeur */
 								leProfesseur.getEDT().getLeJour(j).getLeCours(co).setLaMatiere(laMatiere);
@@ -130,8 +130,7 @@ public class MEdt {
 					
 					/* On compte le nombre d'éleve du groupe */
 					g.getNombreEleveGroupe(lesEleves, c, g);
-					//System.out.println("Nombre d'éleve : "  + g.getNombreEleveGroupe());
-
+					
 					/* On parcourt les jours et les cours de l'EDT du groupe */
 					for(Jour j : g.getEDT().getLesJours()) {
 						for(Cours co : j.getLesCours()) {
@@ -155,13 +154,13 @@ public class MEdt {
 
 									/* On vérifie si il reste des cours à placer */
 									if(laMatiere.getMaxHeureRestante() > 0) {
-										System.out.println("---");
-										System.out.println("Matiere : " + laMatiere.getNomMatiere());
-										System.out.println("CM : " + laMatiere.getNombreHeureCMrestante());
-										System.out.println("TD : " + laMatiere.getNombreHeureTDrestante());
-										System.out.println("TP : " + laMatiere.getNombreHeureTPrestante());
-										System.out.println("Nombre heure restante au max : " + laMatiere.getMaxHeureRestante());
-										System.out.println("Type d'heure restante : " + laMatiere.getTypeMatiereMaxHeureRestante());
+										//System.out.println("---");
+										//System.out.println("Matiere : " + laMatiere.getNomMatiere());
+										//System.out.println("CM : " + laMatiere.getNombreHeureCMrestante());
+										//System.out.println("TD : " + laMatiere.getNombreHeureTDrestante());
+										//System.out.println("TP : " + laMatiere.getNombreHeureTPrestante());
+										//System.out.println("Nombre heure restante au max : " + laMatiere.getMaxHeureRestante());
+										//System.out.println("Type d'heure restante : " + laMatiere.getTypeMatiereMaxHeureRestante());
 									/* On parcourt la liste de salle afin d'en trouver une qui correspond aux critères */
 										for(Salle s : lesSalles.getLesSalles()) {
 											//System.out.println("Salle : " + s.getNumeroSalle() + " - Occupé : " + s.estOccupe(j, co));
@@ -198,7 +197,7 @@ public class MEdt {
 									
 										/* On soustrait les 2 heures de cours placées */
 										laMatiere.enleverHeureRestante(laMatiere.getTypeMatiereMaxHeureRestante());
-										System.out.println("On enleve 2h de TP ou TD au groupe : " + g.getNomGroupe());
+										//System.out.println("On enleve 2h de TP ou TD au groupe : " + g.getNomGroupe());
 
 										/* On met à jour l'EDT du professeur */
 										leProfesseur.getEDT().getLeJour(j).getLeCours(co).setLaMatiere(laMatiere);
@@ -228,9 +227,9 @@ public class MEdt {
 										/* Si un CM, on enleve les 2h de cours à tous les groupes de la classe */
 										String typeCours = laMatiere.getTypeMatiereMaxHeureRestante();
 										for(Groupe gr : c.getLesGroupesClasse()) {
-											System.out.println("On enleve 2h de CM au groupe : " + gr.getNomGroupe());
+											//System.out.println("On enleve 2h de CM au groupe : " + gr.getNomGroupe());
 											gr.getLesMatieres().get(i-1).enleverHeureRestante(typeCours);
-											System.out.println("Nombre d'heure de " + gr.getLesMatieres().get(i-1).getNomMatiere() + ": "+ gr.getLesMatieres().get(i-1).getNombreHeureCMrestante());
+											//System.out.println("Nombre d'heure de " + gr.getLesMatieres().get(i-1).getNomMatiere() + ": "+ gr.getLesMatieres().get(i-1).getNombreHeureCMrestante());
 
 											/* On met à jour l'EDT des groupes */
 											gr.getEDT().getLeJour(j).getLeCours(co).setLaMatiere(laMatiere);

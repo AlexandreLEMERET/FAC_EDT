@@ -46,4 +46,40 @@ public class Eleve {
 	public Edt getEDT() {
 		return this.edtEleve;
 	}
+
+	public void setEDT(MGroupe lesGroupes) {
+		for(Groupe g : lesGroupes.getLesGroupes()) {
+			if(this.groupeEleve == g) {
+				for(Jour j : edtEleve.getLesJours()) {
+					for(Cours co : j.getLesCours()) {
+						this.edtEleve.getLeJour(j).getLeCours(co).setLaMatiere(g.getEDT().getLeJour(j).getLeCours(co).getMatiere());
+						this.edtEleve.getLeJour(j).getLeCours(co).setLeTypeCours(g.getEDT().getLeJour(j).getLeCours(co).getTypeCours());
+						this.edtEleve.getLeJour(j).getLeCours(co).setLeProfesseur(g.getEDT().getLeJour(j).getLeCours(co).getProfesseur());
+						this.edtEleve.getLeJour(j).getLeCours(co).setLaSalle(g.getEDT().getLeJour(j).getLeCours(co).getSalle());
+						this.edtEleve.getLeJour(j).getLeCours(co).setLaClasse(g.getEDT().getLeJour(j).getLeCours(co).getClasse());
+						this.edtEleve.getLeJour(j).getLeCours(co).setLeGroupe(g.getEDT().getLeJour(j).getLeCours(co).getGroupe());
+						this.edtEleve.getLeJour(j).getLeCours(co).setOccupe();
+					}
+				}
+			}
+		}
+	}
+
+	public void setEDT(MClasse lesClasses) {
+		for(Classe c : lesClasses.getLesClasses()) {
+			if(this.classeEleve == c) {
+				for(Jour j : edtEleve.getLesJours()) {
+					for(Cours co : j.getLesCours()) {
+						this.edtEleve.getLeJour(j).getLeCours(co).setLaMatiere(c.getEDT().getLeJour(j).getLeCours(co).getMatiere());
+						this.edtEleve.getLeJour(j).getLeCours(co).setLeTypeCours(c.getEDT().getLeJour(j).getLeCours(co).getTypeCours());
+						this.edtEleve.getLeJour(j).getLeCours(co).setLeProfesseur(c.getEDT().getLeJour(j).getLeCours(co).getProfesseur());
+						this.edtEleve.getLeJour(j).getLeCours(co).setLaSalle(c.getEDT().getLeJour(j).getLeCours(co).getSalle());
+						this.edtEleve.getLeJour(j).getLeCours(co).setLaClasse(c.getEDT().getLeJour(j).getLeCours(co).getClasse());
+						this.edtEleve.getLeJour(j).getLeCours(co).setLeGroupe(c.getEDT().getLeJour(j).getLeCours(co).getGroupe());
+						this.edtEleve.getLeJour(j).getLeCours(co).setOccupe();
+					}
+				}
+			}
+		}
+	}
 }

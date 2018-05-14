@@ -27,17 +27,20 @@ public class MSalle implements Serializable {
 	}
 
 	/* Permet d'ajouter une salle */
-	public int ajoutSalle(String numeroSalle, String nombrePlace, String typeSalle, MEdt lesEDT) {
+	public int ajoutSalle(String numeroSalle, String nombrePlace, int valeurIndex, MEdt lesEDT) {
 		if (numeroSalle.length() == 0) {
 			JOptionPane.showMessageDialog(null,"Erreur : Vous devez indiquer un nom de salle !");
 		} else if(nombrePlace == "") {
 			JOptionPane.showMessageDialog(null,"Erreur : Vous devez indiquer un nombre de place !");
 		} else {
 			try {
+				String typeSalle = "";
+				if(valeurIndex == 0) { typeSalle = "CM"; }
+				if(valeurIndex == 1) { typeSalle = "TP"; }
+				if(valeurIndex == 2) { typeSalle = "TD"; }
 	        	Salle nouvelleSalle = new Salle(numeroSalle, Integer.parseInt(nombrePlace), typeSalle);
 	   			lesSalles.add(nouvelleSalle);
 				JOptionPane.showMessageDialog(null,"La salle " + numeroSalle + " a été ajouté."); 
-				//System.out.println("Numéro salle : " + numeroSalle + " - Nombre places : " + nombrePlace + " - Type salle : " + typeSalle);
 				return 0;
 				
 			
@@ -88,9 +91,7 @@ public class MSalle implements Serializable {
 
 	public void remplirJComboBoxSalle(JComboBox cmbSalle, MSalle lesSalles) {
 		cmbSalle.removeAllItems();
-		//System.out.println("Nombre de salles : " + lesSalles.getLesSalles().size());
 		for(Salle s : lesSalles.getLesSalles()) {
-			//System.out.println("Numero salle : " + s.getNumeroSalle());
 			cmbSalle.addItem(s.getNumeroSalle());
 		}
 	}

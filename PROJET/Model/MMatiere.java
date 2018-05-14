@@ -31,20 +31,29 @@ public class MMatiere implements Serializable {
 		if(nomMatiere == "") {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour la matière !");
 		} else if(nombreHeureCM == "") {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de CM pour la matière !");
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de cours en salle pour la matière !");
 		} else if(nombreHeureTD == "") {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de TD pour la matière !");
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de cours en salle informatique pour la matière !");
 		} else if(nombreHeureTP == "") {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de TP pour la matière !");
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de cours en salle de TP pour la matière !");
 		} else if(indexProfesseur == -1) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir un professeur pour la matiere !");
 		} else if(couleurMatiere.getRed() == 238 && couleurMatiere.getGreen() == 238 && couleurMatiere.getBlue() == 238) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir une couleur pour la matière !");
 		} else {
 			try {
+				
 				Matiere nouvelMatiere = new Matiere(nomMatiere, Integer.parseInt(nombreHeureCM), Integer.parseInt(nombreHeureTP), Integer.parseInt(nombreHeureTD), niveauMatiere, lesProfesseurs.getLesProfesseurs().get(indexProfesseur), couleurMatiere);
 				lesMatieres.add(nouvelMatiere);
-				JOptionPane.showMessageDialog(null, "La matière " + nomMatiere + " a été ajouté.");
+				if(verificationNombreHeureClasse(niveauMatiere) > 40) {
+					int heure = verificationNombreHeureClasse(niveauMatiere);
+					JOptionPane.showMessageDialog(null, "Il y a " + -(40-heure) + " heures de cours en trop afin de ne pas dépasser le total d'heures hebdomadaire de la classe !");
+					lesMatieres.remove(lesMatieres.size()-1);
+					return 1;
+		
+				} else {
+					JOptionPane.showMessageDialog(null, "La matière " + nomMatiere + " a été ajouté.");
+				}
 				return 0;				
 			
 			} catch(NumberFormatException e) {
@@ -52,6 +61,16 @@ public class MMatiere implements Serializable {
 			}
 		}
 		return 1;
+	}
+
+	public int verificationNombreHeureClasse(String niveauMatiere) {
+		int totalH = 0;
+		for(Matiere m : lesMatieres) {
+			if(m.getNiveauMatiere().equals(niveauMatiere)) {
+				totalH = m.getNombreHeureCM() + m.getNombreHeureTP() + m.getNombreHeureTD() + totalH;
+			}
+		}
+		return totalH;
 	}
 
 	public void chargerComboBoxProfesseurMatiere(MProfesseur lesProfesseurs, JComboBox<String> cmbProfesseurMatiere) {
@@ -81,13 +100,6 @@ public class MMatiere implements Serializable {
 					couleurMatiere = new Color(Integer.parseInt(ligne), true);
 					nouvelleMatiere = new Matiere(nomMatiere, nombreHeureCM, nombreHeureTD, nombreHeureTP, niveauClasse, lesProfesseurs.getLesProfesseurs().get(indexProfesseur), couleurMatiere);
 					lesMatieres.add(nouvelleMatiere);
-
-					for(Classe c : lesClasses.getLesClasses()) {
-						if(niveauClasse.equals(c.getNiveauClasse())) {
-							c.getLesMatieres().add(nouvelleMatiere);
-						}
-					}
-
 					i = -1;
 				}
 				i++;

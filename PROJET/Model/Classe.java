@@ -70,7 +70,7 @@ public class Classe {
 
 	public void setLesMatieres(MMatiere lesMatieres) {
 		for(Matiere m : lesMatieres.getLesMatieres()) {
-			if(m.getNiveauMatiere() == this.niveauClasse) {
+			if(m.getNiveauMatiere().equals(this.niveauClasse)) {
 				this.lesMatieres.add((Matiere)m.clone());
 			}
 		}

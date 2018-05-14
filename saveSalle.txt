@@ -1,9 +1,9 @@
-Salle CM
+qsd
 10
 CM
-Salle TP
+qsd
 10
 TP
-Salle TD
+qsd
 10
 TD

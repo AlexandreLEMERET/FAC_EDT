@@ -28,17 +28,24 @@ public class MProfesseur implements Serializable {
 		return this.lesProfesseurs;
 	}
 	
-	public int ajoutProfesseur(String nomProfesseur, String prenomProfesseur, String nombreHeureProfesseur, MEdt lesEDT) {
+	public int ajoutProfesseur(String nomProfesseur, String prenomProfesseur, String nombreHeureProfesseur, MEdt lesEDT, MMatiere lesMatieres) {
 		if(nomProfesseur.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour le professeur !");
 		} else if(prenomProfesseur.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour le professeur !");
+		} else if(Integer.parseInt(nombreHeureProfesseur) > 40) {
+			JOptionPane.showMessageDialog(null, "Erreur : Le total d'heure du professeur ne peut excéder le total d'heures hebdomadaire (40 heures) !");
 		} else {
 			try {
 				Professeur nouveauProfesseur = new Professeur(nomProfesseur, prenomProfesseur, Integer.parseInt(nombreHeureProfesseur));
 				lesProfesseurs.add(nouveauProfesseur);
+				if(verificationNombreHeureProfesseur(lesMatieres, nouveauProfesseur) > 40 || verificationNombreHeureProfesseur(lesMatieres, nouveauProfesseur) > nouveauProfesseur.getNombreHeuresProfesseur()) {
+					int heure = verificationNombreHeureProfesseur(lesMatieres, nouveauProfesseur);
+					JOptionPane.showMessageDialog(null, "Il y a " + -(40-heure) + " heures de cours en trop afin de ne pas dépasser le total d'heures hebdomadaire du professeur !");
+					lesProfesseurs.remove(lesProfesseurs.size()-1);
+					return 1;
+				}
 				JOptionPane.showMessageDialog(null,"Le professeur a été ajouté.");
-				//System.out.println("Nom professeur : " + nomProfesseur + " " + prenomProfesseur + " - Nombre heure : " + nombreHeureProfesseur);
 				return 0;
 
 			} catch(NumberFormatException e) {
@@ -46,6 +53,19 @@ public class MProfesseur implements Serializable {
 			}
 		}
 		return 1;
+	}
+
+	public int verificationNombreHeureProfesseur(MMatiere lesMatieres, Professeur leProfesseur) {
+		int totalH = 0;
+		System.out.println("Debut de la fonction");
+		System.out.println("Nombre de matiere : " + lesMatieres.getLesMatieres().size());
+		for(Matiere m : lesMatieres.getLesMatieres()) {
+			System.out.println("On passe à l'interieur");
+			if(m.getProfesseurMatiere().equals(leProfesseur)) {
+				totalH = m.getNombreHeureCM() + m.getNombreHeureTP() + m.getNombreHeureTD() + totalH;
+			}
+		}
+		return totalH;
 	}
 
 	public void chargerLesProfesseurs() {

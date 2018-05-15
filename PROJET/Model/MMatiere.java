@@ -29,13 +29,15 @@ public class MMatiere implements Serializable {
 	}
 	public int ajoutMatiere(String nomMatiere, String nombreHeureCM, String nombreHeureTP, String nombreHeureTD, String niveauMatiere, int indexProfesseur, Color couleurMatiere, MProfesseur lesProfesseurs) {
 		if(nomMatiere == "") {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour la matière !");
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour la matière !", "Erreur : Nom de la matiere", JOptionPane.ERROR_MESSAGE);
 		} else if(nombreHeureCM == "") {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de cours en salle pour la matière !");
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de cours en salle pour la matière !", "Erreur : Nombre d'heures de cours", JOptionPane.ERROR_MESSAGE);
 		} else if(nombreHeureTD == "") {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de cours en salle informatique pour la matière !");
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de cours en salle informatique pour la matière !", "Erreur : Nombre d'heures de cours", JOptionPane.ERROR_MESSAGE);
 		} else if(nombreHeureTP == "") {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de cours en salle de TP pour la matière !");
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de cours en salle de TP pour la matière !", "Erreur : Nombre d'heures de cours", JOptionPane.ERROR_MESSAGE);
+		} else if(Integer.parseInt(nombreHeureCM)%2 != 0 || Integer.parseInt(nombreHeureTD)%2 != 0 || Integer.parseInt(nombreHeureTP)%2 != 0) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez entrer un nombre d'heure de cours pair !", "Erreur : Nombre d'heures", JOptionPane.ERROR_MESSAGE);
 		} else if(indexProfesseur == -1) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir un professeur pour la matiere !");
 		} else if(couleurMatiere.getRed() == 238 && couleurMatiere.getGreen() == 238 && couleurMatiere.getBlue() == 238) {
@@ -47,7 +49,7 @@ public class MMatiere implements Serializable {
 				lesMatieres.add(nouvelMatiere);
 				if(verificationNombreHeureClasse(niveauMatiere) > 40) {
 					int heure = verificationNombreHeureClasse(niveauMatiere);
-					JOptionPane.showMessageDialog(null, "Il y a " + -(40-heure) + " heures de cours en trop afin de ne pas dépasser le total d'heures hebdomadaire de la classe !");
+					JOptionPane.showMessageDialog(null, "Il y a " + -(40-heure) + " heures de cours en trop afin de ne pas dépasser le total d'heures hebdomadaire de la classe !", "Erreur : Nombre d'heures", JOptionPane.ERROR_MESSAGE);
 					lesMatieres.remove(lesMatieres.size()-1);
 					return 1;
 		
@@ -57,7 +59,7 @@ public class MMatiere implements Serializable {
 				return 0;				
 			
 			} catch(NumberFormatException e) {
-				JOptionPane.showMessageDialog(null, "Erreur : Vous devez entre un chiffre entier pour les nombres d'heures !");
+				JOptionPane.showMessageDialog(null, "Erreur : Vous devez entre un chiffre entier pour les nombres d'heures !", "Erreur : Nombre d'heures", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		return 1;

@@ -28,9 +28,9 @@ public class MClasse implements Serializable {
 
 	public int ajoutClasse(String nomClasse, String niveauClasse, Color couleurClasse, MEdt lesEDT) {
 		if(nomClasse.length() == 0) {
-			JOptionPane.showMessageDialog(null, "Erreur : Le nom de la classe doit contenir au moins 1 caractère !");
+			JOptionPane.showMessageDialog(null, "Erreur : Le nom de la classe doit contenir au moins 1 caractère !", "Erreur : Nom de la classe", JOptionPane.ERROR_MESSAGE);
 		} else if(couleurClasse.getRed() == 238 && couleurClasse.getGreen() == 238 && couleurClasse.getBlue() == 238) {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir une couleur pour la classe !");
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir une couleur pour la classe !", "Erreur : Couleur de la classe", JOptionPane.ERROR_MESSAGE);
 		} else {
 			Classe nouvelleClasse = new Classe(nomClasse, niveauClasse, couleurClasse);
 			lesClasses.add(nouvelleClasse);

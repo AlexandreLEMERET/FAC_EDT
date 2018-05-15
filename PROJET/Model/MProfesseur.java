@@ -30,18 +30,18 @@ public class MProfesseur implements Serializable {
 	
 	public int ajoutProfesseur(String nomProfesseur, String prenomProfesseur, String nombreHeureProfesseur, MEdt lesEDT, MMatiere lesMatieres) {
 		if(nomProfesseur.length() == 0) {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour le professeur !");
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour le professeur !", "Erreur : Nom du professeur", JOptionPane.ERROR_MESSAGE);
 		} else if(prenomProfesseur.length() == 0) {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour le professeur !");
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour le professeur !", "Erreur : Prénom du professeur", JOptionPane.ERROR_MESSAGE);
 		} else if(Integer.parseInt(nombreHeureProfesseur) > 40) {
-			JOptionPane.showMessageDialog(null, "Erreur : Le total d'heure du professeur ne peut excéder le total d'heures hebdomadaire (40 heures) !");
+			JOptionPane.showMessageDialog(null, "Erreur : Le total d'heure du professeur ne peut excéder le total d'heures hebdomadaire (40 heures) !", "Erreur : Nombre d'heures", JOptionPane.ERROR_MESSAGE);
 		} else {
 			try {
 				Professeur nouveauProfesseur = new Professeur(nomProfesseur, prenomProfesseur, Integer.parseInt(nombreHeureProfesseur));
 				lesProfesseurs.add(nouveauProfesseur);
 				if(verificationNombreHeureProfesseur(lesMatieres, nouveauProfesseur) > 40 || verificationNombreHeureProfesseur(lesMatieres, nouveauProfesseur) > nouveauProfesseur.getNombreHeuresProfesseur()) {
 					int heure = verificationNombreHeureProfesseur(lesMatieres, nouveauProfesseur);
-					JOptionPane.showMessageDialog(null, "Il y a " + -(40-heure) + " heures de cours en trop afin de ne pas dépasser le total d'heures hebdomadaire du professeur !");
+					JOptionPane.showMessageDialog(null, "Il y a " + -(40-heure) + " heures de cours en trop afin de ne pas dépasser le total d'heures hebdomadaire du professeur !", "Erreur Nombre d'heures", JOptionPane.ERROR_MESSAGE);
 					lesProfesseurs.remove(lesProfesseurs.size()-1);
 					return 1;
 				}
@@ -49,7 +49,7 @@ public class MProfesseur implements Serializable {
 				return 0;
 
 			} catch(NumberFormatException e) {
-				JOptionPane.showMessageDialog(null, "Erreur : Le nombre d'heure doit être un chiffre entier !");
+				JOptionPane.showMessageDialog(null, "Erreur : Le nombre d'heure doit être un chiffre entier !", "Erreur : Nombre d'heures", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		return 1;

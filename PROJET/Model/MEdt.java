@@ -219,6 +219,11 @@ public class MEdt {
 										g.getEDT().getLeJour(j).getLeCours(co).setLaSalle(laSalle);
 										g.getEDT().getLeJour(j).getLeCours(co).setOccupe();
 
+										/* On sauvegarde la classe */
+										c.getEDT().getLeJour(j).getLeCours(co).setLaClasse(c);
+										c.getEDT().getLeJour(j).getLeCours(co).setLaMatiere(laMatiere);
+										c.getEDT().getLeJour(j).getLeCours(co).setLeTypeCours("groupe");
+
 									}
 
 									/* Si c'est un CM, c'est pour tous les groupes de la classe */
@@ -255,7 +260,6 @@ public class MEdt {
 										c.getEDT().getLeJour(j).getLeCours(co).setLaMatiere(laMatiere);
 										c.getEDT().getLeJour(j).getLeCours(co).setLeProfesseur(leProfesseur);
 										c.getEDT().getLeJour(j).getLeCours(co).setLaSalle(laSalle);
-										c.getEDT().getLeJour(j).getLeCours(co).setLeTypeCours(laMatiere.getTypeMatiereMaxHeureRestante());
 										c.getEDT().getLeJour(j).getLeCours(co).setOccupe();
 									}
 
@@ -328,11 +332,12 @@ public class MEdt {
 				//System.out.println("Professeur : " + s.getEDT().getLeJour(j).getLeCours(co).getProfesseur());
 					if(s.getEDT().getLeJour(j).getLeCours(co).getMatiere() != null && s.getEDT().getLeJour(j).getLeCours(co).getClasse() != null && s.getEDT().getLeJour(j).getLeCours(co).getProfesseur() != null && s.getEDT().getLeJour(j).getLeCours(co).getGroupe() != null) {
 						System.out.println("	Cours de " + co.getHeureDebut() + " à " + co.getHeureFin() + " - M : " + s.getEDT().getLeJour(j).getLeCours(co).getMatiere().getNomMatiere() + " - C : " + s.getEDT().getLeJour(j).getLeCours(co).getClasse().getNiveauClasse() + " " + s.getEDT().getLeJour(j).getLeCours(co).getClasse().getNomClasse() + " - G : " + s.getEDT().getLeJour(j).getLeCours(co).getGroupe().getNomGroupe() +" - P : " + s.getEDT().getLeJour(j).getLeCours(co).getProfesseur().getNomProfesseur());
-					}
-					if(s.getEDT().getLeJour(j).getLeCours(co).getMatiere() != null && s.getEDT().getLeJour(j).getLeCours(co).getClasse() != null && s.getEDT().getLeJour(j).getLeCours(co).getProfesseur() != null) {
-						System.out.println("	Cours de " + co.getHeureDebut() + " à " + co.getHeureFin() + " - M : " + s.getEDT().getLeJour(j).getLeCours(co).getMatiere().getNomMatiere() + " - C : " + s.getEDT().getLeJour(j).getLeCours(co).getClasse().getNiveauClasse() + " " + s.getEDT().getLeJour(j).getLeCours(co).getClasse().getNomClasse() + " - P : " + s.getEDT().getLeJour(j).getLeCours(co).getProfesseur().getNomProfesseur());
 					} else {
-						System.out.println("	Cours de " + co.getHeureDebut() + " à " + co.getHeureFin());
+						if(s.getEDT().getLeJour(j).getLeCours(co).getMatiere() != null && s.getEDT().getLeJour(j).getLeCours(co).getClasse() != null && s.getEDT().getLeJour(j).getLeCours(co).getProfesseur() != null && s.getEDT().getLeJour(j).getLeCours(co).getGroupe() == null) {
+							System.out.println("	Cours de " + co.getHeureDebut() + " à " + co.getHeureFin() + " - M : " + s.getEDT().getLeJour(j).getLeCours(co).getMatiere().getNomMatiere() + " - C : " + s.getEDT().getLeJour(j).getLeCours(co).getClasse().getNiveauClasse() + " " + s.getEDT().getLeJour(j).getLeCours(co).getClasse().getNomClasse() + " - P : " + s.getEDT().getLeJour(j).getLeCours(co).getProfesseur().getNomProfesseur());
+						} else {
+							System.out.println("	Cours de " + co.getHeureDebut() + " à " + co.getHeureFin());
+						}
 					}
 				}
 				System.out.println("-----");

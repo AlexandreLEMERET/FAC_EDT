@@ -29,9 +29,11 @@ public class MGroupe implements Serializable {
 
 	public int ajoutGroupe(String nomGroupe, int indexClasse, MClasse lesClasses, MEdt lesEDT) {
 		if(indexClasse < 0) {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir une classe !");
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir une classe !", "Erreur : Classe", JOptionPane.ERROR_MESSAGE);
 		} else if (nomGroupe.length() == 0) {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom de groupe !");
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom de groupe !", "Erreur : Groupe", JOptionPane.ERROR_MESSAGE);
+		} else if (lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().size() == 2) {
+			JOptionPane.showMessageDialog(null, "Erreur : Il ne peux y avoir que deux groupes par classe !", "Erreur : Groupe", JOptionPane.ERROR_MESSAGE);
 		} else {
 			Groupe nouveauGroupe = new Groupe(nomGroupe, lesClasses.getLesClasses().get(indexClasse));
 			lesGroupes.add(nouveauGroupe);

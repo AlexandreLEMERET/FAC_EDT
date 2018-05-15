@@ -1,9 +1,3 @@
-qsd
-10
-CM
-qsd
+Salle TP
 10
 TP
-qsd
-10
-TD

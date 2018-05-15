@@ -29,9 +29,9 @@ public class MSalle implements Serializable {
 	/* Permet d'ajouter une salle */
 	public int ajoutSalle(String numeroSalle, String nombrePlace, int valeurIndex, MEdt lesEDT) {
 		if (numeroSalle.length() == 0) {
-			JOptionPane.showMessageDialog(null,"Erreur : Vous devez indiquer un nom de salle !");
+			JOptionPane.showMessageDialog(null,"Erreur : Vous devez indiquer un nom de salle !", "Erreur : Nom de salle", JOptionPane.ERROR_MESSAGE);
 		} else if(nombrePlace == "") {
-			JOptionPane.showMessageDialog(null,"Erreur : Vous devez indiquer un nombre de place !");
+			JOptionPane.showMessageDialog(null,"Erreur : Vous devez indiquer un nombre de place !", "Erreur : Nombre de place", JOptionPane.ERROR_MESSAGE);
 		} else {
 			try {
 				String typeSalle = "";
@@ -45,7 +45,7 @@ public class MSalle implements Serializable {
 				
 			
 	   		} catch(NumberFormatException e) {
-	        	JOptionPane.showMessageDialog(null,"Erreur : Le nombre de place doit être un chiffre entier !"); 
+	        	JOptionPane.showMessageDialog(null,"Erreur : Le nombre de place doit être un chiffre entier !", "Erreur : Nombre de place", JOptionPane.ERROR_MESSAGE); 
 	    	}
 	    }
 	    return 1;

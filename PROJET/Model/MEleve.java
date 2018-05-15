@@ -30,9 +30,9 @@ public class MEleve implements Serializable {
 	/* Ajout d'un eleve dans une classe sans groupe */
 	public int ajoutEleve(String nomEleve, String prenomEleve, int indexClasse, MClasse lesClasses, MEdt lesEDT) {
 		if(nomEleve.length() == 0) {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour l'élève !");
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour l'élève !", "Erreur : Nom de l'élève", JOptionPane.ERROR_MESSAGE);
 		} else if(prenomEleve.length() == 0) {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour l'élève !");
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour l'élève !", "Erreur : Prénom de l'élève", JOptionPane.ERROR_MESSAGE);
 		} else {
 			Eleve nouvelEleve = new Eleve(nomEleve, prenomEleve, lesClasses.getLesClasses().get(indexClasse));
 			lesEleves.add(nouvelEleve);
@@ -47,9 +47,9 @@ public class MEleve implements Serializable {
 	/* Ajout d'un eleve dans une classe avec un groupe */
 	public int ajoutEleve(String nomEleve, String prenomEleve, int indexClasse, int indexGroupe, MClasse lesClasses, MEdt lesEDT) {
 		if(nomEleve.length() == 0) {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour l'élève !");
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour l'élève !", "Erreur : Nom de l'élève", JOptionPane.ERROR_MESSAGE);
 		} else if(prenomEleve.length() == 0) {
-			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour l'élève !");
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour l'élève !", "Erreur : Prénom de l'élève", JOptionPane.ERROR_MESSAGE);
 		} else {
 			Eleve nouvelEleve = new Eleve(nomEleve, prenomEleve, lesClasses.getLesClasses().get(indexClasse), lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().get(indexGroupe));
 			lesEleves.add(nouvelEleve);

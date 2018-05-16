@@ -96,4 +96,8 @@ public class Classe {
 
 		this.lesMatieres = tmpMatiere;
 	}
+
+	public void setLesMatieres() {
+		this.lesMatieres = new ArrayList<Matiere>();
+	}
 }

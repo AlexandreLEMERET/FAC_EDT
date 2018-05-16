@@ -56,4 +56,16 @@ public class Salle implements Serializable {
 		return this.edtSalle;
 	}
 
+	public void setNumeroSalle(String p_numeroSalle) {
+		this.numeroSalle = p_numeroSalle;
+	}
+
+	public void setNombrePlace(String p_nombrePlace) {
+		this.nombrePlacesSalle = Integer.parseInt(p_nombrePlace);
+	}
+
+	public void setTypeSalle(String p_typeSalle) {
+		this.typeSalle = p_typeSalle;
+	}
+
 }

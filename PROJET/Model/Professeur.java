@@ -37,5 +37,17 @@ public class Professeur {
 	public boolean estOccupe(Jour p_leJour, Cours p_leCours) {
 		return this.edtProfesseur.getLeJour(p_leJour).getLeCours(p_leCours).getOccupe();
 	}
+
+	public void setNomProfesseur(String p_nomProfesseur) {
+		this.nomProfesseur = p_nomProfesseur;
+	}
+
+	public void setPrenomProfesseur(String p_prenomProfesseur) {
+		this.prenomProfesseur = p_prenomProfesseur;
+	}
+
+	public void setNombreHeuresProfesseur(int p_nombreHeuresProfesseur) {
+		this.nombreHeuresProfesseur = p_nombreHeuresProfesseur;
+	}
 	
 }

@@ -22,6 +22,8 @@ public class MEdt {
 	}
 
 	public void genererLesEDT(MClasse lesClasses, MEleve lesEleves, MSalle lesSalles) {
+
+
 		for(Classe c : lesClasses.getLesClasses()) {
 			
 			/* Classe sans groupe */
@@ -127,7 +129,7 @@ public class MEdt {
 			/* Classe avec groupes */
 			if(c.getLesGroupesClasse().size() > 0) {
 				for(Groupe g : c.getLesGroupesClasse()) {
-					
+
 					/* On compte le nombre d'éleve du groupe */
 					g.getNombreEleveGroupe(lesEleves, c, g);
 					
@@ -147,8 +149,10 @@ public class MEdt {
 								int i = 0;
 								
 								//System.out.println("g.getLesMatieres().size() : " + g.getLesMatieres().size());
-								while(salleLibre == false && professeurLibre == false && i < g.getLesMatieres().size()) {
+								while(salleLibre != true && professeurLibre != true && i < g.getLesMatieres().size()) {
 
+									//System.out.println("Size : " + g.getLesMatieres().size());
+									//System.out.println("i : " + i);
 									/* On sauvegarder la matière dans un objet Matiere */
 									laMatiere = g.getLesMatieres().get(i);
 
@@ -156,15 +160,17 @@ public class MEdt {
 									if(laMatiere.getMaxHeureRestante() > 0) {
 										//System.out.println("---");
 										//System.out.println("Matiere : " + laMatiere.getNomMatiere());
+										//System.out.println("Heure debut : " + co.getHeureDebut());
+										//System.out.println("Heure fin : " + co.getHeureFin());
 										//System.out.println("CM : " + laMatiere.getNombreHeureCMrestante());
-										//System.out.println("TD : " + laMatiere.getNombreHeureTDrestante());
+										///System.out.println("TD : " + laMatiere.getNombreHeureTDrestante());
 										//System.out.println("TP : " + laMatiere.getNombreHeureTPrestante());
 										//System.out.println("Nombre heure restante au max : " + laMatiere.getMaxHeureRestante());
 										//System.out.println("Type d'heure restante : " + laMatiere.getTypeMatiereMaxHeureRestante());
 									/* On parcourt la liste de salle afin d'en trouver une qui correspond aux critères */
 										for(Salle s : lesSalles.getLesSalles()) {
 											//System.out.println("Salle : " + s.getNumeroSalle() + " - Occupé : " + s.estOccupe(j, co));
-											//System.out.println("Nombre d'eleve de la classe : " + c.getNombreEleveClasse() + " - Nombre de place : " + s.getNombrePlacesSalle());
+											//System.out.println("Nombre d'eleve du groupe : " + g.getNombreEleveGroupe() + " - Nombre de place : " + s.getNombrePlacesSalle());
 											//System.out.println("laMatiere.getTypeMatiereMaxHeureRestante() :" + laMatiere.getTypeMatiereMaxHeureRestante() + " - s.getTypeSalle() : " + s.getTypeSalle());
 											if(s.estOccupe(j, co) == false && s.getNombrePlacesSalle() >= g.getNombreEleveGroupe() && laMatiere.getTypeMatiereMaxHeureRestante().equals(s.getTypeSalle())) {
 												//System.out.println("ISSOU");
@@ -176,10 +182,12 @@ public class MEdt {
 
 										/* On cherche un professeur qui est libre pour assurer cette matière */
 										//System.out.println("Le professeur : " + laMatiere.getProfesseurMatiere().getNomProfesseur() + " - Occupé : " + laMatiere.getProfesseurMatiere().estOccupe(j,co));
+										//System.out.println("Matiere : " + leProfesseur.getEDT().getLeJour(j).getLeCours(co).getMatiere());
+										//System.out.println("Salle : " + leProfesseur.getEDT().getLeJour(j).getLeCours(co).getSalle());
 										if(laMatiere.getProfesseurMatiere().estOccupe(j, co) == false) {
 											leProfesseur = laMatiere.getProfesseurMatiere();
 											professeurLibre = true;
-										}
+										} else { salleLibre = false; }
 									}
 									i++;
 								}
@@ -223,6 +231,7 @@ public class MEdt {
 										c.getEDT().getLeJour(j).getLeCours(co).setLaClasse(c);
 										c.getEDT().getLeJour(j).getLeCours(co).setLaMatiere(laMatiere);
 										c.getEDT().getLeJour(j).getLeCours(co).setLeTypeCours("groupe");
+										//System.out.println("Type cours : " + c.getEDT().getLeJour(j).getLeCours(co).getTypeCours());
 
 									}
 
@@ -265,7 +274,7 @@ public class MEdt {
 
 
 								} else {
-									System.out.println("Pas de solution");
+									//System.out.println("Pas de solution");
 								}
 							}
 
@@ -278,6 +287,82 @@ public class MEdt {
 		JOptionPane.showMessageDialog(null, "Les emplois du temps ont été généré.");
 	}
 
+
+
+
+		/* Nettoyage des EDT*/
+		public void viderEDT(MSalle lesSalles, MProfesseur lesProfesseurs, MClasse lesClasses, MGroupe lesGroupes, MEleve lesEleves) {
+			for(Salle s : lesSalles.getLesSalles()) {
+				for(Jour j : s.getEDT().getLesJours()) {
+					for(Cours co : j.getLesCours()) {
+						s.getEDT().getLeJour(j).getLeCours(co).setLaMatiere(null);
+						s.getEDT().getLeJour(j).getLeCours(co).setLeTypeCours("");
+						s.getEDT().getLeJour(j).getLeCours(co).setLeProfesseur(null);
+						s.getEDT().getLeJour(j).getLeCours(co).setLaSalle(null);
+						s.getEDT().getLeJour(j).getLeCours(co).setLaClasse(null);
+						s.getEDT().getLeJour(j).getLeCours(co).setLeGroupe(null);
+						s.getEDT().getLeJour(j).getLeCours(co).setOccupe(false);
+					}
+				}
+			}
+
+			for(Professeur p : lesProfesseurs.getLesProfesseurs()) {
+				for(Jour j : p.getEDT().getLesJours()) {
+					for(Cours co : j.getLesCours()) {
+						p.getEDT().getLeJour(j).getLeCours(co).setLaMatiere(null);
+						p.getEDT().getLeJour(j).getLeCours(co).setLeTypeCours("");
+						p.getEDT().getLeJour(j).getLeCours(co).setLeProfesseur(null);
+						p.getEDT().getLeJour(j).getLeCours(co).setLaSalle(null);
+						p.getEDT().getLeJour(j).getLeCours(co).setLaClasse(null);
+						p.getEDT().getLeJour(j).getLeCours(co).setLeGroupe(null);
+						p.getEDT().getLeJour(j).getLeCours(co).setOccupe(false);
+					}
+				}
+			}
+
+			for(Classe c : lesClasses.getLesClasses()) {
+				for(Jour j : c.getEDT().getLesJours()) {
+					for(Cours co : j.getLesCours()) {
+						c.getEDT().getLeJour(j).getLeCours(co).setLaMatiere(null);
+						c.getEDT().getLeJour(j).getLeCours(co).setLeTypeCours("");
+						c.getEDT().getLeJour(j).getLeCours(co).setLeProfesseur(null);
+						c.getEDT().getLeJour(j).getLeCours(co).setLaSalle(null);
+						c.getEDT().getLeJour(j).getLeCours(co).setLaClasse(null);
+						c.getEDT().getLeJour(j).getLeCours(co).setLeGroupe(null);
+						c.getEDT().getLeJour(j).getLeCours(co).setOccupe(false);
+						c.setLesMatieres();
+					}
+				}
+			}
+
+			for(Groupe g : lesGroupes.getLesGroupes()) {
+				for(Jour j : g.getEDT().getLesJours()) {
+					for(Cours co : j.getLesCours()) {
+						g.getEDT().getLeJour(j).getLeCours(co).setLaMatiere(null);
+						g.getEDT().getLeJour(j).getLeCours(co).setLeTypeCours("");
+						g.getEDT().getLeJour(j).getLeCours(co).setLeProfesseur(null);
+						g.getEDT().getLeJour(j).getLeCours(co).setLaSalle(null);
+						g.getEDT().getLeJour(j).getLeCours(co).setLaClasse(null);
+						g.getEDT().getLeJour(j).getLeCours(co).setLeGroupe(null);
+						g.getEDT().getLeJour(j).getLeCours(co).setOccupe(false);
+					}
+				}
+			}
+
+			for(Eleve e : lesEleves.getLesEleves()) {
+				for(Jour j : e.getEDT().getLesJours()) {
+					for(Cours co : j.getLesCours()) {
+						e.getEDT().getLeJour(j).getLeCours(co).setLaMatiere(null);
+						e.getEDT().getLeJour(j).getLeCours(co).setLeTypeCours("");
+						e.getEDT().getLeJour(j).getLeCours(co).setLeProfesseur(null);
+						e.getEDT().getLeJour(j).getLeCours(co).setLaSalle(null);
+						e.getEDT().getLeJour(j).getLeCours(co).setLaClasse(null);
+						e.getEDT().getLeJour(j).getLeCours(co).setLeGroupe(null);
+						e.getEDT().getLeJour(j).getLeCours(co).setOccupe(false);
+					}
+				}
+			}
+		}
 
 
 	/*public void afficherLesEDT(MClasse lesClasses) {

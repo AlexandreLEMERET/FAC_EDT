@@ -99,4 +99,8 @@ public class Cours {
 		this.occupe = true;
 	}
 	
+	public void setOccupe(boolean p_occupe) {
+		this.occupe = p_occupe;
+	}
 }
+

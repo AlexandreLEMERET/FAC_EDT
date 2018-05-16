@@ -16,7 +16,10 @@ import javax.swing.JButton;
 
 public class Generateur {
 	
-	private int res;
+	private int res, i;
+	private String type;
+	private String[] typeButtonsStrings;
+	private JButton tmpButton;
 	private InterfaceGraphique interfaceGraphique;
 	private MSalle lesSalles;
 	private MProfesseur lesProfesseurs;
@@ -51,29 +54,34 @@ public class Generateur {
 					switch(interfaceGraphique.getCmbMessageList().getSelectedItem().toString()) {
 
 						case "Salle":
-							mettreLesListeners("Salle");
 							interfaceGraphique.create_frameAjoutSalle();
 							interfaceGraphique.getBoutonAccepterSalle().addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent event) {
 									res = lesSalles.ajoutSalle(interfaceGraphique.getTfNumeroSalle().getText(), interfaceGraphique.getTfNombrePlaceSalle().getText(), interfaceGraphique.getCmbTypeSalle().getSelectedIndex(), lesEDT);
-									if(res == 0) { interfaceGraphique.create_buttonSalle(true, interfaceGraphique.getTfNumeroSalle().getText()); }
+									if(res == 0) { 
+										interfaceGraphique.create_buttonSalle(true, interfaceGraphique.getTfNumeroSalle().getText()); 
+									enleverLesListeners();
+									mettreLesListeners("Salle");
+									}
 								}
 							});
 							break;
 
 						case "Professeur":
-							mettreLesListeners("Professeur");
 							interfaceGraphique.create_frameAjoutProfesseur();
 							interfaceGraphique.getBoutonAccepterProfesseur().addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent event) {
 									res = lesProfesseurs.ajoutProfesseur(interfaceGraphique.getTfNomProfesseur().getText(), interfaceGraphique.getTfPrenomProfesseur().getText(), interfaceGraphique.getTfNombreHeureProfesseur().getText(), lesEDT, lesMatieres);
-									if(res == 0) { interfaceGraphique.create_buttonProfesseur(true, interfaceGraphique.getTfNomProfesseur().getText(), interfaceGraphique.getTfPrenomProfesseur().getText()); }
+									if(res == 0) { 
+										interfaceGraphique.create_buttonProfesseur(true, interfaceGraphique.getTfNomProfesseur().getText(), interfaceGraphique.getTfPrenomProfesseur().getText());
+									enleverLesListeners(); 
+									mettreLesListeners("Professeur");
+									}
 								}
 							});
 							break;
 
 						case "Classe":
-							mettreLesListeners("Classe");
 							interfaceGraphique.create_frameAjoutClasse();
 							interfaceGraphique.getBoutonCouleurClasse().addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent event) {
@@ -88,25 +96,31 @@ public class Generateur {
 							interfaceGraphique.getBoutonAccepterClasse().addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent event) {
 									res = lesClasses.ajoutClasse(interfaceGraphique.getTfNomClasse().getText(), interfaceGraphique.getCmbNiveauClasse().getSelectedItem().toString(), interfaceGraphique.getBoutonCouleurClasse().getBackground(), lesEDT); 
-									if(res == 0) { interfaceGraphique.create_buttonClasse(true, interfaceGraphique.getCmbNiveauClasse().getSelectedItem().toString(), interfaceGraphique.getTfNomClasse().getText(), interfaceGraphique.getBoutonCouleurClasse().getBackground()); }
+									if(res == 0) { 
+										interfaceGraphique.create_buttonClasse(true, interfaceGraphique.getCmbNiveauClasse().getSelectedItem().toString(), interfaceGraphique.getTfNomClasse().getText(), interfaceGraphique.getBoutonCouleurClasse().getBackground()); 
+									enleverLesListeners();
+									mettreLesListeners("Classe");
+									}
 								}
 							});
 							break;
 
 						case "Groupe":
-							mettreLesListeners("Groupe");
 							interfaceGraphique.create_frameAjoutGroupe();
 							lesGroupes.chargerComboBoxGroupe(lesClasses, interfaceGraphique.getCmbClasseGroupe());
 							interfaceGraphique.getBoutonAccepterGroupe().addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent event) {
 									res = lesGroupes.ajoutGroupe(interfaceGraphique.getTfNomGroupe().getText(), interfaceGraphique.getCmbClasseGroupe().getSelectedIndex(), lesClasses, lesEDT);
-									if(res == 0) { interfaceGraphique.create_buttonGroupe(true, interfaceGraphique.getTfNomGroupe().getText(), interfaceGraphique.getCmbClasseGroupe().getSelectedItem().toString()); }
+									if(res == 0) { 
+										interfaceGraphique.create_buttonGroupe(true, interfaceGraphique.getTfNomGroupe().getText(), interfaceGraphique.getCmbClasseGroupe().getSelectedItem().toString()); 
+									enleverLesListeners();
+									mettreLesListeners("Groupe");
+									}
 								}
 							});
 							break;
 
 						case "Eleve":
-							mettreLesListeners("Eleve");
 							interfaceGraphique.create_frameAjoutEleve();
 							lesEleves.chargerComboBoxEleve(lesClasses, interfaceGraphique.getCmbClasseEleve(), interfaceGraphique.getCmbGroupeEleve());
 							interfaceGraphique.getCmbClasseEleve().addActionListener (new ActionListener () {
@@ -118,18 +132,25 @@ public class Generateur {
 								public void actionPerformed(ActionEvent event) {
 									if(interfaceGraphique.getCmbGroupeEleve().getSelectedIndex() < 0) {
 										res = lesEleves.ajoutEleve(interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText(), interfaceGraphique.getCmbClasseEleve().getSelectedIndex(), lesClasses, lesEDT);
-										if(res == 0) { interfaceGraphique.create_buttonEleve(true, interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText()); }
+										if(res == 0) { 
+											interfaceGraphique.create_buttonEleve(true, interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText()); 
+										enleverLesListeners();
+										mettreLesListeners("Eleve");
+										}
 									} 
 									else {
 										res = lesEleves.ajoutEleve(interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText(), interfaceGraphique.getCmbClasseEleve().getSelectedIndex(), interfaceGraphique.getCmbGroupeEleve().getSelectedIndex(), lesClasses, lesEDT);
-										if(res == 0) { interfaceGraphique.create_buttonEleve(true, interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText()); }
+										if(res == 0) { 
+											interfaceGraphique.create_buttonEleve(true, interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText()); 
+										enleverLesListeners();
+										mettreLesListeners("Eleve");
+										}
 									}
 								}
 							});
 							break;
 
 						case "Matiere":
-							mettreLesListeners("Matiere");
 							interfaceGraphique.create_frameAjoutMatiere();
 							lesMatieres.chargerComboBoxProfesseurMatiere(lesProfesseurs, interfaceGraphique.getCmbProfesseurMatiere());
 							interfaceGraphique.getBoutonCouleurMatiere().addActionListener(new ActionListener() {
@@ -145,7 +166,11 @@ public class Generateur {
 							interfaceGraphique.getBoutonAccepterMatiere().addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent event) {
 									res = lesMatieres.ajoutMatiere(interfaceGraphique.getTfNomMatiere().getText(), interfaceGraphique.getTfNombreHeureCM().getText(), interfaceGraphique.getTfNombreHeureTD().getText(), interfaceGraphique.getTfNombreHeureTP().getText(), interfaceGraphique.getCmbNiveauMatiere().getSelectedItem().toString(), interfaceGraphique.getCmbProfesseurMatiere().getSelectedIndex(), interfaceGraphique.getBoutonCouleurMatiere().getBackground(), lesProfesseurs);
-									if(res == 0) { interfaceGraphique.create_buttonMatiere(true, interfaceGraphique.getTfNomMatiere().getText(), interfaceGraphique.getBoutonCouleurMatiere().getBackground()); }
+									if(res == 0) { 
+										interfaceGraphique.create_buttonMatiere(true, interfaceGraphique.getTfNomMatiere().getText(), interfaceGraphique.getBoutonCouleurMatiere().getBackground()); 
+										enleverLesListeners();
+										mettreLesListeners("Matiere");
+									}
 								}
 							});
 							break;
@@ -153,6 +178,43 @@ public class Generateur {
 				}
 		});
 		
+		/* On ajoute les listeners sur les boutons*/
+		interfaceGraphique.getCmbMessageList().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				switch(interfaceGraphique.getCmbMessageList().getSelectedItem().toString()) {
+					case "Salle" :
+						enleverLesListeners();
+						mettreLesListeners("Salle");
+						break;
+
+					case "Professeur" :
+						enleverLesListeners();
+						mettreLesListeners("Professeur"); 
+						break;
+
+					case "Classe" : 
+						enleverLesListeners();
+						mettreLesListeners("Classe");
+						break;
+
+					case "Groupe" : 
+						enleverLesListeners();
+						mettreLesListeners("Groupe");
+						break;
+
+					case "Eleve" :
+						enleverLesListeners();
+						mettreLesListeners("Eleve");
+						break;
+
+					case "Matiere" : 
+						enleverLesListeners();
+						mettreLesListeners("Matiere");
+						break;
+				}
+			}
+		});
+
 		/* Le bouton qui permet de sauvegarder les différentes classes */
 		interfaceGraphique.getBoutonSauvegarder().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -207,6 +269,8 @@ public class Generateur {
 						}
 
 						interfaceGraphique.update_panelBoutonObjetsCrees();
+						enleverLesListeners();
+						mettreLesListeners(interfaceGraphique.getCmbMessageList().getSelectedItem().toString());
 					}
 				}
 		});
@@ -223,11 +287,11 @@ public class Generateur {
 						g.setLesMatieres(lesMatieres, c);
 					}
 				}
-				
+				lesEDT.viderEDT(lesSalles, lesProfesseurs, lesClasses, lesGroupes, lesEleves);
 				lesEDT.genererLesEDT(lesClasses, lesEleves, lesSalles);
 				lesEleves.setEDTEleve(lesClasses, lesGroupes);
 				//lesEDT.afficherLesEDT(lesClasses);
-				lesEDT.afficherLesEDT(lesSalles);
+				//lesEDT.afficherLesEDT(lesSalles);
 			}
 		});
 
@@ -310,16 +374,76 @@ public class Generateur {
 	}
 
 	/* Modification des elements*/
-	public void mettreLesListeners(String type) {
-		int i = 0;
+	public void mettreLesListeners(String p_type) {
+		i = 0;
+		type = p_type;
 		for(JButton b : interfaceGraphique.getLesButtons(type)) {
+			//System.out.println("Nombre de boutons : " + interfaceGraphique.getLesButtons(type).size());
+			tmpButton = b;
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent event) {
-					System.out.println("Bouton de type " + type + " : " + i);
+					switch(type) {
+						case "Salle" :
+							//for(JButton button : interfaceGraphique.getLesButtons(type)) {
+							//	if(tmpButton != button) { System.out.println("Différent"); i++; } else { System.out.println("Pareil"); break; }
+							//}
+							//System.out.println("Salle : " + i);
+							//System.out.println("Nom salle : " + lesSalles.getLesSalles().get(i));
+							interfaceGraphique.create_frameModificationSalle(lesSalles.getLesSalles().get(i).getNumeroSalle(), lesSalles.getLesSalles().get(i).getNombrePlacesSalle(), lesSalles.getLesSalles().get(i).getTypeSalle());
+							
+							interfaceGraphique.getBoutonModifierSalle().addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent event) {
+									lesSalles.modifierSalle(interfaceGraphique.getTfNumeroSalle().getText(), interfaceGraphique.getTfNombrePlaceSalle().getText(), interfaceGraphique.getCmbTypeSalle().getSelectedIndex(), i);
+								}
+							});
+							i = 0;
+							break;
+
+						case "Professeur" :
+							interfaceGraphique.create_frameModificationProfesseur(lesProfesseurs.getLesProfesseurs().get(i).getNomProfesseur(), lesProfesseurs.getLesProfesseurs().get(i).getPrenomProfesseur(), lesProfesseurs.getLesProfesseurs().get(i).getNombreHeuresProfesseur()); 
+							break;
+
+						case "Classe" : 
+							interfaceGraphique.create_frameModificationClasse(lesClasses.getLesClasses().get(i).getNomClasse(), lesClasses.getLesClasses().get(i).getNiveauClasse(), lesClasses.getLesClasses().get(i).getCouleurClasse());
+							break;
+
+						case "Groupe" : 
+							interfaceGraphique.create_frameModificationGroupe(lesGroupes.getLesGroupes().get(i).getNomGroupe(), lesGroupes.getLesGroupes().get(i).getClasseGroupe(), lesClasses);
+							break;
+
+						case "Eleve" :
+							//lesEleves.chargerComboBoxEleve(lesClasses, interfaceGraphique.getCmbClasseEleve(), interfaceGraphique.getCmbGroupeEleve());
+							break;
+
+						case "Matiere" : 
+							//lesMatieres.chargerComboBoxProfesseurMatiere(lesProfesseurs, interfaceGraphique.getCmbProfesseurMatiere());
+							break; 
+					}
 				}
 			});
 			i++;
 		}
 	}
+
+
+	public void enleverLesListeners() {
+		String[] typeButtonsStrings = {"Salle", "Professeur", "Classe", "Groupe", "Eleve", "Matiere"};
+		for(String s : typeButtonsStrings) {
+			for(JButton b : interfaceGraphique.getLesButtons(s)) {
+				for(ActionListener al : b.getActionListeners() ) {
+			        b.removeActionListener(al);
+			    }
+			}
+		}
+	}
+
+
 	
 }
+
+/* Finir de mettre les listeners a toutes les classes */
+/* Creer les JFramme de modification */
+/* Faire la fonction qui modifie les objets */
+/* Supprimer les listeners apres les avoir ajouter */
+/* Pouvoir supprimer les objets */
+/* Finir l'itnerface graphique et changer la taille de la fenetre*/

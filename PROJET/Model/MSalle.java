@@ -50,6 +50,32 @@ public class MSalle implements Serializable {
 	    }
 	    return 1;
 	}
+
+	/* Permet d'ajouter une salle */
+	public int modifierSalle(String numeroSalle, String nombrePlace, int valeurIndex, int indexSalle) {
+		if (numeroSalle.length() == 0) {
+			JOptionPane.showMessageDialog(null,"Erreur : Vous devez indiquer un nom de salle !", "Erreur : Nom de salle", JOptionPane.ERROR_MESSAGE);
+		} else if(nombrePlace == "") {
+			JOptionPane.showMessageDialog(null,"Erreur : Vous devez indiquer un nombre de place !", "Erreur : Nombre de place", JOptionPane.ERROR_MESSAGE);
+		} else {
+			try {
+				String typeSalle = "";
+				if(valeurIndex == 0) { typeSalle = "CM"; }
+				if(valeurIndex == 1) { typeSalle = "TP"; }
+				if(valeurIndex == 2) { typeSalle = "TD"; }
+	        	lesSalles.get(indexSalle).setNumeroSalle(numeroSalle);
+	        	lesSalles.get(indexSalle).setNombrePlace(nombrePlace);
+	        	lesSalles.get(indexSalle).setTypeSalle(typeSalle);
+				JOptionPane.showMessageDialog(null,"La salle " + numeroSalle + " a été modifié."); 
+				return 0;
+				
+			
+	   		} catch(NumberFormatException e) {
+	        	JOptionPane.showMessageDialog(null,"Erreur : Le nombre de place doit être un chiffre entier !", "Erreur : Nombre de place", JOptionPane.ERROR_MESSAGE); 
+	    	}
+	    }
+	    return 1;
+	}
 	
 	public void chargerLesSalles() {
 		try {

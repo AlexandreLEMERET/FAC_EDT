@@ -73,6 +73,21 @@ public class MGroupe implements Serializable {
 		}
 		return 1;
 	}
+
+	public ArrayList<Integer> supprimerGroupe(int indexGroupe, MEleve lesEleves, ArrayList<Integer> lesIndexEleves) {
+		int nbE = lesEleves.getLesEleves().size();
+		for(int i = 0 ; i < nbE ; i++) {
+			if(lesEleves.getLesEleves().size() > 0) {
+				if(lesEleves.getLesEleves().get(i).getGroupeEleve() == lesGroupes.get(indexGroupe)) {
+				System.out.println("i : " + i);
+				lesIndexEleves.add(i);
+				}
+			}
+		}
+		lesGroupes.remove(indexGroupe);
+		JOptionPane.showMessageDialog(null, "Le groupe a été supprimé.");
+		return lesIndexEleves;
+	}
 	
 	public void chargerLesGroupes(MClasse lesClasses) {
 		try {

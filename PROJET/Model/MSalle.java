@@ -76,6 +76,12 @@ public class MSalle implements Serializable {
 	    }
 	    return 1;
 	}
+
+	public void supprimerSalle(int index) {
+			JOptionPane.showMessageDialog(null,"La salle " + this.lesSalles.get(index).getNumeroSalle() + " a été supprimé.");
+			this.lesSalles.remove(index);
+			
+	}
 	
 	public void chargerLesSalles() {
 		try {

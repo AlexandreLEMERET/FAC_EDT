@@ -61,6 +61,34 @@ public class MEleve implements Serializable {
 		return 1;		
 	}
 
+									
+
+	/* Modifier un eleve */
+	public int modifierEleve(String nomEleve, String prenomEleve, int indexClasse, int indexGroupe, MClasse lesClasses, MGroupe lesGroupes, int index) {
+		if(nomEleve.length() == 0) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour l'élève !", "Erreur : Nom de l'élève", JOptionPane.ERROR_MESSAGE);
+		} else if(prenomEleve.length() == 0) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour l'élève !", "Erreur : Prénom de l'élève", JOptionPane.ERROR_MESSAGE);
+		} else {
+			int tmpIndexClasse = lesClasses.getLesClasses().indexOf(lesEleves.get(index).getClasseEleve());
+			
+			lesEleves.get(index).setNomEleve(nomEleve);
+			lesEleves.get(index).setPrenomEleve(prenomEleve);
+			lesEleves.get(index).setClasseEleve(lesClasses.getLesClasses().get(indexClasse));
+			if(indexGroupe != -1) { lesEleves.get(index).setGroupeEleve(lesGroupes.getLesGroupes().get(indexGroupe)); } else { lesEleves.get(index).setGroupeEleve(null); }
+
+			if(tmpIndexClasse != indexClasse) {
+				lesClasses.getLesClasses().get(tmpIndexClasse).getLesEleves().remove(lesEleves.get(index));
+				lesClasses.getLesClasses().get(indexClasse).getLesEleves().add(lesEleves.get(index));
+			}
+
+			JOptionPane.showMessageDialog(null, "L'élève " + nomEleve + " " + prenomEleve + " a été modifié.");
+			return 0;
+			
+		}
+		return 1;		
+	}
+
 	
 	public void chargerLesEleves(MClasse lesClasses) {
 		try {
@@ -91,6 +119,10 @@ public class MEleve implements Serializable {
 		} catch(Exception ex) {
 			System.out.println("Erreur : " + ex);
 		}			
+	}
+
+	public void supprimerEleve(int indexEleve) {
+		lesEleves.remove(indexEleve);
 	}
 
 	public void sauvegarderLesEleves(MClasse lesClasses) {

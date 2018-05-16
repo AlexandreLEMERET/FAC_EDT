@@ -54,6 +54,11 @@ public class MClasse implements Serializable {
 		}
 		return 1;
 	}
+
+	public void supprimerClasse(int indexClasse) {
+		this.lesClasses.remove(indexClasse);
+		JOptionPane.showMessageDialog(null, "La classe à été supprimé.");
+	}
 	
 	public void chargerLesClasses() {
 		try {

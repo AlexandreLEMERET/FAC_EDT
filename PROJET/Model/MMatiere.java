@@ -129,6 +129,10 @@ public class MMatiere implements Serializable {
 		return 1;
 	}
 
+	public void supprimerMatiere(int indexMatiere) {
+		lesMatieres.remove(indexMatiere);
+	}
+
 	public int verificationNombreHeureClasse(String niveauMatiere) {
 		int totalH = 0;
 		for(Matiere m : lesMatieres) {

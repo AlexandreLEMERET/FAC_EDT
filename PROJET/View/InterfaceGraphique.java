@@ -2998,7 +2998,7 @@ public class InterfaceGraphique extends JFrame {
 		boutonModifierProfesseur = new JButton("✓");
 		boutonSupprimerProfesseur = new JButton("✗");
 		panelAjoutProfesseur_2.add(boutonModifierProfesseur);
-		panelAjoutProfesseur_2.add(boutonModifierProfesseur);
+		panelAjoutProfesseur_2.add(boutonSupprimerProfesseur);
 		
 		frameAjoutProfesseur = new JFrame();
 		frameAjoutProfesseur.setSize(400,145);
@@ -3076,7 +3076,7 @@ public class InterfaceGraphique extends JFrame {
 		
 		panelAjoutClasse_2 = new JPanel();
 		boutonModifierClasse = new JButton("✓");
-		boutonModifierClasse = new JButton("✗");
+		boutonSupprimerClasse = new JButton("✗");
 		panelAjoutClasse_2.add(boutonModifierClasse);
 		panelAjoutClasse_2.add(boutonSupprimerClasse);
 		
@@ -3467,6 +3467,12 @@ public class InterfaceGraphique extends JFrame {
 		panelBoutonObjetsCrees.updateUI();
 	}
 
+	public void rm_buttonSalle(int indexBouton) {
+		this.lesBoutonsSalle.remove(indexBouton);
+		panelBoutonObjetsCrees.removeAll();
+		update_panelBoutonObjetsCrees();
+	}
+
 	public void create_buttonProfesseur(boolean visible, String nomProfesseur, String prenomProfesseur) {
 		JButton professeur = new JButton(nomProfesseur + " " + prenomProfesseur);
 		this.lesBoutonsProfesseur.add(professeur);
@@ -3477,6 +3483,12 @@ public class InterfaceGraphique extends JFrame {
 	public void update_buttonProfesseur(String nomProfesseur, String prenomProfesseur, int indexBouton) {
 		this.lesBoutonsProfesseur.get(indexBouton).setLabel(nomProfesseur + " " + prenomProfesseur);
 		panelBoutonObjetsCrees.updateUI();
+	}
+
+	public void rm_buttonProfesseur(int indexBouton) {
+		this.lesBoutonsProfesseur.remove(indexBouton);
+		panelBoutonObjetsCrees.removeAll();
+		update_panelBoutonObjetsCrees();
 	}
 
 	public void create_buttonClasse(boolean visible, String niveauClasse, String nomClasse, Color couleurClasse) {
@@ -3493,6 +3505,12 @@ public class InterfaceGraphique extends JFrame {
 		panelBoutonObjetsCrees.updateUI();
 	}
 
+	public void rm_buttonClasse(int indexBouton) {
+		this.lesBoutonsClasse.remove(indexBouton);
+		panelBoutonObjetsCrees.removeAll();
+		update_panelBoutonObjetsCrees();
+	}
+
 	public void create_buttonGroupe(boolean visible, String nomGroupe, String nomClasse) {
 		JButton groupe = new JButton(nomClasse + " - " + nomGroupe);
 		this.lesBoutonsGroupe.add(groupe);
@@ -3505,6 +3523,12 @@ public class InterfaceGraphique extends JFrame {
 		panelBoutonObjetsCrees.updateUI();
 	}
 
+	public void rm_buttonGroupe(int indexBouton) {
+		this.lesBoutonsGroupe.remove(indexBouton);
+		panelBoutonObjetsCrees.removeAll();
+		update_panelBoutonObjetsCrees();
+	}
+
 	public void create_buttonEleve(boolean visible, String nomEleve, String prenomEleve) {
 		JButton eleve = new JButton(nomEleve + " " + prenomEleve);
 		this.lesBoutonsEleve.add(eleve);
@@ -3515,6 +3539,12 @@ public class InterfaceGraphique extends JFrame {
 	public void update_buttonEleve(String nomEleve, String prenomEleve, int indexBouton) {
 		this.lesBoutonsEleve.get(indexBouton).setLabel(nomEleve + " " + prenomEleve);
 		panelBoutonObjetsCrees.updateUI();
+	}
+
+	public void rm_buttonEleve(int indexBouton) {
+		this.lesBoutonsEleve.remove(indexBouton);
+		panelBoutonObjetsCrees.removeAll();
+		update_panelBoutonObjetsCrees();
 	}
 
 	public void create_buttonMatiere(boolean visible, String nomMatiere, Color couleurMatiere) {
@@ -3531,7 +3561,38 @@ public class InterfaceGraphique extends JFrame {
 		panelBoutonObjetsCrees.updateUI();
 	}
 
+	public void rm_buttonMatiere(int indexBouton) {
+		this.lesBoutonsMatiere.remove(indexBouton);
+		panelBoutonObjetsCrees.removeAll();
+		update_panelBoutonObjetsCrees();
+	}
 
+	/* -------------------------------------- */
+	/* ----- Getteurs JFramme Modification ----*/
+
+	public JFrame getJFrameModificationSalle() {
+		return this.frameAjoutSalle;
+	}
+
+	public JFrame getJFrameModificationProfesseur() {
+		return this.frameAjoutProfesseur;
+	}	
+
+	public JFrame getJFrameModificationClasse() {
+		return this.frameAjoutClasse;
+	}
+
+	public JFrame getJFrameModificationGroupe() {
+		return this.frameAjoutGroupe;
+	}
+
+	public JFrame getJFrameModificationEleve() {
+		return this.frameAjoutEleve;
+	}
+
+	public JFrame getJFrameModificationMatiere() {
+		return this.frameAjoutMatiere;
+	}
 
 	/* -------------------------------------- */
 	/* --- Getteurs JFrame Ajout Salle ------ */

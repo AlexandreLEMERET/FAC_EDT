@@ -402,6 +402,14 @@ public class Generateur {
 									interfaceGraphique.update_buttonSalle(interfaceGraphique.getTfNumeroSalle().getText(), index);
 								}
 							});
+
+							interfaceGraphique.getBoutonSupprimerSalle().addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent event) {
+									lesSalles.supprimerSalle(index);
+									interfaceGraphique.rm_buttonSalle(index);
+									interfaceGraphique.getJFrameModificationSalle().dispose();
+								}
+							});
 							break;
 
 						case "Professeur" :
@@ -414,6 +422,27 @@ public class Generateur {
 									interfaceGraphique.update_buttonProfesseur(interfaceGraphique.getTfNomProfesseur().getText(), interfaceGraphique.getTfPrenomProfesseur().getText(), index);
 								}
 							});
+
+							interfaceGraphique.getBoutonSupprimerProfesseur().addActionListener(new ActionListener(){
+								public void actionPerformed(ActionEvent event) {
+									ArrayList<Integer> lesIndexMatieres = new ArrayList<Integer>();
+									lesIndexMatieres = lesProfesseurs.supprimerProfesseur(index, lesMatieres, lesIndexMatieres);
+									interfaceGraphique.rm_buttonProfesseur(index);
+									while(lesIndexMatieres.size() != 0) {
+										int maxIndex = 0;
+										for(int i : lesIndexMatieres) {
+											if(i > maxIndex) {
+												maxIndex = i;
+											}
+										}
+										interfaceGraphique.rm_buttonMatiere(maxIndex);
+										lesMatieres.getLesMatieres().remove(maxIndex);
+										lesIndexMatieres.remove(maxIndex);
+									}
+									interfaceGraphique.getJFrameModificationProfesseur().dispose();
+								}
+							});
+
 							break;
 
 						case "Classe" : 
@@ -436,6 +465,14 @@ public class Generateur {
 									interfaceGraphique.update_buttonClasse(interfaceGraphique.getCmbNiveauClasse().getSelectedItem().toString(), interfaceGraphique.getTfNomClasse().getText(), interfaceGraphique.getBoutonCouleurClasse().getBackground(), index);
 								}
 							});
+
+							interfaceGraphique.getBoutonSupprimerClasse().addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent event) {
+									lesClasses.supprimerClasse(index);
+									interfaceGraphique.rm_buttonClasse(index);
+									interfaceGraphique.getJFrameModificationClasse().dispose();
+								}
+							});
 							break;
 
 						case "Groupe" : 
@@ -445,6 +482,31 @@ public class Generateur {
 								public void actionPerformed(ActionEvent event) {
 									lesGroupes.modifierGroupe(interfaceGraphique.getTfNomGroupe().getText(), interfaceGraphique.getCmbClasseGroupe().getSelectedIndex(), lesClasses, lesEleves, index);
 									interfaceGraphique.update_buttonGroupe(interfaceGraphique.getTfNomGroupe().getText(), interfaceGraphique.getCmbClasseGroupe().getSelectedItem().toString(), index);
+								}
+							});
+
+							interfaceGraphique.getBoutonSupprimerGroupe().addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent event) {
+									ArrayList<Integer> lesIndexEleves = new ArrayList<Integer>();
+									lesIndexEleves = lesGroupes.supprimerGroupe(index, lesEleves, lesIndexEleves);
+									interfaceGraphique.rm_buttonGroupe(index);
+									interfaceGraphique.getJFrameModificationGroupe().dispose();
+
+									System.out.println("Les eleves nb : " + lesEleves.getLesEleves().size());
+									while(lesIndexEleves.size() != 0) {
+										int maxIndex = 0;
+										for(int i : lesIndexEleves) {
+											if(i > maxIndex) {
+												maxIndex = i;
+											}
+										}
+										System.out.println("Max index : " + maxIndex);
+										System.out.println("Les eleves nb : " + lesEleves.getLesEleves().size());
+										interfaceGraphique.rm_buttonEleve(maxIndex);
+										lesEleves.getLesEleves().remove(maxIndex);
+										System.out.println("Les eleves nb : " + lesEleves.getLesEleves().size());
+										lesIndexEleves.remove(new Integer(maxIndex));
+									}
 								}
 							});
 							break;
@@ -457,6 +519,21 @@ public class Generateur {
 							else {
 								interfaceGraphique.create_frameModificationEleve(interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText(), interfaceGraphique.getCmbClasseEleve().getSelectedIndex(), interfaceGraphique.getCmbGroupeEleve().getSelectedIndex(), lesClasses, lesGroupes);
 							}
+
+							interfaceGraphique.getBoutonModifierEleve().addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent event) {
+									lesEleves.modifierEleve(interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText(), interfaceGraphique.getCmbClasseEleve().getSelectedIndex(), interfaceGraphique.getCmbGroupeEleve().getSelectedIndex(), lesClasses, lesGroupes, index);
+									interfaceGraphique.update_buttonEleve(interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText(), index);
+								}
+							});
+
+							interfaceGraphique.getBoutonSupprimerEleve().addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent event) {
+									lesEleves.supprimerEleve(index);
+									interfaceGraphique.rm_buttonEleve(index);
+									interfaceGraphique.getJFrameModificationEleve().dispose();
+								}
+							});
 
 							break;
 
@@ -478,6 +555,14 @@ public class Generateur {
 								public void actionPerformed(ActionEvent event) {
 									lesMatieres.modifierMatiere(interfaceGraphique.getTfNomMatiere().getText(), interfaceGraphique.getTfNombreHeureCM().getText(), interfaceGraphique.getTfNombreHeureTD().getText(), interfaceGraphique.getTfNombreHeureTP().getText(), interfaceGraphique.getCmbNiveauMatiere().getSelectedItem().toString(), interfaceGraphique.getCmbProfesseurMatiere().getSelectedIndex(), interfaceGraphique.getBoutonCouleurMatiere().getBackground(), lesProfesseurs, index);
 									interfaceGraphique.update_buttonMatiere(interfaceGraphique.getTfNomMatiere().getText(), interfaceGraphique.getBoutonCouleurMatiere().getBackground(), index);
+								}
+							});
+
+							interfaceGraphique.getBoutonSupprimerMatiere().addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent event) {
+									lesMatieres.supprimerMatiere(index);
+									interfaceGraphique.rm_buttonMatiere(index);
+									interfaceGraphique.getJFrameModificationMatiere().dispose();
 								}
 							});
 							break; 

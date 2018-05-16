@@ -33,6 +33,8 @@ public class MProfesseur implements Serializable {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour le professeur !", "Erreur : Nom du professeur", JOptionPane.ERROR_MESSAGE);
 		} else if(prenomProfesseur.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour le professeur !", "Erreur : Prénom du professeur", JOptionPane.ERROR_MESSAGE);
+		} else if(nombreHeureProfesseur.equals("")) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nombre d'heure d'enseignement pour le professeur", "Erreur : Nombre d'heure", JOptionPane.ERROR_MESSAGE);
 		} else if(Integer.parseInt(nombreHeureProfesseur) > 40) {
 			JOptionPane.showMessageDialog(null, "Erreur : Le total d'heure du professeur ne peut excéder le total d'heures hebdomadaire (40 heures) !", "Erreur : Nombre d'heures", JOptionPane.ERROR_MESSAGE);
 		} else {
@@ -56,10 +58,12 @@ public class MProfesseur implements Serializable {
 	}
 
 	public int modifierProfesseur(String nomProfesseur, String prenomProfesseur, String nombreHeureProfesseur, MMatiere lesMatieres, int indexProfesseur) {
-		if(nomProfesseur.length() == 0) {
+		if(nomProfesseur.equals("")) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour le professeur !", "Erreur : Nom du professeur", JOptionPane.ERROR_MESSAGE);
-		} else if(prenomProfesseur.length() == 0) {
+		} else if(prenomProfesseur.equals("")) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour le professeur !", "Erreur : Prénom du professeur", JOptionPane.ERROR_MESSAGE);
+		} else if(nombreHeureProfesseur.equals("")) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nombre d'heure d'enseignement pour le professeur", "Erreur : Nombre d'heure", JOptionPane.ERROR_MESSAGE);
 		} else if(Integer.parseInt(nombreHeureProfesseur) > 40) {
 			JOptionPane.showMessageDialog(null, "Erreur : Le total d'heure du professeur ne peut excéder le total d'heures hebdomadaire (40 heures) !", "Erreur : Nombre d'heures", JOptionPane.ERROR_MESSAGE);
 		} else {
@@ -88,6 +92,20 @@ public class MProfesseur implements Serializable {
 			}
 		}
 		return 1;
+	}
+
+	public ArrayList<Integer> supprimerProfesseur(int indexProfesseur, MMatiere lesMatieres, ArrayList<Integer> lesIndexMatieres) {
+		int nbM = lesMatieres.getLesMatieres().size();
+		for(int i = 0 ; i < nbM ; i++) {
+			if(lesMatieres.getLesMatieres().size() > 0) {
+				if(lesMatieres.getLesMatieres().get(i).getProfesseurMatiere() == lesProfesseurs.get(indexProfesseur)) {
+					lesIndexMatieres.add(i);
+				}
+			}
+		}
+		lesProfesseurs.remove(indexProfesseur);
+		JOptionPane.showMessageDialog(null,"Le professeur a été supprimé ainsi que les élements qui lui étaient rattachés !");
+		return lesIndexMatieres;
 	}
 
 	public int verificationNombreHeureProfesseur(MMatiere lesMatieres, Professeur leProfesseur) {

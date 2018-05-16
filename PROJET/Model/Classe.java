@@ -26,12 +26,28 @@ public class Classe {
 		this.edtClasse = new Edt();
 	}
 
+	public void setNomClasse(String p_nomClasse) {
+		this.nomClasse = p_nomClasse;
+	}
+
+	public void setNiveauClasse(String p_niveauClasse) {
+		this.niveauClasse = p_niveauClasse;
+	}
+
+	public void setCouleurClasse(Color p_couleurClasse) {
+		this.couleurClasse = p_couleurClasse;
+	}
+
 	public String getNomClasse() {
 		return this.nomClasse;
 	}
 	
 	public String getNiveauClasse() {
 		return this.niveauClasse;
+	}
+
+	public void ajouterEleve(Eleve p_eleve) {
+		this.lesEleves.add(p_eleve);
 	}
 
 	public ArrayList<Groupe> getLesGroupesClasse() {

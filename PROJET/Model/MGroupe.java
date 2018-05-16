@@ -44,6 +44,35 @@ public class MGroupe implements Serializable {
 		}
 		return 1;
 	}
+
+	public int modifierGroupe(String nomGroupe, int indexClasse, MClasse lesClasses, MEleve lesEleves, int index) {
+		if(indexClasse < 0) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir une classe !", "Erreur : Classe", JOptionPane.ERROR_MESSAGE);
+		} else if (nomGroupe.length() == 0) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom de groupe !", "Erreur : Groupe", JOptionPane.ERROR_MESSAGE);
+		} else {
+			int indexAncienneClasse = lesClasses.getLesClasses().indexOf(lesGroupes.get(index).getClasseGroupe());
+
+			lesGroupes.get(index).setNomGroupe(nomGroupe);
+			lesGroupes.get(index).setClasse(lesClasses.getLesClasses().get(indexClasse));
+			lesClasses.getLesClasses().get(indexAncienneClasse).getLesGroupesClasse().remove(lesClasses.getLesClasses().get(indexAncienneClasse).getLesGroupesClasse().indexOf(lesGroupes.get(index)));
+			lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse().add(lesGroupes.get(index));
+
+			for(Eleve e : lesEleves.getLesEleves()) {
+				System.out.println(" E : " + e.getPrenomEleve() + " " + e.getNomEleve());
+				if(e.getGroupeEleve() == lesGroupes.get(index)) {
+					e.setClasseEleve(lesClasses.getLesClasses().get(indexClasse));
+					e.setGroupeEleve(lesGroupes.get(index));
+					lesClasses.getLesClasses().get(indexClasse).ajouterEleve(e);
+					lesClasses.getLesClasses().get(indexAncienneClasse).getLesEleves().remove(e);
+				}
+			}
+			JOptionPane.showMessageDialog(null, "Le groupe a été modifié.");
+			return 0;
+			
+		}
+		return 1;
+	}
 	
 	public void chargerLesGroupes(MClasse lesClasses) {
 		try {

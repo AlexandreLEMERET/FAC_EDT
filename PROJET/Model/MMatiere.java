@@ -27,14 +27,15 @@ public class MMatiere implements Serializable {
 	public ArrayList<Matiere> getLesMatieres(){
 		return this.lesMatieres;
 	}
+
 	public int ajoutMatiere(String nomMatiere, String nombreHeureCM, String nombreHeureTP, String nombreHeureTD, String niveauMatiere, int indexProfesseur, Color couleurMatiere, MProfesseur lesProfesseurs) {
-		if(nomMatiere == "") {
+		if(nomMatiere.equals("")) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour la matière !", "Erreur : Nom de la matiere", JOptionPane.ERROR_MESSAGE);
-		} else if(nombreHeureCM == "") {
+		} else if(nombreHeureCM.equals("")) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de cours en salle pour la matière !", "Erreur : Nombre d'heures de cours", JOptionPane.ERROR_MESSAGE);
-		} else if(nombreHeureTD == "") {
+		} else if(nombreHeureTD.equals("")) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de cours en salle informatique pour la matière !", "Erreur : Nombre d'heures de cours", JOptionPane.ERROR_MESSAGE);
-		} else if(nombreHeureTP == "") {
+		} else if(nombreHeureTP.equals("")) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de cours en salle de TP pour la matière !", "Erreur : Nombre d'heures de cours", JOptionPane.ERROR_MESSAGE);
 		} else if(Integer.parseInt(nombreHeureCM)%2 != 0 || Integer.parseInt(nombreHeureTD)%2 != 0 || Integer.parseInt(nombreHeureTP)%2 != 0) {
 			JOptionPane.showMessageDialog(null, "Erreur : Vous devez entrer un nombre d'heure de cours pair !", "Erreur : Nombre d'heures", JOptionPane.ERROR_MESSAGE);
@@ -55,6 +56,69 @@ public class MMatiere implements Serializable {
 		
 				} else {
 					JOptionPane.showMessageDialog(null, "La matière " + nomMatiere + " a été ajouté.");
+				}
+				return 0;				
+			
+			} catch(NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Erreur : Vous devez entre un chiffre entier pour les nombres d'heures !", "Erreur : Nombre d'heures", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		return 1;
+	}
+
+	
+	public int modifierMatiere(String nomMatiere, String nombreHeureCM, String nombreHeureTD, String nombreHeureTP, String niveauMatiere, int indexProfesseur, Color couleurMatiere, MProfesseur lesProfesseurs, int index) {
+		if(nomMatiere.equals("")) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour la matière !", "Erreur : Nom de la matiere", JOptionPane.ERROR_MESSAGE);
+		} else if(nombreHeureCM.equals("")) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de cours en salle pour la matière !", "Erreur : Nombre d'heures de cours", JOptionPane.ERROR_MESSAGE);
+		} else if(nombreHeureTD.equals("")) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de cours en salle informatique pour la matière !", "Erreur : Nombre d'heures de cours", JOptionPane.ERROR_MESSAGE);
+		} else if(nombreHeureTP.equals("")) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez enter un nombre d'heure de cours en salle de TP pour la matière !", "Erreur : Nombre d'heures de cours", JOptionPane.ERROR_MESSAGE);
+		} else if(Integer.parseInt(nombreHeureCM)%2 != 0 || Integer.parseInt(nombreHeureTD)%2 != 0 || Integer.parseInt(nombreHeureTP)%2 != 0) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez entrer un nombre d'heure de cours pair !", "Erreur : Nombre d'heures", JOptionPane.ERROR_MESSAGE);
+		} else if(indexProfesseur == -1) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir un professeur pour la matiere !");
+		} else if(couleurMatiere.getRed() == 238 && couleurMatiere.getGreen() == 238 && couleurMatiere.getBlue() == 238) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir une couleur pour la matière !");
+		} else {
+			try {
+				
+				String tmpNomMatiere = lesMatieres.get(index).getNomMatiere();
+				int tmpNombreHeureCM = lesMatieres.get(index).getNombreHeureCM();
+				int tmpNombreHeureTD = lesMatieres.get(index).getNombreHeureTD();
+				int tmpNombreHeureTP = lesMatieres.get(index).getNombreHeureTP();
+				String tmpNiveauMatiere = lesMatieres.get(index).getNiveauMatiere();
+				Professeur tmpProfesseur = lesMatieres.get(index).getProfesseurMatiere();
+				Color tmpCouleurMatiere = lesMatieres.get(index).getCouleurMatiere();
+
+
+				lesMatieres.get(index).setNomMatiere(nomMatiere);
+				lesMatieres.get(index).setNombreHeureCM(Integer.parseInt(nombreHeureCM));
+				lesMatieres.get(index).setNombreHeureTD(Integer.parseInt(nombreHeureTD));
+				lesMatieres.get(index).setNombreHeureTP(Integer.parseInt(nombreHeureTP));
+				lesMatieres.get(index).setNiveauMatiere(niveauMatiere);
+				lesMatieres.get(index).setProfesseurMatiere(lesProfesseurs.getLesProfesseurs().get(indexProfesseur));
+				lesMatieres.get(index).setCouleurMatiere(couleurMatiere);
+
+				if(verificationNombreHeureClasse(niveauMatiere) > 40) {
+					int heure = verificationNombreHeureClasse(niveauMatiere);
+					JOptionPane.showMessageDialog(null, "Il y a " + -(40-heure) + " heures de cours en trop afin de ne pas dépasser le total d'heures hebdomadaire de la classe !", "Erreur : Nombre d'heures", JOptionPane.ERROR_MESSAGE);
+					lesMatieres.remove(lesMatieres.size()-1);
+
+					lesMatieres.get(index).setNomMatiere(tmpNomMatiere);
+					lesMatieres.get(index).setNombreHeureCM(tmpNombreHeureCM);
+					lesMatieres.get(index).setNombreHeureTD(tmpNombreHeureTD);
+					lesMatieres.get(index).setNombreHeureTP(tmpNombreHeureTP);
+					lesMatieres.get(index).setNiveauMatiere(tmpNiveauMatiere);
+					lesMatieres.get(index).setProfesseurMatiere(tmpProfesseur);
+					lesMatieres.get(index).setCouleurMatiere(tmpCouleurMatiere);
+
+					return 1;
+		
+				} else {
+					JOptionPane.showMessageDialog(null, "La matière " + nomMatiere + " a été mise à jour.");
 				}
 				return 0;				
 			

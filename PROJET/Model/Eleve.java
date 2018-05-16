@@ -27,6 +27,22 @@ public class Eleve {
 		this.edtEleve = new Edt();
 	}
 	
+	public void setNomEleve(String p_nomEleve) {
+		this.nomEleve = p_nomEleve;
+	}
+
+	public void setPrenomEleve(String p_prenomEleve) {
+		this.prenomEleve = p_prenomEleve;
+	}
+
+	public void setClasseEleve(Classe p_classeEleve) {
+		this.classeEleve = p_classeEleve;
+	}
+
+	public void setGroupeEleve(Groupe p_groupeEleve) {
+		this.groupeEleve = p_groupeEleve;
+	}
+
 	public String getNomEleve() {
 		return this.nomEleve;
 	}

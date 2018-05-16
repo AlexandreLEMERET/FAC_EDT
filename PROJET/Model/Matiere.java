@@ -32,8 +32,35 @@ public class Matiere implements Cloneable {
 		this.couleurMatiere = p_couleurMatiere;
 	}
 	
-	public void setProfesseurMatiere(Professeur leProfesseurMatiere) {
-		this.professeurMatiere = leProfesseurMatiere;
+	public void setNomMatiere(String p_nomMatiere) {
+		this.nomMatiere = p_nomMatiere;
+	}
+
+	public void setNombreHeureCM(int p_nombreHeureCM) {
+		this.nombreHeureCM = p_nombreHeureCM;
+		this.nombreHeureCMrestante = p_nombreHeureCM;
+	}
+
+	public void setNombreHeureTP(int p_nombreHeureTP) {
+		this.nombreHeureTP = p_nombreHeureTP;
+		this.nombreHeureTPrestante = p_nombreHeureTP;
+	}
+
+	public void setNombreHeureTD(int p_nombreHeureTD) {
+		this.nombreHeureTD = p_nombreHeureTD;
+		this.nombreHeureTDrestante = p_nombreHeureTD;
+	}
+
+	public void setNiveauMatiere(String p_niveauMatiere) {
+		this.niveauMatiere = p_niveauMatiere;
+	}
+
+	public void setProfesseurMatiere(Professeur p_leProfesseurMatiere) {
+		this.professeurMatiere = p_leProfesseurMatiere;
+	}
+
+	public void setCouleurMatiere(Color p_couleurMatiere) {
+		this.couleurMatiere = p_couleurMatiere;
 	}
 
 	public String getNomMatiere() {

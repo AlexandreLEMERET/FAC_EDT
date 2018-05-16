@@ -16,7 +16,7 @@ import javax.swing.JButton;
 
 public class Generateur {
 	
-	private int res, i;
+	private int res, index;
 	private String type;
 	private String[] typeButtonsStrings;
 	private JButton tmpButton;
@@ -241,6 +241,16 @@ public class Generateur {
 
 					int resultat = JOptionPane.showOptionDialog(null, "Voulez-vous vraiment charger votres sauvegarde ?", "Confirmation de chargement", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[1]);
 					if(resultat == 0) {
+
+						lesSalles = new MSalle();
+						lesProfesseurs = new MProfesseur();
+						lesClasses = new MClasse();
+						lesGroupes = new MGroupe();
+						lesEleves = new MEleve();
+						lesMatieres = new MMatiere();
+						lesEDT = new MEdt();
+
+
 						interfaceGraphique.vider_button();
 						lesSalles.chargerLesSalles();
 						lesProfesseurs.chargerLesProfesseurs();
@@ -375,53 +385,105 @@ public class Generateur {
 
 	/* Modification des elements*/
 	public void mettreLesListeners(String p_type) {
-		i = 0;
+		index = 0;
 		type = p_type;
 		for(JButton b : interfaceGraphique.getLesButtons(type)) {
-			//System.out.println("Nombre de boutons : " + interfaceGraphique.getLesButtons(type).size());
-			tmpButton = b;
+			final JButton bF = b;
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent event) {
 					switch(type) {
 						case "Salle" :
-							//for(JButton button : interfaceGraphique.getLesButtons(type)) {
-							//	if(tmpButton != button) { System.out.println("Différent"); i++; } else { System.out.println("Pareil"); break; }
-							//}
-							//System.out.println("Salle : " + i);
-							//System.out.println("Nom salle : " + lesSalles.getLesSalles().get(i));
-							interfaceGraphique.create_frameModificationSalle(lesSalles.getLesSalles().get(i).getNumeroSalle(), lesSalles.getLesSalles().get(i).getNombrePlacesSalle(), lesSalles.getLesSalles().get(i).getTypeSalle());
+							index = interfaceGraphique.getLesButtons(type).indexOf(bF);
+							interfaceGraphique.create_frameModificationSalle(lesSalles.getLesSalles().get(index).getNumeroSalle(), lesSalles.getLesSalles().get(index).getNombrePlacesSalle(), lesSalles.getLesSalles().get(index).getTypeSalle());
 							
 							interfaceGraphique.getBoutonModifierSalle().addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent event) {
-									lesSalles.modifierSalle(interfaceGraphique.getTfNumeroSalle().getText(), interfaceGraphique.getTfNombrePlaceSalle().getText(), interfaceGraphique.getCmbTypeSalle().getSelectedIndex(), i);
+									lesSalles.modifierSalle(interfaceGraphique.getTfNumeroSalle().getText(), interfaceGraphique.getTfNombrePlaceSalle().getText(), interfaceGraphique.getCmbTypeSalle().getSelectedIndex(), index);
+									interfaceGraphique.update_buttonSalle(interfaceGraphique.getTfNumeroSalle().getText(), index);
 								}
 							});
-							i = 0;
 							break;
 
 						case "Professeur" :
-							interfaceGraphique.create_frameModificationProfesseur(lesProfesseurs.getLesProfesseurs().get(i).getNomProfesseur(), lesProfesseurs.getLesProfesseurs().get(i).getPrenomProfesseur(), lesProfesseurs.getLesProfesseurs().get(i).getNombreHeuresProfesseur()); 
+							index = interfaceGraphique.getLesButtons(type).indexOf(bF);
+							interfaceGraphique.create_frameModificationProfesseur(lesProfesseurs.getLesProfesseurs().get(index).getNomProfesseur(), lesProfesseurs.getLesProfesseurs().get(index).getPrenomProfesseur(), lesProfesseurs.getLesProfesseurs().get(index).getNombreHeuresProfesseur()); 
+							
+							interfaceGraphique.getBoutonModifierProfesseur().addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent event) {
+									lesProfesseurs.modifierProfesseur(interfaceGraphique.getTfNomProfesseur().getText(), interfaceGraphique.getTfPrenomProfesseur().getText(), interfaceGraphique.getTfNombreHeureProfesseur().getText(), lesMatieres, index);
+									interfaceGraphique.update_buttonProfesseur(interfaceGraphique.getTfNomProfesseur().getText(), interfaceGraphique.getTfPrenomProfesseur().getText(), index);
+								}
+							});
 							break;
 
 						case "Classe" : 
-							interfaceGraphique.create_frameModificationClasse(lesClasses.getLesClasses().get(i).getNomClasse(), lesClasses.getLesClasses().get(i).getNiveauClasse(), lesClasses.getLesClasses().get(i).getCouleurClasse());
+							index = interfaceGraphique.getLesButtons(type).indexOf(bF);
+							interfaceGraphique.create_frameModificationClasse(lesClasses.getLesClasses().get(index).getNomClasse(), lesClasses.getLesClasses().get(index).getNiveauClasse(), lesClasses.getLesClasses().get(index).getCouleurClasse());
+							interfaceGraphique.getBoutonCouleurClasse().addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent event) {
+									try {
+									Color couleur = JColorChooser.showDialog(null, "couleur du fond", Color.WHITE);
+									interfaceGraphique.getBoutonCouleurClasse().setBackground(couleur);
+									} catch (Exception ex) {
+										System.out.println("Erreur : " + ex);
+									}
+								}
+							});
+							
+							interfaceGraphique.getBoutonModifierClasse().addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent event) {
+									lesClasses.modifierClasse(interfaceGraphique.getTfNomClasse().getText(), interfaceGraphique.getCmbNiveauClasse().getSelectedItem().toString(), interfaceGraphique.getBoutonCouleurClasse().getBackground(), index); 
+									interfaceGraphique.update_buttonClasse(interfaceGraphique.getCmbNiveauClasse().getSelectedItem().toString(), interfaceGraphique.getTfNomClasse().getText(), interfaceGraphique.getBoutonCouleurClasse().getBackground(), index);
+								}
+							});
 							break;
 
 						case "Groupe" : 
-							interfaceGraphique.create_frameModificationGroupe(lesGroupes.getLesGroupes().get(i).getNomGroupe(), lesGroupes.getLesGroupes().get(i).getClasseGroupe(), lesClasses);
+							index = interfaceGraphique.getLesButtons(type).indexOf(bF);
+							interfaceGraphique.create_frameModificationGroupe(lesGroupes.getLesGroupes().get(index).getNomGroupe(), lesGroupes.getLesGroupes().get(index).getClasseGroupe(), lesClasses);
+							interfaceGraphique.getBoutonModifierGroupe().addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent event) {
+									lesGroupes.modifierGroupe(interfaceGraphique.getTfNomGroupe().getText(), interfaceGraphique.getCmbClasseGroupe().getSelectedIndex(), lesClasses, lesEleves, index);
+									interfaceGraphique.update_buttonGroupe(interfaceGraphique.getTfNomGroupe().getText(), interfaceGraphique.getCmbClasseGroupe().getSelectedItem().toString(), index);
+								}
+							});
 							break;
 
 						case "Eleve" :
-							//lesEleves.chargerComboBoxEleve(lesClasses, interfaceGraphique.getCmbClasseEleve(), interfaceGraphique.getCmbGroupeEleve());
+							index = interfaceGraphique.getLesButtons(type).indexOf(bF);
+							if(interfaceGraphique.getCmbGroupeEleve().getSelectedIndex() < 0) {
+								interfaceGraphique.create_frameModificationEleve(interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText(), interfaceGraphique.getCmbClasseEleve().getSelectedIndex(), lesClasses, lesGroupes);
+							} 
+							else {
+								interfaceGraphique.create_frameModificationEleve(interfaceGraphique.getTfNomEleve().getText(), interfaceGraphique.getTfPrenomEleve().getText(), interfaceGraphique.getCmbClasseEleve().getSelectedIndex(), interfaceGraphique.getCmbGroupeEleve().getSelectedIndex(), lesClasses, lesGroupes);
+							}
+
 							break;
 
 						case "Matiere" : 
-							//lesMatieres.chargerComboBoxProfesseurMatiere(lesProfesseurs, interfaceGraphique.getCmbProfesseurMatiere());
+							index = interfaceGraphique.getLesButtons(type).indexOf(bF);
+							interfaceGraphique.create_frameModificationMatiere(lesMatieres.getLesMatieres().get(index).getNomMatiere(), String.valueOf(lesMatieres.getLesMatieres().get(index).getNombreHeureCM()), String.valueOf(lesMatieres.getLesMatieres().get(index).getNombreHeureTD()), String.valueOf(lesMatieres.getLesMatieres().get(index).getNombreHeureTP()), lesMatieres.getLesMatieres().get(index).getNiveauMatiere(), lesProfesseurs.getLesProfesseurs().indexOf(lesMatieres.getLesMatieres().get(index).getProfesseurMatiere()), lesProfesseurs, lesMatieres.getLesMatieres().get(index).getCouleurMatiere(), index);
+							
+							interfaceGraphique.getBoutonCouleurMatiere().addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent event) {
+										try {
+										Color couleur = JColorChooser.showDialog(null, "Couleur du fond", Color.WHITE);
+										interfaceGraphique.getBoutonCouleurMatiere().setBackground(couleur);
+										} catch (Exception ex) {
+											System.out.println("Erreur : " + ex);
+										}
+									}
+							});
+							interfaceGraphique.getBoutonModifierMatiere().addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent event) {
+									lesMatieres.modifierMatiere(interfaceGraphique.getTfNomMatiere().getText(), interfaceGraphique.getTfNombreHeureCM().getText(), interfaceGraphique.getTfNombreHeureTD().getText(), interfaceGraphique.getTfNombreHeureTP().getText(), interfaceGraphique.getCmbNiveauMatiere().getSelectedItem().toString(), interfaceGraphique.getCmbProfesseurMatiere().getSelectedIndex(), interfaceGraphique.getBoutonCouleurMatiere().getBackground(), lesProfesseurs, index);
+									interfaceGraphique.update_buttonMatiere(interfaceGraphique.getTfNomMatiere().getText(), interfaceGraphique.getBoutonCouleurMatiere().getBackground(), index);
+								}
+							});
 							break; 
 					}
 				}
 			});
-			i++;
 		}
 	}
 

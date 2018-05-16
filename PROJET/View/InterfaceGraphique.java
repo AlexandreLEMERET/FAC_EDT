@@ -40,7 +40,7 @@ public class InterfaceGraphique extends JFrame {
 			
 	private JTextArea textCreation;
 			
-	private JButton boutonModifierSalle, boutonModifierProfesseur, boutonModifierClasse, boutonModifierGroupe, boutonModifierEleve, boutonModifierMatiere, boutonSauvegarder, boutonPrecedent, boutonSuivant, boutonAjouter, boutonCreation, boutonGenerer, boutonEDT, boutonAccepterSalle, boutonAccepterProfesseur, boutonAccepterClasse, 
+	private JButton boutonSupprimerSalle, boutonSupprimerProfesseur, boutonSupprimerClasse, boutonSupprimerGroupe, boutonSupprimerEleve, boutonSupprimerMatiere, boutonModifierSalle, boutonModifierProfesseur, boutonModifierClasse, boutonModifierGroupe, boutonModifierEleve, boutonModifierMatiere, boutonSauvegarder, boutonPrecedent, boutonSuivant, boutonAjouter, boutonCreation, boutonGenerer, boutonEDT, boutonAccepterSalle, boutonAccepterProfesseur, boutonAccepterClasse, 
 			boutonAccepterGroupe, boutonAccepterEleve, boutonAccepterMatiere, boutonCouleurClasse, boutonCouleurMatiere, boutonImporter;
 			
 	private JComboBox<String> cmbNiveauMatiere, cmbProfesseurMatiere, cmbMessageList, cmbTypeList, cmbChoixList, cmbNiveauClasse, cmbTypeSalle, cmbClasseGroupe, cmbClasseEleve, cmbGroupeEleve;
@@ -1403,40 +1403,67 @@ public class InterfaceGraphique extends JFrame {
 					panel8_2.setLayout(new BorderLayout());
 					panel8.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
 
-					if(p_jour1.getLesCours().get(0).getTypeCours() != "groupe") {
-						if(p_jour1.getLesCours().get(0).getMatiere() == null) { label8 = new JLabel("Libre", SwingConstants.CENTER); } else { label8 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+					/* Si cours en classe */
+					if(p_jour1.getLesCours().get(0).getTypeCours().equals("")) {
+						System.out.println("Le cours est en classe entiere");
+						if(p_jour1.getLesCours().get(0).getMatiere() == null) { 
+							label8 = new JLabel("Libre", SwingConstants.CENTER); 
+						} else { label8 = new JLabel(p_jour1.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
 						panel8.setLayout(new BorderLayout());
-						if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel8.setBackground(Color.white); } else { panel8.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
-						panel8.add(label8, BorderLayout.CENTER);
-					} else {
-						panel8.setLayout(new GridLayout(1,2));
-						if(p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().size() == 2) { System.out.println("Le groupe 2 : " + p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(1).getNomGroupe()); }
 						
-						if(p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(0).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere() == null) { label8 = new JLabel("Libre", SwingConstants.CENTER); } else { label8 = new JLabel(p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(0).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
+						if(p_jour1.getLesCours().get(0).getMatiere() == null) { panel8.setBackground(Color.white); 
+						} else { panel8.setBackground(p_jour1.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
+						panel8.add(label8, BorderLayout.CENTER);
+					/* Si cours en groupe */
+					} else {
+						System.out.println("Le cours est en groupe");
+						panel8.setLayout(new BorderLayout());;
+						if(p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(0).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere() == null) { 
+							label8 = new JLabel("Libre", SwingConstants.CENTER);
+							System.out.println("Le groupe 1 n'a pas cours : " + p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(0).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere() + " - Label : " + label8.getText()); 
+						} else { 
+							label8 = new JLabel(p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(0).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); 
+							System.out.println("Le groupe 1 a cours de : " + p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(0).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere().getNomMatiere() + " - Label : " + label8.getText());
+						}
+						
 						if(p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().size() == 2) {
+							System.out.println("Il y a deux groupes");
 							if(p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(1).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere() == null) { 
 								label8_1 = new JLabel("Libre", SwingConstants.CENTER); 
+								System.out.println("Le groupe 2 n'a pas cours : " + p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(1).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere() + " - Label : " + label8_1.getText());
 							} else { 
 								label8_1 = new JLabel(p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(1).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); 
+								System.out.println("Le groupe 2 n'a pas cours - " + label8_1.getText());
 							}
 						} else {
+							System.out.println("Il n'y a qu'un groupe");
 							label8_1 = new JLabel("Libre", SwingConstants.CENTER);
+							System.out.println("Label8_1 : " + label8_1);
 						}
-						if(p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(0).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere() == null) { panel8_1.setBackground(Color.white); } else { System.out.println("Couleur avant : " + panel8_1.getBackground()); System.out.println("Couleur a mettre : " + p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(0).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere().getCouleurMatiere()); panel8_1.setBackground(p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(0).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere().getCouleurMatiere()); System.out.println("Couleur apres : " + panel8_1.getBackground());}			
-						
+						if(p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(0).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere() == null) { 
+							panel8_1.setBackground(Color.white); 
+							System.out.println("Le groupe 1 n'a pas cours donc fond blanc : " + panel8_1.getBackground());
+						} else { 
+							panel8_1.setBackground(p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(0).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere().getCouleurMatiere()); 
+							System.out.println("Le groupe 1 a cours donc fond  : " + panel8_1.getBackground());
+						}			
+
 						if(p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().size() == 2) {
 							if(p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(1).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere() == null) { 
 								panel8_2.setBackground(Color.white); 
+								System.out.println("Le groupe 2 n'a pas cours donc fond blanc : " + panel8_2.getBackground());
 							} else { 
-								panel8_2.setBackground(p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(1).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere().getCouleurMatiere()); 
+								panel8_2.setBackground(p_jour1.getLesCours().get(0).getClasse().getLesGroupesClasse().get(1).getEDT().getLeJour(p_jour1).getLesCours().get(0).getMatiere().getCouleurMatiere());
+								System.out.println("Le groupe 2 a cours donc fond : " + panel8_2.getBackground()); 
 							}	
 						}
 						
 						panel8_1.add(label8, BorderLayout.CENTER);
 						panel8_2.add(label8_1, BorderLayout.CENTER);
-
-						panel8.add(panel8_1);
-						panel8.add(panel8_2);
+						System.out.println("Couleur panel de gauche : " + panel8_1.getBackground());
+						System.out.println("Couleur panel de droite : " + panel8_2.getBackground());
+						panel8.add(panel8_1, BorderLayout.WEST);
+						panel8.add(panel8_2, BorderLayout.EAST);
 					}
 
 					label9 = new JLabel();
@@ -1446,7 +1473,7 @@ public class InterfaceGraphique extends JFrame {
 					panel9_2.setLayout(new BorderLayout());
 					panel9.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
 
-					if(p_jour2.getLesCours().get(0).getTypeCours() != "groupe") {
+					if(p_jour2.getLesCours().get(0).getTypeCours().equals("")) {
 						if(p_jour2.getLesCours().get(0).getMatiere() == null) { label9 = new JLabel("Libre", SwingConstants.CENTER); } else { label9 = new JLabel(p_jour2.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
 						panel9.setLayout(new BorderLayout());
 						if(p_jour2.getLesCours().get(0).getMatiere() == null) { panel9.setBackground(Color.white); } else { panel9.setBackground(p_jour2.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
@@ -1487,7 +1514,7 @@ public class InterfaceGraphique extends JFrame {
 					panel10_2.setLayout(new BorderLayout());
 					panel10.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
 
-					if(p_jour3.getLesCours().get(0).getTypeCours() != "groupe") {
+					if(p_jour3.getLesCours().get(0).getTypeCours().equals("")) {
 						if(p_jour3.getLesCours().get(0).getMatiere() == null) { label10 = new JLabel("Libre", SwingConstants.CENTER); } else { label10 = new JLabel(p_jour3.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
 						panel10.setLayout(new BorderLayout());
 						if(p_jour3.getLesCours().get(0).getMatiere() == null) { panel10.setBackground(Color.white); } else { panel10.setBackground(p_jour3.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
@@ -1528,7 +1555,7 @@ public class InterfaceGraphique extends JFrame {
 					panel11_2.setLayout(new BorderLayout());
 					panel11.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
 
-					if(p_jour4.getLesCours().get(0).getTypeCours() != "groupe") {
+					if(p_jour4.getLesCours().get(0).getTypeCours().equals("")) {
 						if(p_jour4.getLesCours().get(0).getMatiere() == null) { label11 = new JLabel("Libre", SwingConstants.CENTER); } else { label11 = new JLabel(p_jour4.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
 						panel11.setLayout(new BorderLayout());
 						if(p_jour4.getLesCours().get(0).getMatiere() == null) { panel11.setBackground(Color.white); } else { panel11.setBackground(p_jour4.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
@@ -1569,7 +1596,7 @@ public class InterfaceGraphique extends JFrame {
 					panel12_2.setLayout(new BorderLayout());
 					panel12.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
 
-					if(p_jour5.getLesCours().get(0).getTypeCours() != "groupe") {
+					if(p_jour5.getLesCours().get(0).getTypeCours().equals("")) {
 						if(p_jour5.getLesCours().get(0).getMatiere() == null) { label12 = new JLabel("Libre", SwingConstants.CENTER); } else { label12 = new JLabel(p_jour5.getLesCours().get(0).getMatiere().getNomMatiere(), SwingConstants.CENTER); }
 						panel12.setLayout(new BorderLayout());
 						if(p_jour5.getLesCours().get(0).getMatiere() == null) { panel12.setBackground(Color.white); } else { panel12.setBackground(p_jour5.getLesCours().get(0).getMatiere().getCouleurMatiere()); }
@@ -2899,7 +2926,9 @@ public class InterfaceGraphique extends JFrame {
 
 		panelAjoutSalle_2 = new JPanel();
 		boutonModifierSalle = new JButton("✓");
+		boutonSupprimerSalle = new JButton("✗");
 		panelAjoutSalle_2.add(boutonModifierSalle);
+		panelAjoutSalle_2.add(boutonSupprimerSalle);
 		
 		frameAjoutSalle = new JFrame();
 		frameAjoutSalle.setSize(400,125);
@@ -2966,8 +2995,10 @@ public class InterfaceGraphique extends JFrame {
 		panelAjoutProfesseur_1.add(tfNombreHeureProfesseur);
 		
 		panelAjoutProfesseur_2 = new JPanel();
-		boutonAccepterProfesseur = new JButton("✓");
-		panelAjoutProfesseur_2.add(boutonAccepterProfesseur);
+		boutonModifierProfesseur = new JButton("✓");
+		boutonSupprimerProfesseur = new JButton("✗");
+		panelAjoutProfesseur_2.add(boutonModifierProfesseur);
+		panelAjoutProfesseur_2.add(boutonModifierProfesseur);
 		
 		frameAjoutProfesseur = new JFrame();
 		frameAjoutProfesseur.setSize(400,145);
@@ -3028,10 +3059,10 @@ public class InterfaceGraphique extends JFrame {
 		labelNiveauClasse = new JLabel("Niveau :");
 		String[] niveauxStrings = {"6 ème", "5 ème", "4 ème", "3 ème"};
 		cmbNiveauClasse = new JComboBox<String>(niveauxStrings);
-		if(niveauClasse == "6 ème") { cmbNiveauClasse.setSelectedIndex(0); }
-		if(niveauClasse == "5 ème") { cmbNiveauClasse.setSelectedIndex(1); }
-		if(niveauClasse == "4 ème") { cmbNiveauClasse.setSelectedIndex(2); }
-		if(niveauClasse == "3 ème") { cmbNiveauClasse.setSelectedIndex(3); }
+		if(niveauClasse.equals("6 ème")) { cmbNiveauClasse.setSelectedIndex(0); }
+		if(niveauClasse.equals("5 ème")) { cmbNiveauClasse.setSelectedIndex(1); }
+		if(niveauClasse.equals("4 ème")) { cmbNiveauClasse.setSelectedIndex(2); }
+		if(niveauClasse.equals("3 ème")) { cmbNiveauClasse.setSelectedIndex(3); }
 		labelCouleurClasse = new JLabel("Couleur :");
 		boutonCouleurClasse = new JButton("Couleur");
 		boutonCouleurClasse.setBackground(couleurClasse);
@@ -3044,8 +3075,10 @@ public class InterfaceGraphique extends JFrame {
 		panelAjoutClasse_1.add(boutonCouleurClasse);
 		
 		panelAjoutClasse_2 = new JPanel();
-		boutonAccepterClasse = new JButton("✓");
-		panelAjoutClasse_2.add(boutonAccepterClasse);
+		boutonModifierClasse = new JButton("✓");
+		boutonModifierClasse = new JButton("✗");
+		panelAjoutClasse_2.add(boutonModifierClasse);
+		panelAjoutClasse_2.add(boutonSupprimerClasse);
 		
 		frameAjoutClasse = new JFrame();
 		frameAjoutClasse.setSize(400,115);
@@ -3115,8 +3148,10 @@ public class InterfaceGraphique extends JFrame {
 		panelAjoutGroupe_1.add(tfNomGroupe);
 		
 		panelAjoutGroupe_2 = new JPanel();
-		boutonAccepterGroupe = new JButton("✓");
-		panelAjoutGroupe_2.add(boutonAccepterGroupe);
+		boutonModifierGroupe = new JButton("✓");
+		boutonSupprimerGroupe = new JButton("✗");
+		panelAjoutGroupe_2.add(boutonModifierGroupe);
+		panelAjoutGroupe_2.add(boutonSupprimerGroupe);
 		
 		frameAjoutGroupe = new JFrame();
 		frameAjoutGroupe.setSize(400,85);
@@ -3159,6 +3194,124 @@ public class InterfaceGraphique extends JFrame {
 		frameAjoutEleve = new JFrame();
 		frameAjoutEleve.setSize(350,135);
 		frameAjoutEleve.setTitle("Ajout d'un élève");
+		frameAjoutEleve.setLocationRelativeTo(null);
+		frameAjoutEleve.setResizable(false);
+		frameAjoutEleve.setVisible(true);
+		frameAjoutEleve.getContentPane().add(panelAjoutEleve_1, BorderLayout.CENTER);
+		frameAjoutEleve.getContentPane().add(panelAjoutEleve_2, BorderLayout.SOUTH);
+		frameAjoutEleve.setVisible(true);
+		
+		return frameAjoutEleve;
+	}
+
+	/* JPanel 'Modification d'un eleve sans groupe*/
+	public JFrame create_frameModificationEleve(String nomEleve, String prenomEleve, int indexClasse, MClasse lesClasses, MGroupe lesGroupes) {
+		panelAjoutEleve_1 = new JPanel();
+		panelAjoutEleve_1.setLayout(new GridLayout(4,2));
+		labelNomEleve = new JLabel("Nom :");
+		tfNomEleve = new JTextField(nomEleve);
+		labelPrenomEleve = new JLabel("Prénom :");
+		tfPrenomEleve = new JTextField(prenomEleve);
+		
+		labelClasseEleve = new JLabel("Classe :");
+		cmbClasseEleve = new JComboBox<String>();
+		cmbClasseEleve.removeAllItems();
+		for(Classe c : lesClasses.getLesClasses()) {
+			cmbClasseEleve.addItem(c.getNiveauClasse() + " " + c.getNomClasse());
+		}
+		cmbClasseEleve.setSelectedIndex(indexClasse);
+	
+		labelGroupeEleve = new JLabel("Groupe :");
+		cmbGroupeEleve = new JComboBox<String>();
+		cmbGroupeEleve.removeAllItems();
+		for(Groupe g : lesGroupes.getLesGroupes()) {
+			cmbGroupeEleve.addItem(g.getClasseGroupe().getNiveauClasse() + " " + g.getClasseGroupe().getNomClasse() +" - " + g.getNomGroupe());
+		}
+
+		panelAjoutEleve_1.add(labelNomEleve);
+		panelAjoutEleve_1.add(tfNomEleve);
+		panelAjoutEleve_1.add(labelPrenomEleve);
+		panelAjoutEleve_1.add(tfPrenomEleve);
+		panelAjoutEleve_1.add(labelClasseEleve);
+		panelAjoutEleve_1.add(cmbClasseEleve);
+		panelAjoutEleve_1.add(labelGroupeEleve);
+		panelAjoutEleve_1.add(cmbGroupeEleve);
+		
+		panelAjoutEleve_2 = new JPanel();
+		boutonModifierEleve = new JButton("✓");
+		boutonSupprimerEleve = new JButton("✗");
+		panelAjoutEleve_2.add(boutonModifierEleve);
+		panelAjoutEleve_2.add(boutonSupprimerEleve);
+		
+		frameAjoutEleve = new JFrame();
+		frameAjoutEleve.setSize(350,135);
+		frameAjoutEleve.setTitle("Modification d'un élève");
+		frameAjoutEleve.setLocationRelativeTo(null);
+		frameAjoutEleve.setResizable(false);
+		frameAjoutEleve.setVisible(true);
+		frameAjoutEleve.getContentPane().add(panelAjoutEleve_1, BorderLayout.CENTER);
+		frameAjoutEleve.getContentPane().add(panelAjoutEleve_2, BorderLayout.SOUTH);
+		frameAjoutEleve.setVisible(true);
+		
+		return frameAjoutEleve;
+	}
+
+	/* JPanel 'Modification d'un eleve avec un groupe */
+	public JFrame create_frameModificationEleve(String nomEleve, String prenomEleve, int indexClasse, int indexGroupe, MClasse lesClasses, MGroupe lesGroupes) {
+		panelAjoutEleve_1 = new JPanel();
+		panelAjoutEleve_1.setLayout(new GridLayout(4,2));
+		labelNomEleve = new JLabel("Nom :");
+		tfNomEleve = new JTextField(nomEleve);
+		labelPrenomEleve = new JLabel("Prénom :");
+		tfPrenomEleve = new JTextField(prenomEleve);
+		
+		labelClasseEleve = new JLabel("Classe :");
+		cmbClasseEleve = new JComboBox<String>();
+		cmbClasseEleve.removeAllItems();
+		for(Classe c : lesClasses.getLesClasses()) {
+			cmbClasseEleve.addItem(c.getNiveauClasse() + " " + c.getNomClasse());
+		}
+		cmbClasseEleve.setSelectedIndex(indexClasse);
+	
+		labelGroupeEleve = new JLabel("Groupe :");
+		cmbGroupeEleve = new JComboBox<String>();
+
+
+		for(Groupe g : lesClasses.getLesClasses().get(indexClasse).getLesGroupesClasse()) {
+			cmbGroupeEleve.addItem(g.getNomGroupe());
+		}
+		cmbGroupeEleve.setSelectedIndex(indexGroupe);
+
+		final MClasse lesClassesF = lesClasses;
+		cmbClasseEleve.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+					cmbGroupeEleve.removeAllItems();
+				for(Groupe g : lesClassesF.getLesClasses().get(cmbClasseEleve.getSelectedIndex()).getLesGroupesClasse()) {
+					cmbGroupeEleve.addItem(g.getNomGroupe());
+					System.out.println("On ajoute 1 groupe");
+				}
+			}
+		});
+		
+
+		panelAjoutEleve_1.add(labelNomEleve);
+		panelAjoutEleve_1.add(tfNomEleve);
+		panelAjoutEleve_1.add(labelPrenomEleve);
+		panelAjoutEleve_1.add(tfPrenomEleve);
+		panelAjoutEleve_1.add(labelClasseEleve);
+		panelAjoutEleve_1.add(cmbClasseEleve);
+		panelAjoutEleve_1.add(labelGroupeEleve);
+		panelAjoutEleve_1.add(cmbGroupeEleve);
+		
+		panelAjoutEleve_2 = new JPanel();
+		boutonModifierEleve = new JButton("✓");
+		boutonSupprimerEleve = new JButton("✗");
+		panelAjoutEleve_2.add(boutonModifierEleve);
+		panelAjoutEleve_2.add(boutonSupprimerEleve);
+		
+		frameAjoutEleve = new JFrame();
+		frameAjoutEleve.setSize(350,135);
+		frameAjoutEleve.setTitle("Modification d'un élève");
 		frameAjoutEleve.setLocationRelativeTo(null);
 		frameAjoutEleve.setResizable(false);
 		frameAjoutEleve.setVisible(true);
@@ -3222,6 +3375,74 @@ public class InterfaceGraphique extends JFrame {
 		
 		return frameAjoutMatiere;
 	}
+	/* JPanel 'Modification d'une matiere' */  
+	public JFrame create_frameModificationMatiere(String nomMatiere, String nbHeureCM, String nbHeureTD, String nbHeureTP, String niveauMatiere, int indexProfesseur, MProfesseur lesProfesseurs, Color couleurMatiere, int index) {
+		panelAjoutMatiere_1 = new JPanel();
+		panelAjoutMatiere_1.setLayout(new GridLayout(7,2));
+									
+		labelNomMatiere = new JLabel("Nom :");
+		tfNomMatiere = new JTextField(nomMatiere);
+		labelNbrHCMMatiere = new JLabel("Nombre d'heures en salle de Cours :");
+		tfNbrHCMMatiere = new JTextField(nbHeureCM);
+		labelNbrHTDMatiere = new JLabel("Nombre d'heures en Salle Informatique :");
+		tfNbrHTDMatiere = new JTextField(nbHeureTD);
+		labelNbrHTPMatiere = new JLabel("Nombre d'heures en Salle de TP :");
+		tfNbrHTPMatiere = new JTextField(nbHeureTP);
+		labelNiveauMatiere = new JLabel("Niveau :");
+		String[] niveauxStrings = {"6 ème", "5 ème", "4 ème", "3 ème"};
+		cmbNiveauMatiere = new JComboBox<String>(niveauxStrings);
+
+		if(niveauMatiere.equals("6 ème")) { cmbNiveauMatiere.setSelectedIndex(0); }
+		if(niveauMatiere.equals("5 ème")) { cmbNiveauMatiere.setSelectedIndex(1); }
+		if(niveauMatiere.equals("4 ème")) { cmbNiveauMatiere.setSelectedIndex(2); }
+		if(niveauMatiere.equals("3 ème")) { cmbNiveauMatiere.setSelectedIndex(3); }
+
+		labelProfesseurMatiere = new JLabel("Professeur :");
+		cmbProfesseurMatiere = new JComboBox<String>();
+
+		for(Professeur p : lesProfesseurs.getLesProfesseurs()) {
+			cmbProfesseurMatiere.addItem(p.getNomProfesseur() + " " + p.getPrenomProfesseur());
+		}
+
+		cmbProfesseurMatiere.setSelectedIndex(indexProfesseur);
+
+		labelCouleurMatiere = new JLabel("Couleur :");
+		boutonCouleurMatiere = new JButton("Couleur");
+		boutonCouleurMatiere.setBackground(couleurMatiere);
+		
+		panelAjoutMatiere_1.add(labelNomMatiere);
+		panelAjoutMatiere_1.add(tfNomMatiere);
+		panelAjoutMatiere_1.add(labelNbrHCMMatiere);
+		panelAjoutMatiere_1.add(tfNbrHCMMatiere);
+		panelAjoutMatiere_1.add(labelNbrHTDMatiere);
+		panelAjoutMatiere_1.add(tfNbrHTDMatiere);
+		panelAjoutMatiere_1.add(labelNbrHTPMatiere);
+		panelAjoutMatiere_1.add(tfNbrHTPMatiere);
+		panelAjoutMatiere_1.add(labelNiveauMatiere);
+		panelAjoutMatiere_1.add(cmbNiveauMatiere);
+		panelAjoutMatiere_1.add(labelProfesseurMatiere);
+		panelAjoutMatiere_1.add(cmbProfesseurMatiere);
+		panelAjoutMatiere_1.add(labelCouleurMatiere);
+		panelAjoutMatiere_1.add(boutonCouleurMatiere);
+		
+		panelAjoutMatiere_2 = new JPanel();
+		boutonModifierMatiere = new JButton("✓");
+		boutonSupprimerMatiere = new JButton("✗");
+		panelAjoutMatiere_2.add(boutonModifierMatiere);
+		panelAjoutMatiere_2.add(boutonSupprimerMatiere);
+		
+		frameAjoutMatiere = new JFrame();
+		frameAjoutMatiere.setSize(600,210);
+		frameAjoutMatiere.setTitle("Modification d'une matière");
+		frameAjoutMatiere.setLocationRelativeTo(null);
+		frameAjoutMatiere.setResizable(false);
+		frameAjoutMatiere.setVisible(true);
+		frameAjoutMatiere.getContentPane().add(panelAjoutMatiere_1, BorderLayout.CENTER);
+		frameAjoutMatiere.getContentPane().add(panelAjoutMatiere_2, BorderLayout.SOUTH);
+		frameAjoutMatiere.setVisible(true);
+		
+		return frameAjoutMatiere;
+	}
 	
 	public void vider_button() {
 		
@@ -3241,10 +3462,20 @@ public class InterfaceGraphique extends JFrame {
 		panelBoutonObjetsCrees.updateUI();
 	}
 
+	public void update_buttonSalle(String nomSalle, int indexBouton) {
+		this.lesBoutonsSalle.get(indexBouton).setLabel(nomSalle);
+		panelBoutonObjetsCrees.updateUI();
+	}
+
 	public void create_buttonProfesseur(boolean visible, String nomProfesseur, String prenomProfesseur) {
 		JButton professeur = new JButton(nomProfesseur + " " + prenomProfesseur);
 		this.lesBoutonsProfesseur.add(professeur);
 		if(visible) { panelBoutonObjetsCrees.add(professeur); }
+		panelBoutonObjetsCrees.updateUI();
+	}
+
+	public void update_buttonProfesseur(String nomProfesseur, String prenomProfesseur, int indexBouton) {
+		this.lesBoutonsProfesseur.get(indexBouton).setLabel(nomProfesseur + " " + prenomProfesseur);
 		panelBoutonObjetsCrees.updateUI();
 	}
 
@@ -3256,10 +3487,21 @@ public class InterfaceGraphique extends JFrame {
 		panelBoutonObjetsCrees.updateUI();
 	}
 
+	public void update_buttonClasse(String niveauClasse, String nomClasse, Color couleurClasse, int indexBouton) {
+		this.lesBoutonsClasse.get(indexBouton).setLabel(niveauClasse + " " + nomClasse);
+		this.lesBoutonsClasse.get(indexBouton).setBackground(couleurClasse);
+		panelBoutonObjetsCrees.updateUI();
+	}
+
 	public void create_buttonGroupe(boolean visible, String nomGroupe, String nomClasse) {
 		JButton groupe = new JButton(nomClasse + " - " + nomGroupe);
 		this.lesBoutonsGroupe.add(groupe);
 		if(visible) { panelBoutonObjetsCrees.add(groupe); }
+		panelBoutonObjetsCrees.updateUI();
+	}
+
+	public void update_buttonGroupe(String nomGroupe, String nomClasse, int indexBouton) {
+		this.lesBoutonsGroupe.get(indexBouton).setLabel(nomClasse + " - " + nomGroupe);
 		panelBoutonObjetsCrees.updateUI();
 	}
 
@@ -3270,11 +3512,22 @@ public class InterfaceGraphique extends JFrame {
 		panelBoutonObjetsCrees.updateUI();
 	}
 
+	public void update_buttonEleve(String nomEleve, String prenomEleve, int indexBouton) {
+		this.lesBoutonsEleve.get(indexBouton).setLabel(nomEleve + " " + prenomEleve);
+		panelBoutonObjetsCrees.updateUI();
+	}
+
 	public void create_buttonMatiere(boolean visible, String nomMatiere, Color couleurMatiere) {
 		JButton matiere = new JButton(nomMatiere);
 		matiere.setBackground(couleurMatiere);
 		this.lesBoutonsMatiere.add(matiere);
 		if(visible) { panelBoutonObjetsCrees.add(matiere); }
+		panelBoutonObjetsCrees.updateUI();
+	}
+
+	public void update_buttonMatiere(String nomMatiere, Color couleurMatiere, int indexBouton) {
+		this.lesBoutonsMatiere.get(indexBouton).setLabel(nomMatiere);
+		this.lesBoutonsMatiere.get(indexBouton).setBackground(couleurMatiere);
 		panelBoutonObjetsCrees.updateUI();
 	}
 
@@ -3549,6 +3802,31 @@ public class InterfaceGraphique extends JFrame {
 	public JButton getBoutonModifierMatiere() {
 		return this.boutonModifierMatiere;
 	}
+
+	public JButton getBoutonSupprimerSalle() {
+		return this.boutonSupprimerSalle;
+	}
+
+	public JButton getBoutonSupprimerProfesseur() {
+		return this.boutonSupprimerProfesseur;
+	}
+
+	public JButton getBoutonSupprimerClasse() {
+		return this.boutonSupprimerClasse;
+	}
+
+	public JButton getBoutonSupprimerGroupe() {
+		return this.boutonSupprimerGroupe;
+	}
+
+	public JButton getBoutonSupprimerEleve() {
+		return this.boutonSupprimerEleve;
+	}
+
+	public JButton getBoutonSupprimerMatiere() {
+		return this.boutonSupprimerMatiere;
+	}
+
 
 	public ArrayList<JButton> getLesButtons(String type) {
 		switch(type) {

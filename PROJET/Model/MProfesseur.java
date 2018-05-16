@@ -55,12 +55,44 @@ public class MProfesseur implements Serializable {
 		return 1;
 	}
 
+	public int modifierProfesseur(String nomProfesseur, String prenomProfesseur, String nombreHeureProfesseur, MMatiere lesMatieres, int indexProfesseur) {
+		if(nomProfesseur.length() == 0) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un nom pour le professeur !", "Erreur : Nom du professeur", JOptionPane.ERROR_MESSAGE);
+		} else if(prenomProfesseur.length() == 0) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez indiquer un prénom pour le professeur !", "Erreur : Prénom du professeur", JOptionPane.ERROR_MESSAGE);
+		} else if(Integer.parseInt(nombreHeureProfesseur) > 40) {
+			JOptionPane.showMessageDialog(null, "Erreur : Le total d'heure du professeur ne peut excéder le total d'heures hebdomadaire (40 heures) !", "Erreur : Nombre d'heures", JOptionPane.ERROR_MESSAGE);
+		} else {
+			try {
+				String tmpNomProfesseur = lesProfesseurs.get(indexProfesseur).getNomProfesseur();
+				String tmpPrenomProfesseur = lesProfesseurs.get(indexProfesseur).getPrenomProfesseur();
+				String tmpNombreHeureProfesseur = String.valueOf(lesProfesseurs.get(indexProfesseur).getNombreHeuresProfesseur());
+
+				lesProfesseurs.get(indexProfesseur).setNomProfesseur(nomProfesseur);
+				lesProfesseurs.get(indexProfesseur).setPrenomProfesseur(prenomProfesseur);
+				lesProfesseurs.get(indexProfesseur).setNombreHeuresProfesseur(Integer.parseInt(nombreHeureProfesseur));
+
+				if(verificationNombreHeureProfesseur(lesMatieres, lesProfesseurs.get(indexProfesseur)) > 40 || verificationNombreHeureProfesseur(lesMatieres, lesProfesseurs.get(indexProfesseur)) > lesProfesseurs.get(indexProfesseur).getNombreHeuresProfesseur()) {
+					int heure = verificationNombreHeureProfesseur(lesMatieres,lesProfesseurs.get(indexProfesseur));
+					JOptionPane.showMessageDialog(null, "Il y a " + -(40-heure) + " heures de cours en trop afin de ne pas dépasser le total d'heures hebdomadaire du professeur !", "Erreur Nombre d'heures", JOptionPane.ERROR_MESSAGE);
+					lesProfesseurs.get(indexProfesseur).setNomProfesseur(tmpNomProfesseur);
+					lesProfesseurs.get(indexProfesseur).setPrenomProfesseur(tmpPrenomProfesseur);
+					lesProfesseurs.get(indexProfesseur).setNombreHeuresProfesseur(Integer.parseInt(tmpNombreHeureProfesseur));
+					return 1;
+				}
+				JOptionPane.showMessageDialog(null,"Le professeur a été modifié.");
+				return 0;
+
+			} catch(NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Erreur : Le nombre d'heure doit être un chiffre entier !", "Erreur : Nombre d'heures", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		return 1;
+	}
+
 	public int verificationNombreHeureProfesseur(MMatiere lesMatieres, Professeur leProfesseur) {
 		int totalH = 0;
-		System.out.println("Debut de la fonction");
-		System.out.println("Nombre de matiere : " + lesMatieres.getLesMatieres().size());
 		for(Matiere m : lesMatieres.getLesMatieres()) {
-			System.out.println("On passe à l'interieur");
 			if(m.getProfesseurMatiere().equals(leProfesseur)) {
 				totalH = m.getNombreHeureCM() + m.getNombreHeureTP() + m.getNombreHeureTD() + totalH;
 			}

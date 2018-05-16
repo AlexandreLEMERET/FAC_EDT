@@ -60,6 +60,7 @@ public class MEleve implements Serializable {
 		}
 		return 1;		
 	}
+
 	
 	public void chargerLesEleves(MClasse lesClasses) {
 		try {
@@ -95,13 +96,19 @@ public class MEleve implements Serializable {
 	public void sauvegarderLesEleves(MClasse lesClasses) {
 		/* Ajout des eleves dans le fichier saveEleve.txt */
 		try {
+			System.out.println("On sauvegarde les eleves");
 			FileWriter monFichier = new FileWriter("saveEleve.txt");
 			BufferedWriter out = new BufferedWriter(monFichier);
 			int i = 0;
+			System.out.println("Nombre de classe : " + lesClasses.getLesClasses().size());
 			for(Classe c : lesClasses.getLesClasses()) { 
+				System.out.println("C : " + c.getNomClasse());
+				System.out.println("Nombre de groupe : " + c.getLesGroupesClasse().size());
 				if(c.getLesGroupesClasse().size() > 0) {
 					int j = 0;
+					
 					for(Groupe g : c.getLesGroupesClasse()) {
+						System.out.println("G : " + g.getNomGroupe());
 						for(Eleve e : c.getLesEleves()) {
 							if(g == e.getGroupeEleve()) { out.write(e.getNomEleve() + "\n" + e.getPrenomEleve() + "\n" + i + "\n" + j + "\n"); }
 						}

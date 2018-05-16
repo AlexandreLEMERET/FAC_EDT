@@ -1,6 +1,3 @@
 Salle TP
 10
 TP
-Salle TP 2
-10
-TP

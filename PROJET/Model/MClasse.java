@@ -39,6 +39,21 @@ public class MClasse implements Serializable {
 		}
 		return 1;
 	}
+
+	public int modifierClasse(String nomClasse, String niveauClasse, Color couleurClasse, int indexClasse) {
+		if(nomClasse.length() == 0) {
+			JOptionPane.showMessageDialog(null, "Erreur : Le nom de la classe doit contenir au moins 1 caractère !", "Erreur : Nom de la classe", JOptionPane.ERROR_MESSAGE);
+		} else if(couleurClasse.getRed() == 238 && couleurClasse.getGreen() == 238 && couleurClasse.getBlue() == 238) {
+			JOptionPane.showMessageDialog(null, "Erreur : Vous devez choisir une couleur pour la classe !", "Erreur : Couleur de la classe", JOptionPane.ERROR_MESSAGE);
+		} else {
+			lesClasses.get(indexClasse).setNomClasse(nomClasse);
+			lesClasses.get(indexClasse).setNiveauClasse(niveauClasse);
+			lesClasses.get(indexClasse).setCouleurClasse(couleurClasse);
+			JOptionPane.showMessageDialog(null, "La classe de " + niveauClasse + " " + nomClasse + " a été modifié.");
+			return 0;
+		}
+		return 1;
+	}
 	
 	public void chargerLesClasses() {
 		try {

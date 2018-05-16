@@ -19,6 +19,14 @@ public class Groupe {
 		this.edtGroupe = new Edt();
 	}
 	
+	public void setNomGroupe(String p_nomGroupe) {
+		this.nomGroupe = p_nomGroupe;
+	}
+
+	public void setClasse(Classe p_laClasse) {
+		this.classeGroupe = p_laClasse;
+	}
+
 	public String getNomGroupe() {
 		return this.nomGroupe;
 	}
